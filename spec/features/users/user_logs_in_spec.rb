@@ -5,12 +5,21 @@ describe "user logs in" do
     pizza = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
     pizza.roles.new(title: "traveler")
     visit root_path
+
+    within(".navbar") do
+      expect(page).to_not have_link("Become a Host")
+    end
+
     click_on "Login"
 
     fill_in "session[email]", with: pizza.email
     fill_in "session[password]", with: pizza.password
     within(".login_btn") do
       click_on "Login"
+    end
+
+    within(".navbar") do
+      expect(page).to have_link("Become a Host")
     end
 
     expect(current_path).to eq(dashboard_path)

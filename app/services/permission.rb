@@ -27,4 +27,11 @@ class Permission
     return true if controller == "users"
     return true if controller == "dashboard"
   end
+
+  def host_user_permissions
+    return true if controller == "sessions"
+    return true if controller == "home"
+    return true if controller == "users"
+    return true if controller == "dashboard"
+  end
 end

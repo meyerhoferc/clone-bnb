@@ -20,16 +20,36 @@ describe User do
 
   describe "#traveler?" do
     it "returns true if a user has a traveler role" do
-      user_one = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2341", password: "123")
+      user_one = User.create(email: "email@email.com",
+                             first_name: "Castle",
+                             last_name: "Pines",
+                             about_me: "Boop beep boop",
+                             phone_number: "853-343-2341",
+                             password: "123")
       user_one.roles.create(title: "traveler")
 
-      user_two = User.create(email: "other_email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2342", password: "123")
+      user_two = User.create(email: "other_email@email.com",
+                             first_name: "Castle",
+                             last_name: "Pines",
+                             about_me: "Boop beep boop",
+                             phone_number: "853-343-2342",
+                             password: "123")
       user_two.roles.create(title: "host")
 
-      user_three = User.create(email: "other@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
+      user_three = User.create(email: "other@email.com",
+                               first_name: "Castle",
+                               last_name: "Pines",
+                               about_me: "Boop beep boop",
+                               phone_number: "853-343-2343",
+                               password: "123")
       user_three.roles.create(title: "admin")
 
-      user_four = User.create(email: "another@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2344", password: "123")
+      user_four = User.create(email: "another@email.com",
+                              first_name: "Castle",
+                              last_name: "Pines",
+                              about_me: "Boop beep boop",
+                              phone_number: "853-343-2344",
+                              password: "123")
       user_four.roles.create(title: "admin")
       user_four.roles.create(title: "traveler")
       user_four.roles.create(title: "host")
@@ -43,16 +63,36 @@ describe User do
 
   describe "#host?" do
     it "returns true if a user has a host role" do
-      user_one = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2341", password: "123")
+      user_one = User.create(email: "email@email.com",
+                             first_name: "Castle",
+                             last_name: "Pines",
+                             about_me: "Boop beep boop",
+                             phone_number: "853-343-2341",
+                             password: "123")
       user_one.roles.create(title: "traveler")
 
-      user_two = User.create(email: "other_email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2342", password: "123")
+      user_two = User.create(email: "other_email@email.com",
+                             first_name: "Castle",
+                             last_name: "Pines",
+                             about_me: "Boop beep boop",
+                             phone_number: "853-343-2342",
+                             password: "123")
       user_two.roles.create(title: "host")
 
-      user_three = User.create(email: "other@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
+      user_three = User.create(email: "other@email.com",
+                               first_name: "Castle",
+                               last_name: "Pines",
+                               about_me: "Boop beep boop",
+                               phone_number: "853-343-2343",
+                               password: "123")
       user_three.roles.create(title: "admin")
 
-      user_four = User.create(email: "another@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2344", password: "123")
+      user_four = User.create(email: "another@email.com",
+                              first_name: "Castle",
+                              last_name: "Pines",
+                              about_me: "Boop beep boop",
+                              phone_number: "853-343-2344",
+                              password: "123")
       user_four.roles.create(title: "admin")
       user_four.roles.create(title: "traveler")
       user_four.roles.create(title: "host")
