@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <h1>Edit Profile</h1><br>
+
+    <div class="form-group add-host-permissions">
+      <%= form_for(@user) do |f| %>
+       <%= f.hidden_field :user_id, value: @user.id %>
+       <%= f.hidden_field :role, value: "host" %>
+       <%= f.submit "Become a Host", class: "btn btn-success" %>
+      <% end %>
+    </div>
+
+    <%= form_for @user do |f| %>
+
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control" %><br>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %><br>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :about_me %>
+        <%= f.text_field :about_me, class: "form-control" %><br>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: "form-control" %><br>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %><br>
+      </div>
+
+      <%= f.submit "Update Account", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

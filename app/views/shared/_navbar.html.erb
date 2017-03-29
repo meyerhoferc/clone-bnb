@@ -9,9 +9,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/users/new">Sign Up</a></li>
-        <% if current_user %>
+        <% if current_user && !current_user.host? %>
           <li><a href="/logout">Logout</a></li>
-          <li><a href="#">Become a Host</a></li>
+          <li><a href="<%= edit_user_path(current_user) %>">Become a Host</a></li>
+        <% elsif current_user && current_user.host? %>
+          <li><a href="/logout">Logout</a></li>
         <% else %>
           <li><a href="/login">Login</a></li>
         <% end %>
