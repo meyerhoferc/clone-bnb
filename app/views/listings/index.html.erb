@@ -41,6 +41,9 @@
         <div class="row">
           <% @listings.each do |listing| %>
             <div class="col-md-4 portfolio-item">
+              <div class="listing <%= listing.id %>">
+
+              </div>
               <%#= listing.images[0].image_url %>
               <!-- <img class="img-responsive" src= "http://lorempixel.com/700/400/city"> -->
               <img class="img-responsive" src= "<%= listing.images[0].image_url %>">
