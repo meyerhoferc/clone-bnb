@@ -1,4 +1,3 @@
-All Listings
 <head>
 
     <meta charset="utf-8">
@@ -31,7 +30,7 @@ All Listings
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Page Heading
+                <h1 class="page-header">All Listings
                     <small>Secondary Text</small>
                 </h1>
             </div>
@@ -40,37 +39,17 @@ All Listings
 
         <!-- Projects Row -->
         <div class="row">
+          <% @listings.each do |listing| %>
             <div class="col-md-4 portfolio-item">
-              <% @listings.each do |listing| %>
-              <%= link_to "/listings/#{listing.id}" %>
-              <%#= binding.pry %>
-              <img class="img-responsive" src="=> "http://lorempixel.com/700/400/city">
-                <a href="#">
-                </a>
+              <%#= listing.images[0].image_url %>
+              <!-- <img class="img-responsive" src= "http://lorempixel.com/700/400/city"> -->
+              <img class="img-responsive" src= "<%= listing.images[0].image_url %>">
                 <h3>
-                    <a href="listing_path(listing)"> <%= listing.title %> </a>
+                  <%= link_to listing.title, listing_path(listing)  %>
                 </h3>
-                <p>listing.description</p>
-                <% end %>
+                <div class="ellipsis"><p><%= listing.description %></p></div>
             </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
+            <% end %>
         </div>
         <!-- /.row -->
 
