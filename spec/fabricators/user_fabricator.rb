@@ -1,9 +1,17 @@
+Fabricate.sequence(:first_name)
+Fabricate.sequence(:last_name)
+Fabricate.sequence(:email)
+Fabricate.sequence(:phone_number)
+Fabricate.sequence(:user_photo)
+Fabricate.sequence(:about_me)
+Fabricate.sequence(:password_digest)
+
 Fabricator(:user) do
-  first_name "First"
-  last_name "Last"
-  email "email@email.com"
-  user_photo "photo_url"
-  phone_number 3138001200
-  about_me "this is my description"
-  password_digest "431jk3nklnlnfk3"
+  first_name { sequence(:first_name) { |i| "first_name#{i}"} }
+  last_name { sequence(:last_name) { |i| "last_name#{i}"} }
+  email { sequence(:email) { |i| "email#{i}"}}
+  user_photo { sequence(:user_photo) { |i| "photo#{i}"}}
+  phone_number { sequence(:phone_number, 8000) }
+  about_me { sequence(:about_me) { |i| "aboutme#{i}"} }
+  password_digest { sequence(:password_digest) { |i| "digest#{i}"} }
 end

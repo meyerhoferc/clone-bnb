@@ -14,4 +14,15 @@ describe "user authorization" do
     expect(page).to_not have_content(user.phone_number)
   end
 
+  it "a user cannot view another user's information" do
+    user_one, user_two = Fabricate.times(2, :user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_one)
+    visit dashboard_path
+
+    expect(page).to_not have_content(user_two.first_name)
+    expect(page).to_not have_content(user_two.last_name)
+    expect(page).to_not have_content(user_two.about_me)
+    expect(page).to_not have_content(user_two.email)
+    expect(page).to_not have_content(user_two.phone_number)
+  end
 end
