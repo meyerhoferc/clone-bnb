@@ -9,4 +9,8 @@ class User < ApplicationRecord
 
   has_many :user_roles
   has_many :roles, through: :user_roles
+
+  def traveler?
+    roles.exists?(title: "traveler")
+  end
 end
