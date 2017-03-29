@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    @user.roles.create(title: "traveler")
     if @user.save
       session[:user_id] = @user.id
       redirect_to dashboard_path
@@ -12,6 +13,17 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_role(user_params)
+    flash[:success] = "Account successfully updated"
+    redirect_to dashboard_path
   end
 
   private
@@ -22,6 +34,7 @@ class UsersController < ApplicationController
                                  :email,
                                  :password,
                                  :about_me,
-                                 :phone_number)
+                                 :phone_number,
+                                 :role)
   end
 end
