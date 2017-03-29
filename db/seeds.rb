@@ -17,7 +17,8 @@ class Seed
         email: Faker::Internet.free_email,
         about_me: Faker::Hipster.paragraph,
         user_photo: "http://robohash.org/#{i}.png",
-        phone_number: Faker::PhoneNumber.cell_phone
+        phone_number: Faker::PhoneNumber.cell_phone,
+        password_digest: "password"
       )
       puts "User #{user.last_name}, #{user.first_name} created!"
     end
@@ -47,7 +48,8 @@ class Seed
     3000.times do |i|
       listing = Listing.find(Random.new.rand(1..1000))
       image = Image.create!(
-        image_url: "http://robohash.org/#{i}.png",
+        # image_url: "http://robohash.org/#{listing.city}.png",
+        image_url: Faker::LoremPixel.image("700x400", false, 'city'),
         listing_id: listing.id
         )
         puts "Image for #{image.listing_id} created!"
