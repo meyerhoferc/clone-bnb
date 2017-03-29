@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def traveler?
     roles.exists?(title: "traveler")
   end
+
+  def host?
+    roles.exists?(title: "host")
+  end
 end
