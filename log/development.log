@@ -1,293 +1,62 @@
-  [1m[35m (29.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
-  [1m[35m (24.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
-  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2299518432844437105);[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-Migrating to CreateUsers (20170328191006)
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (26.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "first_name" character varying, "last_name" character varying, "about_me" character varying, "user_photo" character varying, "phone_number" character varying)[0m
-  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328191006"]]
-  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateRoles (20170328191114)
-  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "roles" ("id" serial primary key, "title" character varying)[0m
-  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328191114"]]
-  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateUserRoles (20170328191144)
-  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "user_roles" ("id" serial primary key, "user_id" integer, "role_id" integer, CONSTRAINT "fk_rails_318345354e"
-FOREIGN KEY ("user_id")
-  REFERENCES "users" ("id")
-, CONSTRAINT "fk_rails_3369e0d5fc"
-FOREIGN KEY ("role_id")
-  REFERENCES "roles" ("id")
-)[0m
-  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_user_roles_on_user_id" ON "user_roles"  ("user_id")[0m
-  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_user_roles_on_role_id" ON "user_roles"  ("role_id")[0m
-  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328191144"]]
-  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateListings (20170328191608)
-  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "listings" ("id" serial primary key, "user_id" integer, "street_address" character varying, "description" character varying, "city" character varying, "state" character varying, "zipcode" character varying, "max_occupancy" character varying, "title" character varying, "list_category" character varying, "number_beds" character varying, "number_rooms" character varying, CONSTRAINT "fk_rails_baa008bfd2"
-FOREIGN KEY ("user_id")
-  REFERENCES "users" ("id")
-)[0m
-  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_listings_on_user_id" ON "listings"  ("user_id")[0m
-  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328191608"]]
-  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateReservations (20170328192425)
-  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "reservations" ("id" serial primary key, "host_id" integer, "traveler_id" integer, "start_date" date, "end_date" date, "listing_id" integer, "status" integer, CONSTRAINT "fk_rails_6d899b98d1"
-FOREIGN KEY ("listing_id")
-  REFERENCES "listings" ("id")
-)[0m
-  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_reservations_on_listing_id" ON "reservations"  ("listing_id")[0m
-  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328192425"]]
-  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
-Migrating to AddListingsToUserRoles (20170328192632)
-  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "user_roles" ADD "listing_id" integer[0m
-  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_user_roles_on_listing_id" ON "user_roles"  ("listing_id")[0m
-  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "user_roles" ADD CONSTRAINT "fk_rails_976f0e7e34"
-FOREIGN KEY ("listing_id")
-  REFERENCES "listings" ("id")
-[0m
-  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328192632"]]
-  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateImages (20170328192701)
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "images" ("id" serial primary key, "image_url" character varying, "listing_id" integer, CONSTRAINT "fk_rails_2a2257c8bb"
-FOREIGN KEY ("listing_id")
-  REFERENCES "listings" ("id")
-)[0m
-  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_images_on_listing_id" ON "images"  ("listing_id")[0m
-  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328192701"]]
-  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateMessages (20170328192724)
-  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "messages" ("id" serial primary key, "host_id" integer, "traveler_id" integer, "body" character varying)[0m
-  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328192724"]]
-  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
-Migrating to AddTitleToMessages (20170328192905)
-  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "messages" ADD "title" character varying[0m
-  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "messages" ALTER COLUMN "body" TYPE text[0m
-  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328192905"]]
-  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
-Migrating to ChangeStringToCiText (20170328193038)
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35mSQL (30.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "citext"[0m
-  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "listings" ALTER COLUMN "street_address" TYPE citext[0m
-  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "listings" ALTER COLUMN "city" TYPE citext[0m
-  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "listings" ALTER COLUMN "state" TYPE citext[0m
-  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "listings" ALTER COLUMN "title" TYPE citext[0m
-  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328193038"]]
-  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
-Migrating to ChangeReservationColumns (20170328193708)
-  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "reservations" DROP "host_id"[0m
-  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "reservations" DROP "traveler_id"[0m
-  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "reservations" ADD "user_id" integer[0m
-  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_reservations_on_user_id" ON "reservations"  ("user_id")[0m
-  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "reservations" ADD CONSTRAINT "fk_rails_48a92fce51"
-FOREIGN KEY ("user_id")
-  REFERENCES "users" ("id")
-[0m
-  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328193708"]]
-  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
-Migrating to AddPasswordToUsers (20170328231238)
-  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" character varying[0m
-  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170328231238"]]
-  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-03-29 03:38:39 UTC], ["updated_at", 2017-03-29 03:38:39 UTC]]
-  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
-  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2299518432844437105)[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
-  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2299518432844437105);[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
-  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
-  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2299518432844437105)[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" ORDER BY "roles"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "roles" ("title") VALUES ($1) RETURNING "id"[0m  [["title", "traveler"]]
-  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "first_name", "last_name", "about_me", "phone_number", "password_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "derp@derp.com"], ["first_name", "derp"], ["last_name", "derp"], ["about_me", "derp derp derp derp"], ["phone_number", "-4642"], ["password_digest", "$2a$10$yViYQ0biqJ3kACrLQccUMO7flOaHWNx77N45HIU6k1Oda.gfNsKXu"]]
-  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" ORDER BY "roles"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "user_roles" ON "roles"."id" = "user_roles"."role_id" WHERE "user_roles"."user_id" = $1[0m  [["user_id", 1]]
-DEPRECATION WARNING: Passing an argument to force an association to reload is now deprecated and will be removed in Rails 5.1. Please call `reload` on the result collection proxy instead. (called from irb_binding at (irb):3)
-  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "user_roles" ON "roles"."id" = "user_roles"."role_id" WHERE "user_roles"."user_id" = $1[0m  [["user_id", 1]]
-Started GET "/" for ::1 at 2017-03-28 23:09:17 -0600
-  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/" for ::1 at 2017-03-29 12:48:52 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (6.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
 Processing by HomeController#index as HTML
   Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (1.7ms)
-  Rendered shared/_navbar.html.erb (0.4ms)
-Completed 200 OK in 476ms (Views: 474.7ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/" for ::1 at 2017-03-28 23:10:22 -0600
-Processing by HomeController#index as HTML
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (0.3ms)
-  Rendered shared/_navbar.html.erb (0.6ms)
-Completed 200 OK in 26ms (Views: 23.4ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/sessions/new" for ::1 at 2017-03-28 23:10:24 -0600
-  
-ActionController::RoutingError (No route matches [GET] "/sessions/new"):
-  
-actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
-web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
-web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
-web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
-web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
-railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
-railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
-activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
-activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
-activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
-railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
-sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
-rack (2.0.1) lib/rack/method_override.rb:22:in `call'
-rack (2.0.1) lib/rack/runtime.rb:22:in `call'
-activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
-rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
-railties (5.0.2) lib/rails/engine.rb:522:in `call'
-puma (3.8.2) lib/puma/configuration.rb:224:in `call'
-puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
-puma (3.8.2) lib/puma/server.rb:435:in `process_client'
-puma (3.8.2) lib/puma/server.rb:299:in `block in run'
-puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
-  Rendered collection of /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [5 times] (4.5ms)
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (6.7ms)
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (97.7ms)
-Started GET "/sessions/new" for ::1 at 2017-03-28 23:10:41 -0600
-  
-ActionController::RoutingError (No route matches [GET] "/sessions/new"):
-  
-actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
-web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
-web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
-web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
-web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
-railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
-railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
-activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
-activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
-activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
-railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
-sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
-rack (2.0.1) lib/rack/method_override.rb:22:in `call'
-rack (2.0.1) lib/rack/runtime.rb:22:in `call'
-activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
-actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
-rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
-railties (5.0.2) lib/rails/engine.rb:522:in `call'
-puma (3.8.2) lib/puma/configuration.rb:224:in `call'
-puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
-puma (3.8.2) lib/puma/server.rb:435:in `process_client'
-puma (3.8.2) lib/puma/server.rb:299:in `block in run'
-puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
-  Rendered collection of /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [5 times] (2.0ms)
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (89.3ms)
-Started GET "/" for ::1 at 2017-03-28 23:10:46 -0600
-Processing by HomeController#index as HTML
-  Rendering home/index.html.erb within layouts/application
-  Rendered home/index.html.erb within layouts/application (0.5ms)
-  Rendered shared/_navbar.html.erb (0.4ms)
-Completed 200 OK in 42ms (Views: 40.6ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/login" for ::1 at 2017-03-28 23:10:47 -0600
-Processing by SessionsController#new as HTML
-  Rendering sessions/new.html.erb within layouts/application
-  Rendered sessions/new.html.erb within layouts/application (416.4ms)
+  Rendered home/index.html.erb within layouts/application (1.9ms)
   Rendered shared/_navbar.html.erb (0.5ms)
-Completed 200 OK in 447ms (Views: 443.6ms | ActiveRecord: 0.0ms)
+Completed 200 OK in 267ms (Views: 264.9ms | ActiveRecord: 0.0ms)
 
 
-Started GET "/login" for ::1 at 2017-03-28 23:11:36 -0600
+Started GET "/login" for ::1 at 2017-03-29 12:49:00 -0600
 Processing by SessionsController#new as HTML
   Rendering sessions/new.html.erb within layouts/application
-  Rendered sessions/new.html.erb within layouts/application (1.9ms)
-  Rendered shared/_navbar.html.erb (0.3ms)
-Completed 200 OK in 32ms (Views: 30.0ms | ActiveRecord: 0.0ms)
+  Rendered sessions/new.html.erb within layouts/application (660.3ms)
+  Rendered shared/_navbar.html.erb (0.5ms)
+Completed 200 OK in 682ms (Views: 681.0ms | ActiveRecord: 0.0ms)
 
 
-  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
-  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
-  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "first_name", "last_name", "about_me", "phone_number", "password_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["email", "hello@derp.com"], ["first_name", "hello"], ["last_name", "world"], ["about_me", "derp derp derp derp"], ["phone_number", "435-2342-343"], ["password_digest", "$2a$10$5T6C2AcMwyVTwulFbEgXlO5u/ZXR4lNt.JsX6j5GsZ945gtXjNbjq"]]
-  [1m[35m (11.8ms)[0m  [1m[35mCOMMIT[0m
-Started GET "/login" for ::1 at 2017-03-28 23:31:15 -0600
-Started GET "/login" for ::1 at 2017-03-28 23:31:15 -0600
-  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-Processing by SessionsController#new as HTML
+Started GET "/login" for ::1 at 2017-03-29 13:51:18 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
 Processing by SessionsController#new as HTML
   Rendering sessions/new.html.erb within layouts/application
-  Rendering sessions/new.html.erb within layouts/application
-  Rendered sessions/new.html.erb within layouts/application (902.6ms)
-  Rendered sessions/new.html.erb within layouts/application (907.6ms)
-  Rendered shared/_navbar.html.erb (0.3ms)
-  Rendered shared/_navbar.html.erb (0.0ms)
-Completed 200 OK in 1527ms (Views: 1524.3ms | ActiveRecord: 0.0ms)
+  Rendered sessions/new.html.erb within layouts/application (438.1ms)
+  Rendered shared/_navbar.html.erb (0.5ms)
+Completed 200 OK in 734ms (Views: 731.3ms | ActiveRecord: 0.0ms)
 
 
-Completed 200 OK in 1526ms (Views: 1523.9ms | ActiveRecord: 0.0ms)
-
-
-Started POST "/login" for ::1 at 2017-03-28 23:31:23 -0600
+Started POST "/login" for ::1 at 2017-03-29 13:51:33 -0600
 Processing by SessionsController#create as HTML
-  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nQaIkDwu1+94I4vZr9mZVAXu/hbeTEnh+pzWpmztD1IgycfntFH9xN6PaYBDM62XN5a+3I7tlxZIXeGEwDgCGw==", "session"=>{"email"=>"hello@derp.com", "password"=>"[FILTERED]"}, "commit"=>"Login"}
-  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hello@derp.com"], ["LIMIT", 1]]
-Completed 500 Internal Server Error in 63455ms (ActiveRecord: 4.5ms)
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"l4vvAJoHr/HJsq+uCF7ouY+II8ij+NHzXindefLhGeDYuucYolVn2tUks0GUqVbHmxkFwcg5OqTK5m1tbQZG9Q==", "session"=>{"email"=>"derp@derp.com", "password"=>"[FILTERED]"}, "commit"=>"Login"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "derp@derp.com"], ["LIMIT", 1]]
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.2ms)
+  Rendered shared/_navbar.html.erb (0.3ms)
+Completed 200 OK in 116ms (Views: 22.7ms | ActiveRecord: 7.8ms)
 
 
-  
-SystemExit (exit):
-  
-app/controllers/sessions_controller.rb:6:in `create'
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (171.0ms)
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (48.8ms)
-  Rendering /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (20.3ms)
-  Rendered /Users/wonderland/.rvm/gems/ruby-2.3.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (324.8ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Started POST "/login" for ::1 at 2017-03-29 13:52:53 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lHv+FF8W9pebwObJJaGcbzH8UN3k23K6is1BUz76zNrbSvYMZ0Q+vIdW+ia5ViIRJW121I8ame0eAvFHoR2Tzw==", "session"=>{"email"=>"hello@derp.com", "password"=>"[FILTERED]"}, "commit"=>"Login"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hello@derp.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/dashboard
+Completed 302 Found in 95ms (ActiveRecord: 3.4ms)
+
+
+Started GET "/dashboard" for ::1 at 2017-03-29 13:52:54 -0600
+Processing by DashboardController#show as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering dashboard/show.html.erb within layouts/application
+  [1m[36mRole Load (6.7ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "user_roles" ON "roles"."id" = "user_roles"."role_id" WHERE "user_roles"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered dashboard/show.html.erb within layouts/application (49.9ms)
+  Rendered shared/_navbar.html.erb (0.6ms)
+Completed 200 OK in 279ms (Views: 265.0ms | ActiveRecord: 10.4ms)
+
+
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "user_roles" ON "roles"."id" = "user_roles"."role_id" WHERE "user_roles"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.6ms)[0m  [1m[32mINSERT INTO "roles" ("title") VALUES ($1) RETURNING "id"[0m  [["title", "host"]]
+  [1m[35mSQL (18.0ms)[0m  [1m[32mINSERT INTO "user_roles" ("user_id", "role_id") VALUES ($1, $2) RETURNING "id"[0m  [["user_id", 2], ["role_id", 2]]
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
