@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
   def show
-  end 
+    render file: "public/404" unless current_user
+  end
 end
