@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "user can see all listings available" do
   scenario "when they visit the listings index page" do
+    Fabricator(:listing)
 
     visit listings_path
 
