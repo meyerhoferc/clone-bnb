@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :users, only: [:new, :create]
   get "dashboard", to: "dashboard#show"
 
   get "login", to: "sessions#new"
@@ -7,4 +6,7 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
 
   root "home#index"
+
+  put "update_host", to: "users#update"
+  resources :users, only: [:new, :create, :edit, :update]
 end
