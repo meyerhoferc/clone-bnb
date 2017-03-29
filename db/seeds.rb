@@ -17,7 +17,8 @@ class Seed
         email: Faker::Internet.free_email,
         about_me: Faker::Hipster.paragraph,
         user_photo: "http://robohash.org/#{i}.png",
-        phone_number: Faker::PhoneNumber.cell_phone
+        phone_number: Faker::PhoneNumber.cell_phone,
+        password_digest: "password"
       )
       puts "User #{user.last_name}, #{user.first_name} created!"
     end
@@ -28,12 +29,13 @@ class Seed
       user = User.find(Random.new.rand(1..1000))
       listing = Listing.create!(
         user_id: user.id,
+        title: Faker::Company.catch_phrase,
         street_address: Faker::Address.street_address,
         city: Faker::Address.city,
         state: Faker::Address.state_abbr,
         zipcode: Faker::Address.zip,
         max_occupancy: Faker::Number.between(1, 30),
-        title: Faker::Hipster.sentence,
+        description: Faker::Hipster.paragraph,
         list_category: ["Entire home/apt", "Private room", "Shared room"].sample,
         number_beds:Faker::Number.between(1, 30),
         number_rooms: Faker::Number.between(1, 30)
@@ -44,13 +46,14 @@ class Seed
   end
 
   def generate_images
-    3000.times do |i|
-      listing = Listing.find(Random.new.rand(1..1000))
-      image = Image.create!(
-        image_url: "http://robohash.org/#{i}.png",
-        listing_id: listing.id
-        )
-        puts "Image for #{image.listing_id} created!"
+    listing = Listing.all.each do |listing|
+      3.times do
+        image = Image.create!(
+          image_url: Faker::LoremPixel.image("700x400", false, 'city'),
+          listing_id: listing.id
+          )
+          puts "Image for #{image.listing_id} created!"
+      end
     end
   end
 

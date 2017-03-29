@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
+  root "home#index"
+  resources :listings, only: [:show, :index]
+  resources :users, only: [:new, :create]
+  get "dashboard", to: "dashboard#show"
+
+=======
   get "dashboard", to: "dashboard#show"
 
   get "login", to: "sessions#new"
@@ -9,4 +16,5 @@ Rails.application.routes.draw do
 
   put "update_host", to: "users#update"
   resources :users, only: [:new, :create, :edit, :update]
+>>>>>>> master
 end
