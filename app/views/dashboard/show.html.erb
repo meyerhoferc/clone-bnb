@@ -1,5 +1,7 @@
 <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
 
-<div class="my-profile">
+<div class="my-profile container">
+  <p>About Me: <%= current_user.about_me %></p>
   <p>Email: <%= current_user.email %></p>
+  <p>Phone Number: <%= current_user.phone_number %></p>
 </div>

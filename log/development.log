@@ -591,3 +591,50 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 56ms (Views: 40.5ms | ActiveRecord: 5.6ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-03-28 18:10:49 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.9ms)
+  Rendered shared/_navbar.html.erb (0.6ms)
+Completed 200 OK in 235ms (Views: 233.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-03-28 18:11:57 -0600
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.3ms)
+  Rendered shared/_navbar.html.erb (0.3ms)
+Completed 200 OK in 22ms (Views: 20.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-03-28 18:12:01 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (14.9ms)
+  Rendered shared/_navbar.html.erb (0.3ms)
+Completed 200 OK in 51ms (Views: 36.6ms | ActiveRecord: 5.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-03-28 18:12:20 -0600
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uLXicHzUEDMSN1xwGgjfNqil1Wggu/1gD0a4qSvOXeRXdR4HI5IZdBtID9RYOahhszATl8tkbMtkAHqXAjPsSA==", "user"=>{"first_name"=>"First", "last_name"=>"Last", "email"=>"email@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create Account"}
+Unpermitted parameter: password_confirmation
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "first_name", "last_name", "password_digest") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "email@email.com"], ["first_name", "First"], ["last_name", "Last"], ["password_digest", "$2a$10$/9yqFTWrgeLQmrZMF2Hb8.GK5H6.58l/RKVOVOnQHEZOWnoBXUByO"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://127.0.0.1:3000/dashboard
+Completed 302 Found in 69ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2017-03-28 18:12:20 -0600
+Processing by DashboardController#show as HTML
+  Rendering dashboard/show.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered dashboard/show.html.erb within layouts/application (5.1ms)
+  Rendered shared/_navbar.html.erb (0.3ms)
+Completed 200 OK in 30ms (Views: 27.9ms | ActiveRecord: 0.6ms)
+
+
