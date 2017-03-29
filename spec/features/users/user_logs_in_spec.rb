@@ -14,7 +14,6 @@ describe "user logs in" do
     end
 
     expect(current_path).to eq(dashboard_path)
-    # test to see that traveler user sees correct things on dashboard
   end
 
   it "as a host" do
