@@ -8,9 +8,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Become A Host</a></li>
         <li><a href="/users/new">Sign Up</a></li>
-        <li><a href="#">Login</a></li>
+        <% if current_user %>
+          <li><a href="/logout">Logout</a></li>
+          <li><a href="#">Become a Host</a></li>
+        <% else %>
+          <li><a href="/login">Login</a></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
