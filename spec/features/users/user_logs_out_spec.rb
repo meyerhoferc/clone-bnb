@@ -25,6 +25,8 @@ describe "a logged in user" do
 
     click_on "Logout"
 
+    expect(current_path).to eq(root_path)
+
     within(".success") do
       expect(page).to have_content("Logged out successfully")
     end
