@@ -21,7 +21,7 @@ describe Listing do
     it { should have_many(:images) }
   end
 
-  describe "#available?" do
+  describe "#range_available?" do
     it "should determine if a listing has a reservation on a date" do
       listing = Fabricate(:listing)
       Fabricate.times(3, :image, listing: listing)
@@ -34,10 +34,10 @@ describe Listing do
                           start_date: start_date,
                           end_date: end_date)
 
-      expect(listing.available?(start_date)).to eq(false)
-      expect(listing.available?(end_date)).to eq(false)
-      expect(listing.available?(middle_date)).to eq(false)
-      expect(listing.available?("01/04/2018")).to eq(true)
+      expect(listing.range_available?(start_date, end_date)).to eq(false)
+      expect(listing.date_available?(end_date)).to eq(false)
+      expect(listing.date_available?(middle_date)).to eq(false)
+      expect(listing.date_available?("01/04/2018")).to eq(true)
     end
   end
 end

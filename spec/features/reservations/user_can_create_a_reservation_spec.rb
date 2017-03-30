@@ -37,10 +37,9 @@ describe "a logged in user" do
     expect(reservation.status).to eq("pending")
     expect(reservation.user).to eq(user)
     expect(reservation.listing).to eq(listing)
-    
+
     start_date, middle_date, end_date = ["01/01/2018", "01/02/2018", "01/03/2018"]
-    expect(listing.available?(start_date)).to eq(false)
-    expect(listing.available?(middle_date)).to eq(false)
-    expect(listing.available?(end_date)).to eq(false)
+    expect(listing.range_available?(start_date, end_date)).to eq(false)
+    expect(listing.date_available?(middle_date)).to eq(false)
   end
 end
