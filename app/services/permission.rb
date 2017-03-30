@@ -19,7 +19,7 @@ class Permission
     return true if controller == "sessions"
     return true if controller == "home"
     return true if controller == "users"
-    return true if controller == "listing"
+    return true if controller == "listings"
   end
 
   def traveler_user_permissions
@@ -27,7 +27,7 @@ class Permission
     return true if controller == "home"
     return true if controller == "users"
     return true if controller == "dashboard"
-    return true if controller == "listing"
+    return true if controller == "listings"
   end
 
   def host_user_permissions
@@ -35,6 +35,6 @@ class Permission
     return true if controller == "home"
     return true if controller == "users"
     return true if controller == "dashboard"
-    return true if controller == "listing"
+    return true if controller == "listings"
   end
 end
