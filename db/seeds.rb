@@ -67,7 +67,7 @@ class Seed
         start_date: start_date,
         end_date: end_date,
         listing_id: listing.id,
-        status: ["Confirmed", "Pending", "Cancelled", "Complete"].sample,
+        status: ["confirmed", "pending", "cancelled", "complete"].sample,
         user_id: user.id
       )
       puts "Reservation #{reservation.id} created!"
