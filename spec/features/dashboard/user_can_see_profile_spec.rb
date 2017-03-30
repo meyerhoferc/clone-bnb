@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "user profile" do
-  it "for traveler on user dashboard" do
+  it "traveler profile on user dashboard" do
     traveler = Fabricate(:user)
     traveler.roles.create!(title: "traveler")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(traveler)
@@ -25,14 +25,11 @@ describe "user profile" do
     expect(page).to_not have_content("Sign Up")
   end
 
-  it "for host on user dashboard" do
+  it "host profile on user dashboard" do
     host = Fabricate(:user)
     host.roles.create!(title: "host")
-    host.roles.create!(title: "traveler")
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
+    #allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
     visit dashboard_path
-    save_and_open_page
-
     expect(page).to have_content("Profile")
     expect(page).to have_content("Welcome, #{host.first_name} #{host.last_name}")
     expect(page).to have_content(host.about_me)
