@@ -2,11 +2,11 @@
   <ul class="nav">
     <li class="active"><a href="/dashboard">Profile</a></li>
     <li><a href="/users/<%= current_user.id %>/messages">Messages</a></li>
-    <li><a href="#">Trips</a></li>
+    <li><a href="/users/<%= current_user.id %>/trips">Trips</a></li>
 
     <% if current_user.host? %>
-      <li><a href="#">Reservations</a></li>
-      <li><a href="#">Listings</a></li>
+      <li><a href="/users/<%= current_user.id %>/reservations">Reservations</a></li>
+      <li><a href="/users/<%= current_user.id %>/listings">Listings</a></li>
     <% end %>
   </ul>
 </div>
@@ -15,6 +15,7 @@
 <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
 
 <div class="my-profile container">
+  <%= current_user.user_photo %>
   <h3>Profile</h3>
   <p>About Me: <%= current_user.about_me %></p>
   <p>Email: <%= current_user.email %></p>
