@@ -16,9 +16,21 @@ class Listing < ApplicationRecord
                         :number_baths
 
   def range_available?(start_date, end_date)
-    reservations.where(start_date: start_date).count == 0 && reservations.where(end_date: end_date).count == 0
+    statuses = (start_date.to_date..end_date.to_date).to_a.map do |date|
+      date_available?(date)
+    end
+    status = statuses.all? { |status| status == true }
   end
 
   def date_available?(date)
+    check_start_and_end_dates(date.to_date) && check_middle_dates(date.to_date)
+  end
+
+  def check_start_and_end_dates(date)
+    reservations.where(start_date: date).count == 0 && reservations.where(end_date: date).count == 0
+  end
+
+  def check_middle_dates(date)
+    reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
 end

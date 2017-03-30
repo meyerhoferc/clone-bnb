@@ -27,17 +27,17 @@ describe Listing do
       Fabricate.times(3, :image, listing: listing)
       traveler = Fabricate(:user)
       start_date = "01/01/2018"
-      middle_date = "01/02/2018"
-      end_date = "01/03/2018"
+      end_date = "04/01/2018"
       Reservation.create!(listing: listing,
                           user: traveler,
                           start_date: start_date,
                           end_date: end_date)
 
       expect(listing.range_available?(start_date, end_date)).to eq(false)
+      expect(listing.date_available?(start_date)).to eq(false)
       expect(listing.date_available?(end_date)).to eq(false)
-      expect(listing.date_available?(middle_date)).to eq(false)
-      expect(listing.date_available?("01/04/2018")).to eq(true)
+      expect(listing.range_available?("03/01/2018", "05/01/2018")).to eq(false)
+      expect(listing.range_available?("02/01/2018", "03/01/2018")).to eq(false)
     end
   end
 end

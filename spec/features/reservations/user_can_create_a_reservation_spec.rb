@@ -21,7 +21,7 @@ describe "a logged in user" do
     expect(current_path).to eq(new_listing_reservation_path(listing))
 
     fill_in("reservation[start_date]", with: "01/01/2018")
-    fill_in("reservation[end_date]", with: "01/03/2018")
+    fill_in("reservation[end_date]", with: "03/01/2018")
 
     click_on "Confirm Reservation"
 
@@ -38,7 +38,7 @@ describe "a logged in user" do
     expect(reservation.user).to eq(user)
     expect(reservation.listing).to eq(listing)
 
-    start_date, middle_date, end_date = ["01/01/2018", "01/02/2018", "01/03/2018"]
+    start_date, middle_date, end_date = ["01/01/2018", "02/01/2018", "03/01/2018"]
     expect(listing.range_available?(start_date, end_date)).to eq(false)
     expect(listing.date_available?(middle_date)).to eq(false)
   end
