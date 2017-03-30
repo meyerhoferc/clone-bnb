@@ -28,8 +28,10 @@ describe "user profile" do
   it "host profile on user dashboard" do
     host = Fabricate(:user)
     host.roles.create!(title: "host")
-    #allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
+    host.roles.create!(title: "traveler")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
     visit dashboard_path
+
     expect(page).to have_content("Profile")
     expect(page).to have_content("Welcome, #{host.first_name} #{host.last_name}")
     expect(page).to have_content(host.about_me)

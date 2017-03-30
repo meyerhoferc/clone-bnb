@@ -6,7 +6,7 @@ describe "user profile" do
     traveler.roles.create!(title: "traveler")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(traveler)
     visit dashboard_path
-    expect(page).to have_content(traverler.user_photo)
+    expect(page).to have_content(traveler.user_photo)
     expect(page).to have_content("Profile")
     expect(page).to have_content("Welcome, #{traveler.first_name} #{traveler.last_name}")
     expect(page).to have_content(traveler.about_me)
@@ -32,7 +32,6 @@ describe "user profile" do
     host.roles.create!(title: "traveler")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
     visit dashboard_path
-    save_and_open_page
 
     expect(page).to have_content(host.user_photo)
     expect(page).to have_content("Profile")
@@ -65,15 +64,17 @@ describe "user profile" do
     expect(current_path).to eq(dashboard_path)
 
     click_on "Messages"
-    expect(current_path).to eq(user_messages_path)
+    expect(current_path).to eq(user_messages_path(host))
     expect(page).to have_content("Messages")
 
+    visit dashboard_path
     click_on "Trips"
-    expect(current_path).to eq(user_trips)
+    expect(current_path).to eq(user_trips_path(host))
     expect(page).to have_content("Trips")
 
-    click_on "Reservatons"
-    expect(current_path).to eq(user_reservations)
+    visit dashboard_path
+    click_on "Reservations"
+    expect(current_path).to eq(user_reservations_path(host))
     expect(page).to have_content("Reservations")
   end
 end
