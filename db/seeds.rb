@@ -14,10 +14,10 @@ class Seed
       user = User.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        email: Faker::Internet.free_email,
+        email: Faker::Internet.unique.free_email,
         about_me: Faker::Hipster.paragraph,
         user_photo: "http://robohash.org/#{i}.png",
-        phone_number: Faker::PhoneNumber.cell_phone,
+        phone_number: Faker::PhoneNumber.unique.cell_phone,
         password_digest: "password"
       )
       puts "User #{user.last_name}, #{user.first_name} created!"
