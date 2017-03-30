@@ -20,4 +20,24 @@ describe Listing do
     it { should have_many(:reservations) }
     it { should have_many(:images) }
   end
+
+  describe "#available?" do
+    it "should determine if a listing has a reservation on a date" do
+      listing = Fabricate(:listing)
+      Fabricate.times(3, :image, listing: listing)
+      traveler = Fabricate(:user)
+      start_date = "01/01/2018"
+      middle_date = "01/02/2018"
+      end_date = "01/03/2018"
+      Reservation.create!(listing: listing,
+                          user: traveler,
+                          start_date: start_date,
+                          end_date: end_date)
+
+      expect(listing.available?(start_date)).to eq(false)
+      expect(listing.available?(end_date)).to eq(false)
+      expect(listing.available?(middle_date)).to eq(false)
+      expect(listing.available?("01/04/2018")).to eq(true)
+    end
+  end
 end
