@@ -48,7 +48,7 @@
                 <h3>
                   <%= link_to listing.title, listing_path(listing)  %>
                 </h3>
-                <div class="ellipsis"><p><%= listing.description %></p></div>
+                <div class="ellipsis"><p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%= listing.description %></p></div>
             </div>
             <% end %>
         </div>
