@@ -1,6 +1,6 @@
 <h1>Reserve this Property</h1>
 
-<%= form_for(@reservation) do |f| %>
+<%= form_for([@listing, @reservation]) do |f| %>
   <p>Select a Check-In Date</p>
   <div class="form-group">
     <%= f.label :start_date %>

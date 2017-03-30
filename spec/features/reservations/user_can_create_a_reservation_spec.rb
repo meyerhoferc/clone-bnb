@@ -9,6 +9,7 @@ describe "a logged in user" do
                         phone_number: "853-343-2343",
                         password: "123")
     user.roles.create!(title: "traveler")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     listing = Fabricate(:listing)
     image = Fabricate.times(3, :image, listing: listing)
     host = listing.user
@@ -17,8 +18,10 @@ describe "a logged in user" do
 
     visit listing_path(listing)
     click_on "Book Now"
+    expect(current_path).to eq(new_listing_reservation_path(listing))
 
-    expect(current_path).to eq(new_reservation_path)
+    fill_in("reservation[start_date]", with: "01/01/2018")
+    fill_in("reservation[end_date]", with: "01/03/2018")
 
     click_on "Confirm Reservation"
 
@@ -26,6 +29,10 @@ describe "a logged in user" do
     reservation = Reservation.last
 
     expect(current_path).to eq(reservation_path(reservation))
+
+    within(".success") do
+      expect(page).to have_content("Successfully made reservation")
+    end
 
     expect(reservation.status).to eq("pending")
     expect(reservation.user).to eq(user)
