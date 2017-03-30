@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   put "update_host", to: "users#update"
   resources :users, only: [:new, :create, :edit, :update]
-
+  resources :reservations, only: [:new, :create]
 end
