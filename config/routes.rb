@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
   root "home#index"
-  resources :listings, only: [:show, :index]
   get "dashboard", to: "dashboard#show"
+  
+  resources :listings, only: [:show, :index] do
+    resources :reservations, only: [:new, :create]
+  end
+  resources :reservations, only: [:show]
 
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
@@ -10,5 +14,4 @@ Rails.application.routes.draw do
 
   put "update_host", to: "users#update"
   resources :users, only: [:new, :create, :edit, :update]
-
 end

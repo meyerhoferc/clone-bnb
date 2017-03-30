@@ -51,7 +51,7 @@
                 <p><%= @listing.description %></p>
             </div>
             <div class="col-md-1">
-              <%= button_to "Book Now", method: :put, class: "btn btn-success" %></td>
+              <%= link_to "Book Now", new_listing_reservation_path(@listing), class: "btn btn-success" %></td>
             </div>
 
         </div>

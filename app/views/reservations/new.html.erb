@@ -1,0 +1,18 @@
+<h1>Reserve this Property</h1>
+
+<%= form_for([@listing, @reservation]) do |f| %>
+  <p>Select a Check-In Date</p>
+  <div class="form-group">
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+
+
+  <p>Select a Check-Out Date</p>
+  <div class="form-group">
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+  </div>
+
+  <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
+<% end %>
