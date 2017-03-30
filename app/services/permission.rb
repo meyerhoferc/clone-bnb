@@ -33,6 +33,7 @@ class Permission
     return true if controller == "reservations"
     return true if controller == "dashboard"
     return true if controller == "listings"
+    return true if controller == "reservations"
   end
 
   def traveler_user_permissions
