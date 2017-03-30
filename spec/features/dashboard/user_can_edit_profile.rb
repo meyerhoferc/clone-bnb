@@ -20,10 +20,10 @@ describe "user can edit profile" do
     click_on "Update Account"
 
     expect(current_path).to eq(dashboard_path)
-    expect(page).to have_content(traveler.first_name)  #if fails change to actual string
-    expect(page).to have_content(traveler.last_name)
-    expect(page).to have_content(traveler.about_me)
-    expect(page).to have_content(traveler.email)
-    expect(page).to have_content(traveler.phone_number)
+    expect(page).to have_content("Chealsea")
+    expect(page).to have_content("Lolittta")
+    expect(page).to have_content("Herm, derp, boop, bop")
+    expect(page).to have_content("supersecureemail@xyz.com")
+    expect(page).to have_content("451-124-1555")
   end
 end
