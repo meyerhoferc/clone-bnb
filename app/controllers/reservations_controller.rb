@@ -6,7 +6,7 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-    @reservation.update_attributes(status: "pending", user_id: current_user.id)
+    @reservation.update_attributes(status: 0, user_id: current_user.id, listing_id: params[:listing_id])
     if @reservation.save
       flash[:success] = "Successfully made reservation"
       redirect_to reservation_path(@reservation)
@@ -17,7 +17,7 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    byebug
+    @reservation = Reservation.find(params[:id])
   end
 
   private
