@@ -13,10 +13,25 @@ describe "a logged in user" do
     image = Fabricate.times(3, :image, listing: listing)
     host = listing.user
 
+    expect(Reservation.count).to eq(0)
+
     visit listing_path(listing)
     click_on "Book Now"
 
     expect(current_path).to eq(new_reservation_path)
 
+    click_on "Confirm Reservation"
+
+    expect(Reservation.count).to eq(1)
+    reservation = Reservation.last
+
+    expect(current_path).to eq(reservation_path(reservation))
+
+    expect(reservation.status).to eq("pending")
+    expect(reservation.user).to eq(user)
+    expect(reservation.listing).to eq(listing)
+    expect(listing.available?(start_date)).to eq(false)
+    expect(listing.available?(middle_date)).to eq(false)
+    expect(listing.available?(end_date)).to eq(false)
   end
 end
