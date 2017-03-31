@@ -6,7 +6,6 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-    binding.pry
     @reservation.update_attributes(user_id: current_user.id, listing_id: params[:listing_id])
     if @reservation.save
       flash[:success] = "Successfully made reservation"
