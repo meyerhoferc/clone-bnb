@@ -19,4 +19,3 @@ describe "user can see all listings available" do
 
   end
 end
-###################################
