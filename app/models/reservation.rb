@@ -14,7 +14,7 @@ class Reservation < ApplicationRecord
   end
 
   def total_cost
-    self.num_nights * self.unit_cost
+    (self.num_nights) * (self.unit_cost)
   end
 
   def no_overlapping?

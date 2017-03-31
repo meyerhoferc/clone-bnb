@@ -41,9 +41,6 @@ describe "a logged in user" do
     within(".charges") do
       expect(page).to have_content("$#{reservation.unit_cost} x #{reservation.num_nights}")
     end
-    within(".charges") do
-      expect(page).to have_content("Total $#{reservation.total_cost}")
-    end
 
     expect(reservation.status).to eq("pending")
     expect(reservation.user).to eq(user)

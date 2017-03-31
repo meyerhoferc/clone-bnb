@@ -6,7 +6,7 @@ describe "user profile" do
     traveler.roles.create!(title: "traveler")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(traveler)
     visit dashboard_path
-    expect(page).to have_content(traveler.user_photo)
+
     expect(page).to have_content("Profile")
     expect(page).to have_content("Welcome, #{traveler.first_name} #{traveler.last_name}")
     expect(page).to have_content(traveler.about_me)
@@ -33,7 +33,6 @@ describe "user profile" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
     visit dashboard_path
 
-    expect(page).to have_content(host.user_photo)
     expect(page).to have_content("Profile")
     expect(page).to have_content("Welcome, #{host.first_name} #{host.last_name}")
     expect(page).to have_content(host.about_me)
@@ -60,7 +59,7 @@ describe "user profile" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
     visit dashboard_path
 
-    click_on "Profile"
+    click_on "Dashboard"
     expect(current_path).to eq(dashboard_path)
 
     click_on "Messages"
