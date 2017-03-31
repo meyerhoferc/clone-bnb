@@ -23,11 +23,11 @@ describe "user logs in" do
     end
 
     expect(current_path).to eq(dashboard_path)
+    expect(page).to have_content(pizza.user_photo)
     expect(page).to have_content("Welcome, #{pizza.first_name} #{pizza.last_name}")
     expect(page).to have_content(pizza.about_me)
     expect(page).to have_content(pizza.email)
     expect(page).to have_content(pizza.phone_number)
-    expect(page).to have_link("Home")
     expect(page).to have_link("Profile")
     expect(page).to have_link("Messages")
     expect(page).to have_link("Trips")
@@ -50,11 +50,11 @@ describe "user logs in" do
     end
 
     expect(current_path).to eq(dashboard_path)
+    expect(page).to have_content(cheese.user_photo)
     expect(page).to have_content("Welcome, #{cheese.first_name} #{cheese.last_name}")
     expect(page).to have_content(cheese.about_me)
     expect(page).to have_content(cheese.email)
     expect(page).to have_content(cheese.phone_number)
-    expect(page).to have_link("Home")
     expect(page).to have_link("Profile")
     expect(page).to have_link("Messages")
     expect(page).to have_link("Trips")
