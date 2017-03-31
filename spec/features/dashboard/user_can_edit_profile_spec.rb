@@ -8,7 +8,7 @@ describe "user can edit profile" do
     visit dashboard_path
 
     click_on "Edit Profile"
-    expect(current_path).to eq(user_edit_path)
+    expect(current_path).to eq(edit_user_path(traveler))
 
     fill_in("user[first_name]", with: "Chealsea")
     fill_in("user[last_name]", with: "Lolittta")
