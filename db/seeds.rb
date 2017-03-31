@@ -3,10 +3,13 @@ class Seed
   def self.start
     seed = Seed.new
     seed.generate_users
+    seed.generate_roles
+    seed.generate_predefined_users
     seed.generate_listings
     seed.generate_images
     seed.generate_reservations
-    seed.generate_roles
+    seed.generate_traveler_user_roles
+    seed.generate_host_user_roles
   end
 
   def generate_users
@@ -110,6 +113,39 @@ class Seed
     puts "Host role created!"
     Role.create!(title: "traveler")
     puts "Traveler role created!"
+  end
+
+  def generate_traveler_user_roles
+    User.all.each do |user|
+      traveler = Role.find_by(title: "traveler")
+      user.user_roles.create!(role: traveler)
+      puts "#{user.email} is now a traveler!"
+    end
+  end
+
+  def generate_host_user_roles
+    User.where('id % 3 = 0').each do |user|
+      host = Role.find_by(title: "host")
+      user.user_roles.create!(role: host)
+      puts "#{user.email} is now a host!"
+    end
+  end
+
+  def generate_predefined_users
+    host = Role.find_by(title: "host")
+    traveler = Role.find_by(title: "traveler")
+    User.create!(email: "sample@email.com",
+                 first_name: "sample",
+                 last_name: "user",
+                 about_me: "sample traveler user",
+                 phone_number: "8183231121",
+                 password: "password")
+    User.create!(email: "host@email.com",
+                 first_name: "host",
+                 last_name: "user",
+                 about_me: "sample traveler user",
+                 phone_number: "8183231122",
+                 password: "password")
   end
 end
 
