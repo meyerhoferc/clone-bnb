@@ -32,6 +32,15 @@ describe "a logged in user" do
     within(".success") do
       expect(page).to have_content("Successfully made reservation")
     end
+    within(".dates") do
+      expect(page).to have_content("#{reservation.start_date.month}-#{reservation.start_date.day}-#{reservation.start_date.year}")
+    end
+    within(".dates") do
+      expect(page).to have_content("#{reservation.end_date.month}-#{reservation.end_date.day}-#{reservation.end_date.year}")
+    end
+    within(".charges") do
+      expect(page).to have_content("$#{reservation.unit_cost}/night x #{reservation.num_nights} nights")
+    end
 
     expect(reservation.status).to eq("pending")
     expect(reservation.user).to eq(user)
@@ -76,8 +85,8 @@ describe "a logged in user" do
 
     expect(Reservation.count).to eq(1)
 
-    within(".danger") do
-      expect(page).to have_content("Reservation not created. Please select another date range.")
-    end
+    expect(page).to_not have_content("Check-in")
+    expect(page).to_not have_content("Check-out")
+    expect(page).to_not have_content("Reservation ID:")
   end
 end

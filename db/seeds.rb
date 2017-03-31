@@ -18,7 +18,7 @@ class Seed
         about_me: Faker::Hipster.paragraph,
         user_photo: "http://robohash.org/#{i}.png",
         phone_number: Faker::PhoneNumber.unique.cell_phone,
-        password_digest: "password"
+        password: "password"
       )
       puts "User #{user.last_name}, #{user.first_name} created!"
     end
@@ -38,10 +38,39 @@ class Seed
         description: Faker::Hipster.paragraph,
         list_category: ["Entire home/apt", "Private room", "Shared room"].sample,
         number_beds:Faker::Number.between(1, 30),
-        number_rooms: Faker::Number.between(1, 30)
+        number_rooms: Faker::Number.between(1, 30),
+        number_baths: Faker::Number.between(1, 5),
+        cost_per_night: Faker::Number.between(1, 350),
+        elevator: [true, false].sample,
+        pets_allowed: [true, false].sample,
+        free_parking: [true, false].sample,
+        family_kid_friendly: [true, false].sample,
+        doorman:[true, false].sample,
+        pool: [true, false].sample,
+        hot_tub: [true, false].sample,
+        gym: [true, false].sample,
+        air_conditioning: [true, false].sample,
+        wheelchair_accessible: [true, false].sample,
+        internet: [true, false].sample,
+        smoking_allowed: [true, false].sample,
+        suitable_for_events: [true, false].sample,
+        wireless_internet: [true, false].sample,
+        indoor_fireplace: [true, false].sample,
+        breakfast: [true, false].sample,
+        kitchen: [true, false].sample,
+        cable_tv: [true, false].sample,
+        dryer: [true, false].sample,
+        hair_dryer: [true, false].sample,
+        washer: [true, false].sample,
+        tv: [true, false].sample,
+        buzzer_wireless_intercom: [true, false].sample,
+        iron: [true, false].sample,
+        essentials: [true, false].sample,
+        laptop_friendly_workspace: [true, false].sample,
+        heating: [true, false].sample,
+        private_entrance: [true, false].sample
         )
         puts "Listing #{listing.title} created!"
-
     end
   end
 
