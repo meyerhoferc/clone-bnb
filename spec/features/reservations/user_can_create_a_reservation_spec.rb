@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe "a logged in user" do
-  it "can create a reservation for a listing" do
+describe "creating a reservation" do
+  it "can be made for a logged in user" do
     user = User.create!(email: "email@email.com",
                         first_name: "Castle",
                         last_name: "Pines",
@@ -32,14 +32,17 @@ describe "a logged in user" do
     within(".success") do
       expect(page).to have_content("Successfully made reservation")
     end
+
     within(".dates") do
       expect(page).to have_content("#{reservation.start_date}")
     end
+
     within(".dates") do
       expect(page).to have_content("#{reservation.end_date}")
     end
+
     within(".charges") do
-      expect(page).to have_content("$#{reservation.unit_cost} x #{reservation.num_nights}")
+      expect(page).to have_content("Total $20")
     end
 
     expect(reservation.status).to eq("pending")
@@ -88,5 +91,9 @@ describe "a logged in user" do
     expect(page).to_not have_content("Check-in")
     expect(page).to_not have_content("Check-out")
     expect(page).to_not have_content("Reservation ID:")
+  end
+
+  it "cannot be created by a guest" do
+
   end
 end
