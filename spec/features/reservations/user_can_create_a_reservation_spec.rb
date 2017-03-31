@@ -94,6 +94,22 @@ describe "creating a reservation" do
   end
 
   it "cannot be created by a guest" do
+    listing = Fabricate(:listing)
+    image = Fabricate.times(3, :image, listing: listing)
 
+    visit listing_path(listing)
+    click_on "Book Now"
+
+    expect(current_path).to eq(new_listing_reservation_path(listing))
+
+    fill_in("reservation[start_date]", with: "01/01/2018")
+    fill_in("reservation[end_date]", with: "03/01/2018")
+
+    expect(page).to_not have_link("Confirm Reservation")
+    expect(page).to have_link("Login to Make Reservation")
+
+    click_on "Login to Make Reservation"
+
+    expect(current_path).to eq(login_path)
   end
 end
