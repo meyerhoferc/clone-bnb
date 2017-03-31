@@ -34,11 +34,11 @@ describe "creating a reservation" do
     end
 
     within(".dates") do
-      expect(page).to have_content("#{reservation.start_date}")
+      expect(page).to have_content("#{reservation.start_date.month}-#{reservation.start_date.day}-#{reservation.start_date.year}")
     end
 
     within(".dates") do
-      expect(page).to have_content("#{reservation.end_date}")
+      expect(page).to have_content("#{reservation.end_date.month}-#{reservation.end_date.day}-#{reservation.end_date.year}")
     end
 
     within(".charges") do

@@ -98,7 +98,8 @@
                         <div class="card">
                             <div class="header dates">
                                 <h5 class="title">Check-in<span class="pull-right">Check-out</span></h5>
-																<h4><strong><%= @reservation.start_date %><span class="pull-right"> <%= @reservation.end_date %></strong></h4>
+																<h4><strong><%= @reservation.start_date.month %>-<%= @reservation.start_date.day %>-<%= @reservation.start_date.year %>
+																						<span class="pull-right"> <%= @reservation.end_date.month %>-<%= @reservation.end_date.day %>-<%= @reservation.end_date.year %></strong></h4>
                             </div>
 														<hr>
 														<div class="header">
@@ -122,10 +123,9 @@
                                 <h4 class="title">Charges</h4>
                             </div>
                             <div class="content charges">
-                              <p> $<%= @reservation.unit_cost %> x <%= @reservation.num_nights %>
+                              <p> $<%= @reservation.unit_cost %>/night x <%= @reservation.num_nights %> nights
                                 <span class="pull-right">$<%= @reservation.total_cost %></span>
                                </p>
-                                <div id="chartHours" class="ct-chart"></div>
 																<hr>
 																<h4>Total <span class="pull-right">$<%= @reservation.total_cost %></span></h4>
                             </div>
