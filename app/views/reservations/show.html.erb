@@ -34,7 +34,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="blue" data-image="assets/images/sidebar-2.jpg">
 
     <!--
 
@@ -105,7 +105,7 @@
                     <div class="col-md-4">
 											<h3> Reservation ID: <%= @reservation.id %> </h3>
                         <div class="card">
-                            <div class="header">
+                            <div class="header dates">
                                 <h5 class="title">Check-in<span class="pull-right">Check-out</span></h5>
 																<h4><strong><%= @reservation.start_date %><span class="pull-right"> <%= @reservation.end_date %></strong></h4>
                             </div>
@@ -130,7 +130,7 @@
                             <div class="header">
                                 <h4 class="title">Charges</h4>
                             </div>
-                            <div class="content">
+                            <div class="content charges">
                               <p> $<%= @reservation.unit_cost %> x <%= @reservation.num_nights %>
                                 <span class="pull-right">$<%= @reservation.total_cost %></span>
                                </p>
