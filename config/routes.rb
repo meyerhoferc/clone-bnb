@@ -13,5 +13,11 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
 
   put "update_host", to: "users#update"
-  resources :users, only: [:new, :create, :edit, :update]
+
+  resources :users, only: [:new, :create, :edit, :update] do
+    resources :messages
+    resources :trips
+    resources :reservations
+    resources :listings
+  end
 end

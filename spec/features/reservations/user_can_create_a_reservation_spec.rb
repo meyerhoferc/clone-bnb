@@ -19,7 +19,6 @@ describe "a logged in user" do
     visit listing_path(listing)
     click_on "Book Now"
     expect(current_path).to eq(new_listing_reservation_path(listing))
-
     fill_in("reservation[start_date]", with: "01/01/2018")
     fill_in("reservation[end_date]", with: "03/01/2018")
 
