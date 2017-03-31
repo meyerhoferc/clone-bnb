@@ -16,7 +16,6 @@ describe Listing do
 
   describe "relationships" do
     it { should belong_to(:user) }
-    it { should have_many(:user_roles) }
     it { should have_many(:reservations) }
     it { should have_many(:images) }
   end
