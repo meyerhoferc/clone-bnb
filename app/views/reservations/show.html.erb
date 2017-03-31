@@ -34,7 +34,8 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="assets/images/sidebar-2.jpg">
+	<!-- start of dashboard sidebar -->
+    <div class="sidebar" data-color="azure" data-image="assets/images/sidebar-2.jpg">
 
     <!--
 
@@ -52,51 +53,41 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.html">
+                    <a href="/dashboard">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="/users/<%= current_user.id %>/messages">
                         <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
+                        <p>Messages</p>
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="/users/<%= current_user.id %>/trips">
                         <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
+                        <p>Trips</p>
                     </a>
                 </li>
+								<% if current_user.host? %>
                 <li>
-                    <a href="typography.html">
+                    <a href="/users/<%= current_user.id %>/reservations">
                         <i class="pe-7s-news-paper"></i>
-                        <p>Typography</p>
+                        <p>Reservations</p>
                     </a>
                 </li>
                 <li>
-                    <a href="icons.html">
+                    <a href="/users/<%= current_user.id %>/listings">
                         <i class="pe-7s-science"></i>
-                        <p>Icons</p>
+                        <p>My Listings</p>
                     </a>
                 </li>
-                <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
+								<% end %>
             </ul>
     	</div>
     </div>
-
+<!-- end of dashboard sidebar -->
     <div class="main-panel">
 
         <div class="content">

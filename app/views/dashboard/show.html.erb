@@ -1,24 +1,81 @@
-<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-  <ul class="nav">
-    <li class="active"><a href="/dashboard">Profile</a></li>
-    <li><a href="/users/<%= current_user.id %>/messages">Messages</a></li>
-    <li><a href="/users/<%= current_user.id %>/trips">Trips</a></li>
+<div class="wrapper">
+	<!-- start of dashboard sidebar -->
+    <div class="sidebar" data-color="azure" data-image="assets/images/sidebar-2.jpg">
 
-    <% if current_user.host? %>
-      <li><a href="/users/<%= current_user.id %>/reservations">Reservations</a></li>
-      <li><a href="/users/<%= current_user.id %>/listings">Listings</a></li>
-    <% end %>
-  </ul>
-</div>
+    <!--
 
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
 
-<h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+    -->
 
-<div class="my-profile container">
-  <%= current_user.user_photo %>
-  <h3>Profile</h3>
-  <p>About Me: <%= current_user.about_me %></p>
-  <p>Email: <%= current_user.email %></p>
-  <p>Phone Number: <%= current_user.phone_number %></p>
-  <p><%= link_to "Edit Profile", edit_user_path(current_user) %></p>
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    CloneBnB
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="/dashboard">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/users/<%= current_user.id %>/messages">
+                        <i class="pe-7s-user"></i>
+                        <p>Messages</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/users/<%= current_user.id %>/trips">
+                        <i class="pe-7s-note2"></i>
+                        <p>Trips</p>
+                    </a>
+                </li>
+								<% if current_user.host? %>
+                <li>
+                    <a href="/users/<%= current_user.id %>/reservations">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Reservations</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/users/<%= current_user.id %>/listings">
+                        <i class="pe-7s-science"></i>
+                        <p>My Listings</p>
+                    </a>
+                </li>
+								<% end %>
+            </ul>
+    	</div>
+    </div>
+<!-- end of dashboard sidebar -->
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-7">
+                    <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">My Profile</h3>
+                      </div>
+                      <div class="content my-profile">
+                        <p>About Me: <%= current_user.about_me %></p>
+                        <p>Email: <%= current_user.email %></p>
+                        <p>Phone Number: <%= current_user.phone_number %></p>
+                        <p><%= link_to "Edit Profile", edit_user_path(current_user) %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.user_photo %>">
+                	</div>
+                </div>
+            </div>
+
+    </div>
 </div>
