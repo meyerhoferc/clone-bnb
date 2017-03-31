@@ -9,14 +9,11 @@ describe "user can edit profile" do
 
     click_on "Edit Profile"
     expect(current_path).to eq(edit_user_path(traveler))
-
     fill_in("user[first_name]", with: "Chealsea")
     fill_in("user[last_name]", with: "Lolittta")
     fill_in("user[about_me]", with: "Herm, derp, boop, bop")
     fill_in("user[email]", with: "supersecureemail@xyz.com")
     fill_in("user[phone_number]", with: "451-124-1555")
-    fill_in("user[password]", with: "password")
-    fill_in("user[password_confirmation]", with: "password")
     click_on "Update Account"
 
     expect(current_path).to eq(dashboard_path)

@@ -1,1 +1,70 @@
 <h1>Reservations</h1>
+<hr>
+
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  <tbody>
+<div class="pending">
+  <% @reservations.where(status: "pending").each do |reservation| %>
+      <tr>
+      <td><%= reservation.start_date %></td>
+      <td><%= reservation.end_date %></td>
+      <td><%= reservation.user.first_name %></td>
+      <td><%= reservation.user.last_name %></td>
+      <td><%= reservation.user.email %></td>
+      <td><%= reservation.user.phone_number %></td>
+      <td><%= reservation.status %></td>
+      </tr>
+  <% end %>
+</div>
+
+<div class="confirmed">
+  <% @reservations.where(status: "confirmed").each do |reservation| %>
+      <tr>
+      <td><%= reservation.start_date %></td>
+      <td><%= reservation.end_date %></td>
+      <td><%= reservation.user.first_name %></td>
+      <td><%= reservation.user.last_name %></td>
+      <td><%= reservation.user.email %></td>
+      <td><%= reservation.user.phone_number %></td>
+      <td><%= reservation.status %></td>
+      </tr>
+  <% end %>
+</div>
+
+<div class="cancelled">
+  <% @reservations.where(status: "cancelled").each do |reservation| %>
+      <tr>
+      <td><%= reservation.start_date %></td>
+      <td><%= reservation.end_date %></td>
+      <td><%= reservation.user.first_name %></td>
+      <td><%= reservation.user.last_name %></td>
+      <td><%= reservation.user.email %></td>
+      <td><%= reservation.user.phone_number %></td>
+      <td><%= reservation.status %></td>
+      </tr>
+  <% end %>
+</div>
+
+<div class="complete">
+  <% @reservations.where(status: "complete").each do |reservation| %>
+      <tr>
+      <td><%= reservation.start_date %></td>
+      <td><%= reservation.end_date %></td>
+      <td><%= reservation.user.first_name %></td>
+      <td><%= reservation.user.last_name %></td>
+      <td><%= reservation.user.email %></td>
+      <td><%= reservation.user.phone_number %></td>
+      <td><%= reservation.status %></td>
+      </tr>
+  <% end %>
+</div>
+
+
+
+
+</tbody>
+</table>

@@ -10,7 +10,12 @@ describe "host can view reservations" do
     host.roles.create!(title: "traveler")
     listing = host.listings.create!(street_address: "1432 Axer Lane",
                                     city: "San Fran",
-                                    state: "CA", zipcode: "45488")
+                                    state: "CA", zipcode: "45488",
+                                    description: "Its cool",
+                                    max_occupancy: 2,
+                                    number_beds: 1,
+                                    number_rooms: 1,
+                                    number_baths: 1)
 
     res_one = host.reservations.create!(start_date: "1/3/2012",
                                         end_date: "1/4/2012",
@@ -51,39 +56,39 @@ describe "host can view reservations" do
     res_seven = host.reservations.create!(start_date: "1/3/2012",
                                           end_date: "1/4/2012",
                                           user_id: traveler.id,
-                                          status: "completed",
+                                          status: "complete",
                                           listing_id: listing.id)
 
     res_eight = host.reservations.create!(start_date: "1/3/2012",
                                           end_date: "1/4/2012",
                                           user_id: traveler.id,
-                                          status: "completed",
+                                          status: "complete",
                                           listing_id: listing.id)
 
 
-    allow_any_instance_of(ApplicationController).receive(:current_user).and_return(host)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
     visit dashboard_path
     click_on "Reservations"
 
     expect(page).to have_content("Reservations")
     within(".pending") do
-      expect(page).to have_content(res_one)
-      expect(page).to have_content(res_two)
+      expect(page).to have_content(res_one.start_date)
+      expect(page).to have_content(res_two.start_date)
     end
 
     within(".confirmed") do
-      expect(page).to have_content(res_one)
-      expect(page).to have_content(res_two)
+      expect(page).to have_content(res_one.start_date)
+      expect(page).to have_content(res_two.start_date)
     end
 
     within(".cancelled") do
-      expect(page).to have_content(res_one)
-      expect(page).to have_content(res_two)
+      expect(page).to have_content(res_one.start_date)
+      expect(page).to have_content(res_two.start_date)
     end
 
-    within(".completed") do
-      expect(page).to have_content(res_one)
-      expect(page).to have_content(res_two)
+    within(".complete") do
+      expect(page).to have_content(res_one.start_date)
+      expect(page).to have_content(res_two.start_date)
     end
   end
 end

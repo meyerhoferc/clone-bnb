@@ -22,8 +22,13 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_role(user_params)
-    flash[:success] = "Account successfully updated"
-    redirect_to dashboard_path
+    @user.update_attributes(user_params)
+    if @user.save
+      flash[:success] = "Account successfully updated"
+      redirect_to dashboard_path
+    else
+      render :edit
+    end
   end
 
   private

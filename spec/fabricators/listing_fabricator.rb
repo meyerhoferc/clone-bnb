@@ -20,4 +20,6 @@ Fabricator(:listing) do
   list_category {["Entire home/apt", "Private room", "Shared room"].sample}
   number_beds {Faker::Number.between(1, 30)}
   number_rooms {Faker::Number.between(1, 30)}
+  description "this is my decription"
+  number_baths {Faker::Number.between(1, 10)}
 end
