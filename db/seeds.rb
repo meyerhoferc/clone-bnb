@@ -18,7 +18,7 @@ class Seed
         about_me: Faker::Hipster.paragraph,
         user_photo: "http://robohash.org/#{i}.png",
         phone_number: Faker::PhoneNumber.unique.cell_phone,
-        password_digest: "password"
+        password: "password"
       )
       puts "User #{user.last_name}, #{user.first_name} created!"
     end

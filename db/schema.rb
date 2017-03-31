@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330164406) do
+ActiveRecord::Schema.define(version: 20170331054914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170330164406) do
     t.string  "list_category"
     t.string  "number_beds"
     t.string  "number_rooms"
-    t.string  "number_baths",              default: "false"
+    t.boolean "number_baths",              default: false
     t.boolean "elevator",                  default: false
     t.boolean "pets_allowed",              default: false
     t.boolean "free_parking",              default: false

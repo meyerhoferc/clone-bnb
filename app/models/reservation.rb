@@ -6,7 +6,7 @@ class Reservation < ApplicationRecord
   enum status: [:pending, :confirmed, :complete, :cancelled]
 
   def num_nights
-    (self.start_date..self.end_date).to_a.count
+    (self.start_date..self.end_date).to_a.count - 1
   end
 
   def unit_cost
@@ -14,7 +14,7 @@ class Reservation < ApplicationRecord
   end
 
   def total_cost
-    self.num_nights * self.unit_cost
+    (self.num_nights) * (self.unit_cost)
   end
 
   def no_overlapping?
