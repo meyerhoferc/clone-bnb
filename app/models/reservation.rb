@@ -6,7 +6,7 @@ class Reservation < ApplicationRecord
   enum status: [:pending, :confirmed, :complete, :cancelled]
 
   def num_nights
-    (self.start_date..self.end_date).to_a.count
+    (self.start_date..self.end_date).to_a.count - 1
   end
 
   def unit_cost
