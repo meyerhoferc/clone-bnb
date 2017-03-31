@@ -33,13 +33,13 @@ describe "a logged in user" do
       expect(page).to have_content("Successfully made reservation")
     end
     within(".dates") do
-      expect(page).to have_content("#{reservation.start_date}")
+      expect(page).to have_content("#{reservation.start_date.month}-#{reservation.start_date.day}-#{reservation.start_date.year}")
     end
     within(".dates") do
-      expect(page).to have_content("#{reservation.end_date}")
+      expect(page).to have_content("#{reservation.end_date.month}-#{reservation.end_date.day}-#{reservation.end_date.year}")
     end
     within(".charges") do
-      expect(page).to have_content("$#{reservation.unit_cost} x #{reservation.num_nights}")
+      expect(page).to have_content("$#{reservation.unit_cost}/night x #{reservation.num_nights} nights")
     end
 
     expect(reservation.status).to eq("pending")
