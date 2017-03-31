@@ -5,13 +5,14 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
-    @reservation.update_attributes(user_id: current_user.id, listing_id: params[:listing_id])
-    if @reservation.save
+    @listing = Listing.find(params[:listing_id])
+    @reservation = @listing.reservations.new(reservation_params)
+    @reservation.user = current_user
+    if @reservation.no_overlapping? && @reservation.save
       flash[:success] = "Successfully made reservation"
       redirect_to reservation_path(@reservation)
     else
-      flash[:danger] = "Reservation not created, check that the dates are entered correctly"
+      flash[:danger] = "Reservation not created. Please select another date range."
       render :new
     end
   end

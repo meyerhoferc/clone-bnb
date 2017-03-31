@@ -7,7 +7,6 @@ describe Reservation do
     it { should validate_presence_of(:listing) }
     it { should validate_presence_of(:user) }
     it { should validate_presence_of(:status) }
-    it { should validate_overlapping_reservations }
   end
 
   describe "relationships" do

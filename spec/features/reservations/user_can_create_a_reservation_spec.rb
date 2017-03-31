@@ -77,10 +77,8 @@ describe "a logged in user" do
 
     expect(Reservation.count).to eq(1)
 
-    expect(current_path).to eq(new_reservation_path)
-
     within(".danger") do
-      expect(page).to have_content("This property is already booked for these days. Please select another date range.")
+      expect(page).to have_content("Reservation not created. Please select another date range.")
     end
   end
 end
