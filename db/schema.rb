@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 20170331234327) do
   enable_extension "citext"
 
   create_table "amenities", force: :cascade do |t|
-    t.string  "name"
-    t.boolean "value"
+    t.string "name"
   end
 
   create_table "images", force: :cascade do |t|
@@ -30,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170331234327) do
   create_table "listing_amenities", force: :cascade do |t|
     t.integer "listing_id"
     t.integer "amenity_id"
+    t.boolean "value",      default: false
     t.index ["amenity_id"], name: "index_listing_amenities_on_amenity_id", using: :btree
     t.index ["listing_id"], name: "index_listing_amenities_on_listing_id", using: :btree
   end

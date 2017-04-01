@@ -54,10 +54,13 @@
               <h2>$<%= @listing.cost_per_night %>/night</h2>
               <%= link_to "Book Now", new_listing_reservation_path(@listing), class: "btn btn-success" %></td>
             </div>
-            <div class="col-sm-3 col-xs-6">
-                <h3>Amenities</h3>
-                <ul>
-                </ul>
+            <div class="col-sm-3 col-xs-6 amenities">
+                <h3>Amenities at this property</h3>
+                <% @listing.amenities.each do |amenity| %>
+                  <ul>
+                    <%= amenity.name %>
+                  </ul>
+                <% end %>
             </div>
 
         </div>
