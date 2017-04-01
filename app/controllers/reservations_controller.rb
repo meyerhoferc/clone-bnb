@@ -22,7 +22,8 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = Reservation.all
+    user = User.find(params[:user_id])
+    @listings = user.listings
   end
 
   private

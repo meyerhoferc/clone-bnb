@@ -17,49 +17,49 @@ describe "host can view reservations" do
                                     number_rooms: 1,
                                     number_baths: 1)
 
-    res_one = host.reservations.create!(start_date: "1/3/2012",
+    res_one = listing.reservations.create!(start_date: "1/3/2012",
                                         end_date: "1/4/2012",
                                         user_id: traveler.id,
                                         status: "pending",
                                         listing_id: listing.id)
 
-    res_two = host.reservations.create!(start_date: "1/3/2012",
+    res_two = listing.reservations.create!(start_date: "1/3/2012",
                                         end_date: "1/4/2012",
                                         user_id: traveler.id,
                                         status: "pending",
                                         listing_id: listing.id)
 
-    res_three = host.reservations.create!(start_date: "1/3/2012",
+    res_three = listing.reservations.create!(start_date: "1/3/2012",
                                           end_date: "1/4/2012",
                                           user_id: traveler.id,
                                           status: "confirmed",
                                           listing_id: listing.id)
 
-    res_four = host.reservations.create!(start_date: "1/3/2012",
+    res_four = listing.reservations.create!(start_date: "1/3/2012",
                                          end_date: "1/4/2012",
                                          user_id: traveler.id,
                                          status: "confirmed",
                                          listing_id: listing.id)
 
-    res_five = host.reservations.create!(start_date: "1/3/2012",
+    res_five = listing.reservations.create!(start_date: "1/3/2012",
                                          end_date: "1/4/2012",
                                          user_id: traveler.id,
                                          status: "cancelled",
                                          listing_id: listing.id)
 
-    res_six = host.reservations.create!(start_date: "1/3/2012",
+    res_six = listing.reservations.create!(start_date: "1/3/2012",
                                         end_date: "1/4/2012",
                                         user_id: traveler.id,
                                         status: "cancelled",
                                         listing_id: listing.id)
 
-    res_seven = host.reservations.create!(start_date: "1/3/2012",
+    res_seven = listing.reservations.create!(start_date: "1/3/2012",
                                           end_date: "1/4/2012",
                                           user_id: traveler.id,
                                           status: "complete",
                                           listing_id: listing.id)
 
-    res_eight = host.reservations.create!(start_date: "1/3/2012",
+    res_eight = listing.reservations.create!(start_date: "1/3/2012",
                                           end_date: "1/4/2012",
                                           user_id: traveler.id,
                                           status: "complete",
@@ -71,24 +71,16 @@ describe "host can view reservations" do
     click_on "Reservations"
 
     expect(page).to have_content("Reservations")
-    within(".pending") do
-      expect(page).to have_content(res_one.start_date)
-      expect(page).to have_content(res_two.start_date)
-    end
+    expect(page).to have_content(res_one.start_date)
+    expect(page).to have_content(res_two.start_date)
 
-    within(".confirmed") do
-      expect(page).to have_content(res_one.start_date)
-      expect(page).to have_content(res_two.start_date)
-    end
+    expect(page).to have_content(res_one.start_date)
+    expect(page).to have_content(res_two.start_date)
 
-    within(".cancelled") do
-      expect(page).to have_content(res_one.start_date)
-      expect(page).to have_content(res_two.start_date)
-    end
+    expect(page).to have_content(res_one.start_date)
+    expect(page).to have_content(res_two.start_date)
 
-    within(".complete") do
-      expect(page).to have_content(res_one.start_date)
-      expect(page).to have_content(res_two.start_date)
-    end
+    expect(page).to have_content(res_one.start_date)
+    expect(page).to have_content(res_two.start_date)
   end
 end
