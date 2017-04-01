@@ -22,4 +22,5 @@ Fabricator(:listing) do
   number_rooms {Faker::Number.between(1, 30)}
   description "this is my decription"
   number_baths {Faker::Number.between(1, 10)}
+  cost_per_night 10
 end

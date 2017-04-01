@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe "a logged in user" do
-  it "can create a reservation for a listing" do
+describe "creating a reservation" do
+  it "can be made for a logged in user" do
     user = User.create!(email: "email@email.com",
                         first_name: "Castle",
                         last_name: "Pines",
@@ -32,14 +32,17 @@ describe "a logged in user" do
     within(".success") do
       expect(page).to have_content("Successfully made reservation")
     end
+
     within(".dates") do
       expect(page).to have_content("#{reservation.start_date.month}-#{reservation.start_date.day}-#{reservation.start_date.year}")
     end
+
     within(".dates") do
       expect(page).to have_content("#{reservation.end_date.month}-#{reservation.end_date.day}-#{reservation.end_date.year}")
     end
+
     within(".charges") do
-      expect(page).to have_content("$#{reservation.unit_cost}/night x #{reservation.num_nights} nights")
+      expect(page).to have_content("Total $20")
     end
 
     expect(reservation.status).to eq("pending")
@@ -88,5 +91,25 @@ describe "a logged in user" do
     expect(page).to_not have_content("Check-in")
     expect(page).to_not have_content("Check-out")
     expect(page).to_not have_content("Reservation ID:")
+  end
+
+  it "cannot be created by a guest" do
+    listing = Fabricate(:listing)
+    image = Fabricate.times(3, :image, listing: listing)
+
+    visit listing_path(listing)
+    click_on "Book Now"
+
+    expect(current_path).to eq(new_listing_reservation_path(listing))
+
+    fill_in("reservation[start_date]", with: "01/01/2018")
+    fill_in("reservation[end_date]", with: "03/01/2018")
+
+    expect(page).to_not have_link("Confirm Reservation")
+    expect(page).to have_link("Login to Make Reservation")
+
+    click_on "Login to Make Reservation"
+
+    expect(current_path).to eq(login_path)
   end
 end
