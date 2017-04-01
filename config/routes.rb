@@ -18,6 +18,6 @@ Rails.application.routes.draw do
     resources :messages
     resources :trips
     resources :reservations
-    resources :listings
+    resources :listings, only: [:show, :index]
   end
 end
