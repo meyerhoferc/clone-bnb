@@ -1,0 +1,8 @@
+<%= render partial: 'shared/sidebar' %>
+<h1>My Listings</h1>
+
+<div class="my-listings">
+  <% @listings.each do |listing| %>
+    <%= link_to listing.title, user_listing_path(current_user, listing) %>
+  <% end %>
+</div>

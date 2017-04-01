@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "a logged in host user" do
   it "they can see all of their listings from their dashboard sidebar link" do
-    user = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
-    user.roles.create(title: "host")
+    user = User.create!(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
+    user.roles.create!(title: "host")
 
     listing_one = Fabricate(:listing, user: user, title: "Big House")
     listing_two = Fabricate(:listing, user: user, title: "Small Apartment")

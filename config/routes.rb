@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :messages
     resources :trips
     resources :reservations
-    resources :listings, only: [:show, :index]
+    get 'listings', to: 'user/listings#index'
+    get 'listings/:listing_id', to: 'user/listings#show', as: 'listing'
   end
 end
