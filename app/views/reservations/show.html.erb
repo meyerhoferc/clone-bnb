@@ -34,60 +34,7 @@
 <body>
 
 <div class="wrapper">
-	<!-- start of dashboard sidebar -->
-    <div class="sidebar" data-color="azure" data-image="assets/images/sidebar-2.jpg">
-
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
-
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="/" class="simple-text">
-                    CloneBnB
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li class="active">
-                    <a href="/dashboard">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/users/<%= current_user.id %>/messages">
-                        <i class="pe-7s-user"></i>
-                        <p>Messages</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/users/<%= current_user.id %>/trips">
-                        <i class="pe-7s-note2"></i>
-                        <p>Trips</p>
-                    </a>
-                </li>
-								<% if current_user.host? %>
-                <li>
-                    <a href="/users/<%= current_user.id %>/reservations">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Reservations</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/users/<%= current_user.id %>/listings">
-                        <i class="pe-7s-science"></i>
-                        <p>My Listings</p>
-                    </a>
-                </li>
-								<% end %>
-            </ul>
-    	</div>
-    </div>
-<!-- end of dashboard sidebar -->
+	<%= render partial: "shared/sidebar" %>
     <div class="main-panel">
 
         <div class="content">
