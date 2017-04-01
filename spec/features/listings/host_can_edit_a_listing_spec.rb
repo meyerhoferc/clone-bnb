@@ -17,7 +17,7 @@ describe "as a logged in host" do
 
     click_on "Edit"
 
-    expect(current_path).to eq(edit_user_listing_path(user, listing_two))
+    expect(current_path).to eq(user_edit_listing_path(user, listing_two))
 
     fill_in("listing[title]", with: "Large Apartment")
     fill_in("listing[max_occupancy]", with: "11")

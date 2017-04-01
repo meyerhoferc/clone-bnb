@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     resources :reservations
     get 'listings', to: 'user/listings#index'
     get 'listings/:listing_id', to: 'user/listings#show', as: 'listing'
+    get 'listings/:listing_id/edit', to: 'user/listings#edit', as: 'edit_listing'
   end
 end

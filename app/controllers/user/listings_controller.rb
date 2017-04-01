@@ -6,4 +6,8 @@ class User::ListingsController < ApplicationController
   def show
     @listing = Listing.find(params[:listing_id])
   end
+
+  def edit
+    @listing = Listing.find(params[:listing_id])
+  end
 end
