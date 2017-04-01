@@ -1,10 +1,8 @@
 class ConversationsController < ApplicationController
 
   def index
-    @user = current_user
-    # @conversations = Conversation.where("initiator_id = ? or recipient_id = ?",
-    #                                     current_user.id, current_user.id)
-    @conversations = current_user.conversations
+    @conversations = Conversation.where("initiator_id = ? or recipient_id = ?",
+                                        current_user.id, current_user.id)
   end
 
   def create
