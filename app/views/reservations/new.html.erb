@@ -14,5 +14,9 @@
     <%= f.date_field :end_date %>
   </div>
 
-  <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
+  <% if current_user %>
+    <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
+  <% else %>
+    <%= link_to "Login to Make Reservation", login_path, class: "btn btn-success" %>
+  <% end %>
 <% end %>

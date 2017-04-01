@@ -4,6 +4,12 @@ describe "user can see a listing" do
   scenario "when they visit the listing show page" do
     listing_1 = Fabricate(:listing)
     image_1, image_2, image_3 = Fabricate.times(3, :image, listing: listing_1)
+    amenities = ["internet", "tv", "gym", "pool", "doorman"]
+
+    amenities.each do |name|
+      amenity = Amenity.create!(name: name)
+      listing_1.listing_amenities.create!(amenity: amenity, value: true)
+    end
 
     visit listings_path
 
@@ -17,6 +23,14 @@ describe "user can see a listing" do
     expect(page).to have_xpath("//img[@src='#{listing_1.images[1].image_url}']")
     expect(page).to have_xpath("//img[@src='#{listing_1.images[2].image_url}']")
     expect(page).to have_xpath("//img[@src='#{listing_1.user.user_photo}']")
-    #add expect amenities when we build this functionality
+
+    within(".amenities") do
+      expect(page).to have_content("Amenities at this property")
+      expect(page).to have_content("internet")
+      expect(page).to have_content("tv")
+      expect(page).to have_content("gym")
+      expect(page).to have_content("pool")
+      expect(page).to have_content("doorman")
+    end
     end
 end
