@@ -143,7 +143,7 @@ class Seed
     Listing.all.each do |listing|
       amenities.each do |amenity|
         listing.listing_amenities.create!(amenity: amenity, value: true)
-        puts "#{amenity} added to #{listing.title}"
+        puts "#{amenity.name} added to #{listing.title}"
       end
     end
   end
