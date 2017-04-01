@@ -3,10 +3,15 @@ class Seed
   def self.start
     seed = Seed.new
     seed.generate_users
+    seed.generate_roles
+    seed.generate_predefined_users
+    seed.generate_amenities
     seed.generate_listings
+    seed.generate_listing_amenities
     seed.generate_images
     seed.generate_reservations
-    seed.generate_roles
+    seed.generate_traveler_user_roles
+    seed.generate_host_user_roles
   end
 
   def generate_users
@@ -40,36 +45,7 @@ class Seed
         number_beds:Faker::Number.between(1, 30),
         number_rooms: Faker::Number.between(1, 30),
         number_baths: Faker::Number.between(1, 5),
-        cost_per_night: Faker::Number.between(1, 350),
-        elevator: [true, false].sample,
-        pets_allowed: [true, false].sample,
-        free_parking: [true, false].sample,
-        family_kid_friendly: [true, false].sample,
-        doorman:[true, false].sample,
-        pool: [true, false].sample,
-        hot_tub: [true, false].sample,
-        gym: [true, false].sample,
-        air_conditioning: [true, false].sample,
-        wheelchair_accessible: [true, false].sample,
-        internet: [true, false].sample,
-        smoking_allowed: [true, false].sample,
-        suitable_for_events: [true, false].sample,
-        wireless_internet: [true, false].sample,
-        indoor_fireplace: [true, false].sample,
-        breakfast: [true, false].sample,
-        kitchen: [true, false].sample,
-        cable_tv: [true, false].sample,
-        dryer: [true, false].sample,
-        hair_dryer: [true, false].sample,
-        washer: [true, false].sample,
-        tv: [true, false].sample,
-        buzzer_wireless_intercom: [true, false].sample,
-        iron: [true, false].sample,
-        essentials: [true, false].sample,
-        laptop_friendly_workspace: [true, false].sample,
-        heating: [true, false].sample,
-        private_entrance: [true, false].sample
-        )
+        cost_per_night: Faker::Number.between(1, 350))
         puts "Listing #{listing.title} created!"
     end
   end
@@ -110,6 +86,66 @@ class Seed
     puts "Host role created!"
     Role.create!(title: "traveler")
     puts "Traveler role created!"
+  end
+
+  def generate_traveler_user_roles
+    User.all.each do |user|
+      traveler = Role.find_by(title: "traveler")
+      user.user_roles.create!(role: traveler)
+      puts "#{user.email} is now a traveler!"
+    end
+  end
+
+  def generate_host_user_roles
+    User.where('id % 3 = 0').each do |user|
+      host = Role.find_by(title: "host")
+      user.user_roles.create!(role: host)
+      puts "#{user.email} is now a host!"
+    end
+  end
+
+  def generate_predefined_users
+    host = Role.find_by(title: "host")
+    traveler = Role.find_by(title: "traveler")
+    User.create!(email: "sample@email.com",
+                 first_name: "sample",
+                 last_name: "user",
+                 about_me: "sample traveler user",
+                 phone_number: "8183231121",
+                 password: "password")
+    User.create!(email: "host@email.com",
+                 first_name: "host",
+                 last_name: "user",
+                 about_me: "sample traveler user",
+                 phone_number: "8183231122",
+                 password: "password")
+  end
+
+  def generate_amenities
+      amenities = ["pets_allowed", "free_parking", "family_kid_friendly",
+        "doorman", "pool", "hot_tub", "gym", "air_conditioning",
+        "wheelchair_accessible", "internet", "smoking_allowed",
+        "suitable_for_events", "wireless_internet", "indoor_fireplace",
+        "breakfast", "kitchen", "cable_tv", "dryer", "hair_dryer", "washer",
+        "tv", "buzzer_wireless_intercom", "iron", "essentials",
+        "laptop_friendly_workspace", "heating", "private_entrance"]
+      amenities.each do |amenity|
+        Amenity.create!(name: amenity)
+        puts "Amenity: #{amenity} created!"
+      end
+  end
+
+  def generate_listing_amenities
+    amenities = []
+    5.times do
+      amenities << Amenity.find(Random.new.rand(1..20))
+    end
+    Listing.all.each do |listing|
+      amenities.each do |amenity|
+        listing.listing_amenities.create!(amenity: amenity, value: true)
+        puts "#{amenity.name} added to #{listing.title}"
+      end
+    end
   end
 end
 

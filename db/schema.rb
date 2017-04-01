@@ -10,16 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331054914) do
+ActiveRecord::Schema.define(version: 20170331234327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "citext"
 
+  create_table "amenities", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "images", force: :cascade do |t|
     t.string  "image_url"
     t.integer "listing_id"
     t.index ["listing_id"], name: "index_images_on_listing_id", using: :btree
+  end
+
+  create_table "listing_amenities", force: :cascade do |t|
+    t.integer "listing_id"
+    t.integer "amenity_id"
+    t.boolean "value",      default: false
+    t.index ["amenity_id"], name: "index_listing_amenities_on_amenity_id", using: :btree
+    t.index ["listing_id"], name: "index_listing_amenities_on_listing_id", using: :btree
   end
 
   create_table "listings", force: :cascade do |t|
@@ -34,36 +46,8 @@ ActiveRecord::Schema.define(version: 20170331054914) do
     t.string  "list_category"
     t.string  "number_beds"
     t.string  "number_rooms"
-    t.boolean "number_baths",              default: false
-    t.boolean "elevator",                  default: false
-    t.boolean "pets_allowed",              default: false
-    t.boolean "free_parking",              default: false
-    t.boolean "family_kid_friendly",       default: false
-    t.boolean "doorman",                   default: false
-    t.boolean "pool",                      default: false
-    t.boolean "hot_tub",                   default: false
-    t.boolean "gym",                       default: false
-    t.boolean "air_conditioning",          default: false
-    t.boolean "wheelchair_accessible",     default: false
-    t.boolean "internet",                  default: false
-    t.boolean "smoking_allowed",           default: false
-    t.boolean "suitable_for_events",       default: false
-    t.boolean "wireless_internet",         default: false
-    t.boolean "indoor_fireplace",          default: false
-    t.boolean "breakfast",                 default: false
-    t.boolean "kitchen",                   default: false
-    t.boolean "cable_tv",                  default: false
-    t.boolean "dryer",                     default: false
-    t.boolean "hair_dryer",                default: false
-    t.boolean "washer",                    default: false
-    t.boolean "tv",                        default: false
-    t.boolean "buzzer_wireless_intercom",  default: false
-    t.boolean "iron",                      default: false
-    t.boolean "essentials",                default: false
-    t.boolean "laptop_friendly_workspace", default: false
-    t.boolean "heating",                   default: false
-    t.boolean "private_entrance",          default: false
-    t.integer "cost_per_night",            default: 0
+    t.integer "cost_per_night", default: 0
+    t.integer "number_baths"
     t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
   end
 
@@ -91,8 +75,6 @@ ActiveRecord::Schema.define(version: 20170331054914) do
   create_table "user_roles", force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
-    t.integer "listing_id"
-    t.index ["listing_id"], name: "index_user_roles_on_listing_id", using: :btree
     t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
     t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
   end
@@ -108,10 +90,11 @@ ActiveRecord::Schema.define(version: 20170331054914) do
   end
 
   add_foreign_key "images", "listings"
+  add_foreign_key "listing_amenities", "amenities"
+  add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "users"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users"
-  add_foreign_key "user_roles", "listings"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
