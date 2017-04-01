@@ -1,8 +1,10 @@
 class ConversationsController < ApplicationController
 
   def index
-    @users = User.all
-    @conversations = Conversation.all
+    @user = current_user
+    # @conversations = Conversation.where("initiator_id = ? or recipient_id = ?",
+    #                                     current_user.id, current_user.id)
+    @conversations = current_user.conversations
   end
 
   def create
@@ -20,5 +22,5 @@ class ConversationsController < ApplicationController
     def conversation_params
       params.permit(:initiator_id, :recipient_id)
     end
-    
+
 end

@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :user_roles
   has_many :roles, through: :user_roles
 
+  has_many :conversations, foreign_key: 'initiator_id'
+
   def traveler?
     roles.exists?(title: "traveler")
   end
