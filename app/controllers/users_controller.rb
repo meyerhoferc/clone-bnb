@@ -17,8 +17,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    render file: "public/404" unless @user == current_user
-
   end
 
   def update
@@ -27,7 +25,6 @@ class UsersController < ApplicationController
     @user.update_attributes(user_params)
     flash[:success] = "Account successfully updated"
     redirect_to dashboard_path
-
   end
 
   private

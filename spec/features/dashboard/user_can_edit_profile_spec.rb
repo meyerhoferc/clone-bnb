@@ -11,7 +11,6 @@ describe "user can edit profile" do
     within(".login_btn") do
       click_on "Login"
     end
-    #allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(traveler)
     click_on "Edit Profile"
     expect(current_path).to eq(edit_user_path(traveler))
     fill_in("user[first_name]", with: "Chealsea")
