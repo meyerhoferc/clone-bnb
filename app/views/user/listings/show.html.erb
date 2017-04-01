@@ -36,6 +36,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header"><%= @listing.title %>
                 </h1>
+                <p><%= link_to "Edit", edit_user_listing_path(current_user, @listing) %></p>
             </div>
         </div>
         <!-- /.row -->
@@ -49,7 +50,13 @@
 
             <div class="col-md-3">
                 <h3>About this listing:</h3>
+                <p><%= @listing.street_address %></p>
+                <p><%= @listing.city %>, <%= @listing.state %> <%= @listing.zipcode %></p>
                 <p><%= @listing.description %></p>
+                <p>Maximum Occupancy: <%= @listing.max_occupancy %></p>
+                <p>Number of Beds: <%= @listing.number_beds %></p>
+                <p>Number of Rooms: <%= @listing.number_rooms %></p>
+                <p>Number of Bathrooms: <%= @listing.number_baths %></p>
             </div>
             <div class="col-md-1">
               <h2>$<%= @listing.cost_per_night %>/night</h2>
