@@ -22,26 +22,12 @@ describe "traveler can send a message" do
     end
   end
 
-  context "without proper credentials" do
-    xit "they cannot see other users messages" do
+  it "they cannot send messages if not logged in" do
+    listing_1 = Fabricate(:listing)
+    image_1, image_2, image_3 = Fabricate.times(3, :image, listing: listing_1)
 
-    end
-  end
-end
+    visit "/listings/#{listing_1.id}"
 
-describe "host can send a message" do
-  xcontext "with proper credentials" do
-    it "when they visit their dashboard" do
-      host = Fabricate(:user)
-      traveler.roles.create!(title: "host")
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
-      visit dashboard_path
-    end
-  end
-
-  context "without proper credentials" do
-    xit "they cannot see other users messages" do
-
-    end
+    expect(page).to_not have_content("Message #{listing_1.user.first_name}")
   end
 end

@@ -95,7 +95,9 @@
                 <h4> <%= @listing.user.first_name %> </h4>
             </div>
             <div class="col-sm-1 col-xs-1">
+              <% if current_user.present? %>
               <%= link_to "Message #{@listing.user.first_name}", conversations_path(initiator_id: current_user.id, recipient_id: @listing.user_id), method: :post %>
+              <% end %>
             </div>
             <div class="col-sm-3 col-xs-6">
                 <h3>About the Host</h3>
