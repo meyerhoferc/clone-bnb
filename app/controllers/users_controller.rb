@@ -17,18 +17,17 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    render file: "public/404" unless @user == current_user
+
   end
 
   def update
-    @user = User.find(params[:id])
-    @user.update_role(user_params)
+    @user = current_user
+    @user.update_role(params[:user][:role])
     @user.update_attributes(user_params)
-    if @user.save
-      flash[:success] = "Account successfully updated"
-      redirect_to dashboard_path
-    else
-      render :edit
-    end
+    flash[:success] = "Account successfully updated"
+    redirect_to dashboard_path
+
   end
 
   private
@@ -39,7 +38,6 @@ class UsersController < ApplicationController
                                  :email,
                                  :password,
                                  :about_me,
-                                 :phone_number,
-                                 :role)
+                                 :phone_number)
   end
 end
