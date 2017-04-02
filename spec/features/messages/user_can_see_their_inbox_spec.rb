@@ -4,7 +4,7 @@ describe "user can see their inbox" do
   it "when they visit dashboard" do
     user_1, user_2 = Fabricate.times(2, :user)
     user_1.roles.create!(title: "traveler")
-    user_2.roles.create!(title: "host")
+    user_2.roles.create!(title: "traveler")
     host = Fabricate(:user)
     host.roles.create!(title: "host")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
@@ -16,8 +16,9 @@ describe "user can see their inbox" do
     visit ("/dashboard")
 
     click_on "Messages"
-# save_and_open_page
-# binding.pry
+save_and_open_page
+binding.pry
+    expect(page).to have_content("Mailbox")
     expect(page).to have_content("#{user_1.first_name}")
     expect(page).to have_content("#{user_2.first_name}")
 
