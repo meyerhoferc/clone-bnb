@@ -41,4 +41,10 @@ describe "admin dashboard" do
 
     expect(page).to_not have_link("Users")
   end
+
+  it "cannot be accessed by a non-logged in user" do
+    visit admin_dashboard_path
+    expect(page).to have_content("The page you were looking for doesn't exist (404)")
+    expect(page).to_not have_link("Users")
+  end
 end
