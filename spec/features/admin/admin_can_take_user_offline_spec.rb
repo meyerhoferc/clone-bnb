@@ -1,4 +1,3 @@
-# and their information is still in the database
 describe "as a logged in admin" do
   it "they can remove a user's content" do
     host = User.create(email: "host@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2349", password: "123")
@@ -44,7 +43,7 @@ describe "as a logged in admin" do
 
     expect(page).to have_content("The page you were looking for doesn't exist (404)")
 
-    expect(user.listings.count).to eq(3)
-    expect(user.listings.first.title).to eq("Big House")
+    expect(host.listings.count).to eq(3)
+    expect(host.listings.first.title).to eq("Big House")
   end
 end

@@ -95,4 +95,7 @@ describe "user logs in" do
     expect(page).to have_content("Email or password has been entered incorrectly")
     expect(current_path).to eq(login_path)
   end
+
+  it "with a status of inactive" do
+  end
 end

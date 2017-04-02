@@ -41,6 +41,7 @@
         <div class="row">
           <% @listings.each do |listing| %>
             <div class="col-md-4 portfolio-item">
+              <% if listing.user.status == "active" %>
               <div class="listing <%= listing.id %>">
 
               </div>
@@ -49,7 +50,8 @@
                   <%= link_to listing.title, listing_path(listing)  %>
                 </h3>
                 <div class="ellipsis"><p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%= listing.description %></p></div>
-            </div>
+              </div>
+              <% end %>
             <% end %>
         </div>
         <hr>

@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   validates :email, :first_name, :last_name, :phone_number, presence: true
   validates :email, :phone_number, uniqueness: true
+  enum status: [:active, :inactive]
+
 
   has_many :listings
   has_many :reservations

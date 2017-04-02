@@ -1,0 +1,46 @@
+<div class="wrapper">
+<%= render partial: "shared/admin_sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-7">
+                    <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">Users</h3>
+                      </div>
+                      <table class="content table table-striped users">
+                        <thead>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
+                          <th>Roles</th>
+                          <th>Status</th>
+                          <th>Acion</th>
+                        </thead>
+                        <tbody>
+                          <% @users.each do |user| %>
+                          <tr scope="row">
+                            <td><%= user.first_name %></td>
+                            <td><%= user.last_name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.roles.pluck(:title).uniq %></td>
+                            <td><%= user.status %></td>
+                            <% if user.status == "active" %>
+                              <td><%= button_to "Deactivate User", admin_user_path(user, status: "inactive"), method: :put, class: "btn btn-success" %></td>
+                            <% else %>
+                              <td><%= button_to "Activate User", admin_user_path(user, status: "active"), method: :put, class: "btn btn-success" %></td>
+                            <% end %>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.user_photo %>">
+                	</div>
+                </div>
+            </div>
+    </div>
+</div>
