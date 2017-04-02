@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <%= render partial: "shared/sidebar" %>
+  <% if current_user %>
+    <%= render partial: "shared/sidebar" %>
+  <% end %>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -20,11 +22,11 @@
                             <%= f.date_field :end_date %>
                           </div>
 
-                          <% if current_user %>
-                          <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
-                          <% else %>
-                          <%= link_to "Login to Make Reservation", login_path, class: "btn btn-success" %>
-                          <% end %>
+                            <% if current_user %>
+                            <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
+                            <% else %>
+                            <%= link_to "Login to Make Reservation", login_path, class: "btn btn-success" %>
+                            <% end %>
                           <% end %>
                       </div>
                     </div>

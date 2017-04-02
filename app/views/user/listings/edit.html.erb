@@ -1,0 +1,7 @@
+<h1>Edit <%= link_to @listing.title, user_listing_path(current_user, @listing) %></h1>
+
+<%= form_for([current_user, @listing]) do |f| %>
+
+  
+  <%= f.submit "Update Listing", class: "btn btn-success" %>
+<% end %>
