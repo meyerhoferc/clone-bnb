@@ -4,8 +4,13 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = @conversation.messages
-    @message = @conversation.messages.new
+    if current_user.id == @conversation.initiator_id ||
+        current_user.id == @conversation.recipient_id
+      @messages = @conversation.messages
+      @message = @conversation.messages.new
+    else
+      render file: "public/404"
+    end
   end
 
   def new

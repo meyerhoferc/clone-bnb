@@ -28,9 +28,9 @@ class User < ApplicationRecord
 
   def recipient
     if conversation.initiator_id == current_user.id
-      User.find(conversation.recipient_id)
+      recipient = User.find(conversation.recipient_id)
     else
-      User.find(conversation.initiator_id)
+      recipient = User.find(conversation.initiator_id)
     end
   end
 end
