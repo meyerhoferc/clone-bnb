@@ -18,8 +18,8 @@ class User < ApplicationRecord
     roles.exists?(title: "host")
   end
 
-  def update_role(params)
-    if params[:role] == "host"
+  def update_role(role)
+    if role == "host"
       roles.create(title: "host")
     end
   end
