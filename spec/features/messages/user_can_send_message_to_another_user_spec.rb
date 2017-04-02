@@ -30,4 +30,5 @@ describe "traveler can send a message" do
 
     expect(page).to_not have_content("Message #{listing_1.user.first_name}")
   end
+
 end
