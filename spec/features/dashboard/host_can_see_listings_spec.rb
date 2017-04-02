@@ -8,6 +8,7 @@ describe "a logged in host user" do
     listing_one = Fabricate(:listing, user: user, title: "Big House")
     listing_two = Fabricate(:listing, user: user, title: "Small Apartment")
     listing_three = Fabricate(:listing, user: user, title: "Hipster Loft")
+    listing_four = Fabricate(:listing)
 
     Fabricate.times(3, :image, listing: listing_two)
 
@@ -34,6 +35,7 @@ describe "a logged in host user" do
       expect(page).to have_link("Big House")
       expect(page).to have_link("Small Apartment")
       expect(page).to have_link("Hipster Loft")
+      expect(page).to_not have_link("#{listing_four.title}")
     end
 
     click_on "Small Apartment"
