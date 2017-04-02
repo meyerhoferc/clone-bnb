@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <%= render partial: "shared/sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-7">
+                    <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">My Listings</h3>
+                      </div>
+                        <table class="content table table-striped my-listings">
+                          <tbody>
+                            <% @listings.each do |listing| %>
+                            <tr scope="row">
+                              <%= link_to listing.title, user_listing_path(current_user, listing) %>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                	</div>
+                </div>
+            </div>
+    </div>
+</div>
