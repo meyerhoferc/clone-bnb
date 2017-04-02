@@ -104,7 +104,7 @@ describe "creating a reservation" do
 
     fill_in("reservation[start_date]", with: "01/01/2018")
     fill_in("reservation[end_date]", with: "03/01/2018")
-
+    save_and_open_page
     expect(page).to_not have_link("Confirm Reservation")
     expect(page).to have_link("Login to Make Reservation")
 

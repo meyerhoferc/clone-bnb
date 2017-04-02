@@ -10,3 +10,36 @@
   </div>
  </div>
 </div>
+
+
+<div class="wrapper">
+<%= render partial: "shared/sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+              <h3>Mailbox</h3>
+              <% @conversations.each do |conversation| %>
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="card">
+                      <div class="content messages">
+                        <div class=”ui segment”>
+                           <%= link_to conversation.recipient.first_name,
+                               conversation_messages_path(conversation)%>
+                            <div class=”content”>
+                              <div class=”list”>
+                               <div class=”message”>
+                                <i class=”right triangle icon”></i>
+                              </div>
+                           </div>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+        </div>
+    </div>
+  </div>
+</div>

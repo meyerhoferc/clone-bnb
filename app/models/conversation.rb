@@ -8,4 +8,5 @@ class Conversation < ApplicationRecord
     OR (conversations.initiator_id = ? AND conversations.recipient_id = ?)",
     initiator_id, recipient_id, recipient_id, initiator_id)
   end
+  validates_presence_of :initiator_id, :recipient_id
 end

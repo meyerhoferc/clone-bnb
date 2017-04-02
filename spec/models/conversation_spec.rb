@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe Conversation do
   describe "validations" do
-    it { should validate_uniqueness_of(:initiator_id) }
+    it { should validate_presence_of(:initiator_id) }
+    it { should validate_presence_of(:recipient_id) }
   end
 
   describe "relationships" do
