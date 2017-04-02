@@ -11,6 +11,7 @@
                       </div>
                         <table class="content table table-striped my-trips">
                           <thead class="headers">
+                            <th>Trip</th>
                             <th>Property</th>
                             <th>Address</th>
                             <th>Check-In</th>
@@ -21,6 +22,7 @@
                           <tbody class="records">
                             <% @trips.each do |trip| %>
                             <tr scope="row">
+                              <td><%= link_to "##{trip.id}", user_trip_path(current_user, trip) %></td>
                               <td><%= link_to trip.listing.title, listing_path(trip.listing) %></td>
                               <td><%= trip.listing.street_address %> <%= trip.listing.city %></td>
                               <td><%= trip.start_date.month %>/<%= trip.start_date.day %>/<%= trip.start_date.year %></td>

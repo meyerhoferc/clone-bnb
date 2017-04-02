@@ -9,12 +9,14 @@ describe "a user can see trips" do
                         cost_per_night: 30,
                         street_address: "123 Street",
                         city: "Denver")
+    Fabricate.times(3, :image, listing: listing)
     start_date = "01/01/2018"
     end_date = "04/01/2018"
-    Reservation.create!(listing: listing,
-                        user: user,
-                        start_date: start_date,
-                        end_date: end_date)
+    reservation = Reservation.create!(listing: listing,
+                                      user: user,
+                                      start_date: start_date,
+                                      end_date: end_date)
+
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit dashboard_path
@@ -32,6 +34,7 @@ describe "a user can see trips" do
       expect(page).to have_content("Status")
       expect(page).to have_content("Property")
       expect(page).to have_content("Address")
+      expect(page).to have_content("Trip")
     end
 
     within(".my-trips .records") do
@@ -41,6 +44,15 @@ describe "a user can see trips" do
       expect(page).to have_content("$90")
       expect(page).to have_content("pending")
       expect(page).to have_content("123 Street Denver")
+      expect(page).to have_link("##{reservation.id}")
     end
+
+    click_on "Super Cool Pad"
+
+    expect(current_path).to eq(listing_path(listing))
+  end
+
+  it "with the role of a host" do
+
   end
 end
