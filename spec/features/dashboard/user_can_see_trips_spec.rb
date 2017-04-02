@@ -4,7 +4,11 @@ describe "a user can see trips" do
   it "with a role of traveler" do
     user = User.create!(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
     user.roles.create!(title: "host")
-    listing = Fabricate(:listing, title: "Super Cool Pad", cost_per_night: 30)
+    listing = Fabricate(:listing,
+                        title: "Super Cool Pad",
+                        cost_per_night: 30,
+                        street_address: "123 Street",
+                        city: "Denver")
     start_date = "01/01/2018"
     end_date = "04/01/2018"
     Reservation.create!(listing: listing,
@@ -21,19 +25,22 @@ describe "a user can see trips" do
 
     expect(current_path).to eq(user_trips_path(user))
 
-    within(".my-trips headers") do
+    within(".my-trips .headers") do
       expect(page).to have_content("Check-In")
       expect(page).to have_content("Check-Out")
       expect(page).to have_content("Price")
-      expect(page).to have_content("status")
+      expect(page).to have_content("Status")
+      expect(page).to have_content("Property")
+      expect(page).to have_content("Address")
     end
 
-    within(".my-trips records") do
+    within(".my-trips .records") do
       expect(page).to have_link("Super Cool Pad")
-      expect(page).to have_content("01/01/2018")
-      expect(page).to have_content("04/01/2018")
+      expect(page).to have_content("1/1/2018")
+      expect(page).to have_content("1/4/2018")
       expect(page).to have_content("$90")
-      expect(page).to have_content("Pending")
+      expect(page).to have_content("pending")
+      expect(page).to have_content("123 Street Denver")
     end
   end
 end

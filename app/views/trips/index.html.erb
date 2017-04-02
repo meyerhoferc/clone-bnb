@@ -1,1 +1,40 @@
-<h1>Trips</h1>
+<div class="wrapper">
+  <%= render partial: "shared/sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">My Trips</h3>
+                      </div>
+                        <table class="content table table-striped my-trips">
+                          <thead class="headers">
+                            <th>Property</th>
+                            <th>Address</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                          </thead>
+                          <tbody class="records">
+                            <% @trips.each do |trip| %>
+                            <tr scope="row">
+                              <td><%= link_to trip.listing.title, listing_path(trip.listing) %></td>
+                              <td><%= trip.listing.street_address %> <%= trip.listing.city %></td>
+                              <td><%= trip.start_date.month %>/<%= trip.start_date.day %>/<%= trip.start_date.year %></td>
+                              <td><%= trip.end_date.month %>/<%= trip.end_date.day %>/<%= trip.end_date.year %></td>
+                              <td>$<%= trip.total_cost %></td>
+                              <td><%= trip.status %></td>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                	</div>
+                </div>
+            </div>
+    </div>
+</div>
