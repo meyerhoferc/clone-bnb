@@ -14,6 +14,11 @@ Rails.application.routes.draw do
 
   put "update_host", to: "users#update"
 
+  namespace :admin do
+    get 'dashboard', to: "dashboard#show"
+    get 'users', to: "users#index"
+  end
+
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations
     resources :messages

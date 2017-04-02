@@ -93,7 +93,7 @@ describe "creating a reservation" do
     expect(page).to_not have_content("Reservation ID:")
   end
 
-  xit "cannot be created by a guest" do
+  it "cannot be created by a guest" do
     listing = Fabricate(:listing)
     image = Fabricate.times(3, :image, listing: listing)
 

@@ -1,0 +1,26 @@
+<div class="wrapper">
+<%= render partial: "shared/admin_sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-7">
+                    <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">My Profile</h3>
+                      </div>
+                      <div class="content my-profile">
+                        <p>About Me: <%= current_user.about_me %></p>
+                        <p>Email: <%= current_user.email %></p>
+                        <p>Phone Number: <%= current_user.phone_number %></p>
+                        <p><%= link_to "Edit Profile", edit_user_path(current_user) %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.user_photo %>">
+                	</div>
+                </div>
+            </div>
+    </div>
+</div>
