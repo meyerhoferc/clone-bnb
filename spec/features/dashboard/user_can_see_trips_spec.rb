@@ -78,6 +78,14 @@ describe "a user can see trips" do
 
     expect(current_path).to eq(user_trips_path(host))
 
+    within(".sidebar") do
+      expect(page).to have_link("My Listings")
+      expect(page).to have_link("Reservations")
+      expect(page).to have_link("Messages")
+      expect(page).to have_link("Dashboard")
+      expect(page).to have_link("Trips")
+    end
+
     within(".my-trips .headers") do
       expect(page).to have_content("Check-In")
       expect(page).to have_content("Check-Out")
