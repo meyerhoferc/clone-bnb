@@ -13,9 +13,9 @@
                         <div class=”ui segment”>
                          <% @messages.each do |message| %>
                           <% if message.body %>
-                           <% user = User.find(message.user_id) %>
+                          <% message.sender %>
                             <div class=”content”>
-                             <div class=”header”><strong><%= user.first_name %></strong></div>
+                             <div class=”header”><strong><%= message.sender.first_name %></strong></div>
                               <div class=”list”>
                                <div class=”message”>
                                 <i class=”right triangle icon”></i>
@@ -35,15 +35,10 @@
                            <%= f.submit%>
                          </div>
                         <% end %>
-
-
-
-
-
-
-
                       </div>
                     </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
