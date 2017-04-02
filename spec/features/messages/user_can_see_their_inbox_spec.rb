@@ -8,19 +8,25 @@ describe "user can see their inbox" do
     host = Fabricate(:user)
     host.roles.create!(title: "host")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(host)
-    conversation_1 = Conversation.create!(initiator_id: user_1.id, recipient_id: host.id)
-    conversation_2 = Conversation.create!(initiator_id: user_2.id, recipient_id: host.id)
+    conversation_1 = Conversation.create!(initiator_id: host.id, recipient_id: user_1.id)
+    conversation_2 = Conversation.create!(initiator_id: host.id, recipient_id: user_2.id)
     message_1 = conversation_1.messages.create!(user_id: user_1.id, body: "msg test 1")
-    message_1 = conversation_2.messages.create!(user_id: user_2.id, body: "msg test 2")
+    message_2 = conversation_2.messages.create!(user_id: user_2.id, body: "msg test 2")
 
     visit ("/dashboard")
 
     click_on "Messages"
 save_and_open_page
-binding.pry
-    expect(page).to have_content("Mailbox")
+# binding.pry
+  within(".mailbox") do
+    expect(page).to have_content("#{host.first_name}'s Mailbox")
+  end
+  within(".card-#{user_1.id}") do
     expect(page).to have_content("#{user_1.first_name}")
+  end
+  within(".card-#{user_2.id}") do
     expect(page).to have_content("#{user_2.first_name}")
+  end
 
     click_on "#{user_1.first_name}"
 

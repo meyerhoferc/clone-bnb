@@ -2,13 +2,13 @@
 <%= render partial: "shared/sidebar" %>
     <div class="main-panel">
         <div class="content">
-            <div class="container-fluid">
-              <h3>Mailbox</h3>
+            <div class="container-fluid mailbox">
+              <h3><%= current_user.first_name %>'s Mailbox</h3>
               <% @conversations.each do |conversation| %>
                 <div class="row">
                   <div class="col-md-7">
-                    <div class="card">
-                      <div class="content messages">
+                    <div class="card-<%= conversation.recipient.id %>">
+                      <div class="content">
                         <div class=”ui segment”>
                            <h4><%= link_to conversation.recipient.first_name,
                                conversation_messages_path(conversation)%></h4>
