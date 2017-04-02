@@ -26,25 +26,22 @@ describe "a user can view trip details" do
     end
 
     click_on "##{reservation.id}"
-
     expect(current_path).to eq(user_trip_path(user, reservation))
 
     within(".sidebar") do
-      expect(page).to have_link("My Listings")
-      expect(page).to have_link("Reservations")
       expect(page).to have_link("Messages")
       expect(page).to have_link("Dashboard")
       expect(page).to have_link("Trips")
     end
 
-    within(".trip-details") do
-      expect(page).to have_link("Super Cool Pad")
-      expect(page).to have_content("Check-In: 1/1/2018")
-      expect(page).to have_content("Check-Out: 1/4/2018")
+    expect(page).to have_link("Super Cool Pad")
+    expect(page).to have_content("1-1-2018")
+    expect(page).to have_content("1-4-2018")
+    within("#total") do
       expect(page).to have_content("Total Price: $90")
-      expect(page).to have_content("Status: pending")
-      expect(page).to have_content("123 Street Denver")
     end
+    expect(page).to have_content("Status: pending")
+    expect(page).to have_content("123 Street Denver")
 
     click_on "Super Cool Pad"
 
