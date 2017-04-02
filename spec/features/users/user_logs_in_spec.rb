@@ -97,9 +97,14 @@ describe "user logs in" do
   end
 
   it "with a status of inactive" do
-    user = User.create(email: "grape@email.com", first_name: "Grape", last_name: "Flavor", about_me: "I am a grape", phone_number: "045-345-3533", password: "123")
+    user = User.create!(email: "grape@email.com",
+                       first_name: "Grape",
+                       last_name: "Flavor",
+                       about_me: "I am a grape",
+                       phone_number: "045-345-3533",
+                       password: "123",
+                       status: "inactive")
     user.roles.create(title: "traveler")
-    user.status = "inactive"
 
     visit root_path
     click_on "Login"

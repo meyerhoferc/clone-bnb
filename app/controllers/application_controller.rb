@@ -30,4 +30,9 @@ class ApplicationController < ActionController::Base
       redirect_to admin_dashboard_path
     end
   end
+
+  def check_user_status
+    user = User.find_by(email: params[:session][:email])
+    render file: "public/404" if user && user.status == "inactive"
+  end
 end
