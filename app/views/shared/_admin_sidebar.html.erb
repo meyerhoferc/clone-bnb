@@ -1,0 +1,36 @@
+<!-- start of dashboard sidebar -->
+  <div class="sidebar" data-color="azure" data-image="assets/images/sidebar-2.jpg">
+  <!--
+      Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+      Tip 2: you can also add an image using data-image tag
+  -->
+    <div class="sidebar-wrapper">
+          <div class="logo">
+              <a href="/" class="simple-text">
+                  CloneBnB
+              </a>
+          </div>
+
+          <ul class="nav">
+              <li class="active">
+                  <a href="/admin/dashboard">
+                      <i class="pe-7s-graph"></i>
+                      <p>Dashboard</p>
+                  </a>
+              </li>
+              <li>
+                  <a href="/users/<%= current_user.id %>/messages">
+                      <i class="pe-7s-user"></i>
+                      <p>Messages</p>
+                  </a>
+              </li>
+              <li>
+                  <a href="<%= admin_users_path %>">
+                      <i class="pe-7s-user"></i>
+                      <p>Users</p>
+                  </a>
+              </li>
+          </ul>
+    </div>
+  </div>
+<!-- end of dashboard sidebar -->
