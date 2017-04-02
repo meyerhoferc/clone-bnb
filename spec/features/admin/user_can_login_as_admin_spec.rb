@@ -28,4 +28,17 @@ describe "admin dashboard" do
       expect(page).to have_link("Users")
     end
   end
+
+  it "cannot be accessed by a non-admin user" do
+    user = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
+    user.roles.create(title: "user")
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit admin_dashboard_path
+
+    expect(page).to have_content("The page you were looking for doesn't exist (404)")
+
+    expect(page).to_not have_link("Users")
+  end
 end
