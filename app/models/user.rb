@@ -25,4 +25,12 @@ class User < ApplicationRecord
       roles.create(title: "host")
     end
   end
+
+  def recipient
+    if conversation.initiator_id == current_user.id
+      User.find(conversation.recipient_id)
+    else
+      User.find(conversation.initiator_id)
+    end
+  end
 end
