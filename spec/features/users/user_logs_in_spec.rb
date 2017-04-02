@@ -97,5 +97,20 @@ describe "user logs in" do
   end
 
   it "with a status of inactive" do
+    user = User.create(email: "grape@email.com", first_name: "Grape", last_name: "Flavor", about_me: "I am a grape", phone_number: "045-345-3533", password: "123")
+    user.roles.create(title: "traveler")
+    user.status = "inactive"
+
+    visit root_path
+    click_on "Login"
+
+    fill_in "session[email]", with: user.email
+    fill_in "session[password]", with: user.password
+
+    within(".login_btn") do
+      click_on "Login"
+    end
+
+    expect(page).to have_content("The page you were looking for doesn't exist (404)")
   end
 end
