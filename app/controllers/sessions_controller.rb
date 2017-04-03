@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :admin_login, only: [:create]
+  before_action :check_user_status, only: [:create]
 
   def create
     user = User.find_by_email(params[:session][:email])

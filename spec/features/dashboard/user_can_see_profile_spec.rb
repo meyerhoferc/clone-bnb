@@ -63,7 +63,7 @@ describe "user profile" do
     expect(current_path).to eq(dashboard_path)
 
     click_on "Messages"
-    expect(current_path).to eq(user_messages_path(host))
+    expect(current_path).to eq(conversations_path)
     expect(page).to have_content("Messages")
 
     visit dashboard_path

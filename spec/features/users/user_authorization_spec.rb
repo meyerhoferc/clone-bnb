@@ -25,4 +25,12 @@ describe "user authorization" do
     expect(page).to_not have_content(user_two.email)
     expect(page).to_not have_content(user_two.phone_number)
   end
+
+  it "user dashboard be viewed by an admin" do
+    admin = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
+    admin.roles.create(title: "admin")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+    visit dashboard_path
+    expect(page).to have_content("The page you were looking for doesn't exist (404)")
+  end
 end
