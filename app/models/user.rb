@@ -6,7 +6,7 @@ class User < ApplicationRecord
   enum status: [:active, :inactive]
 
 
-  has_many :listings
+  has_many :listings, dependent: :destroy
   has_many :reservations
 
   has_many :user_roles
