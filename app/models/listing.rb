@@ -35,4 +35,5 @@ class Listing < ApplicationRecord
   def check_middle_dates(date)
     reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
+
 end
