@@ -11,7 +11,6 @@
                   </div>
                   <table class="content table table-striped my-trips">
                     <thead class="headers">
-                      <th></th>
                       <th>Street Address</th>
                       <th>City</th>
                       <th>State</th>
@@ -30,8 +29,7 @@
                       <div class="listing-details">
                         <%@completed_trips.each do |listing|%>
                           <tr scope="row">
-                            <td><%= listing.images.first.image_url %></td>
-                            <td><%= listing.stdeet_address %></td>
+                            <td><%= listing.street_address %></td>
                             <td><%= listing.city %></td>
                             <td><%= listing.state %></td>
                             <td><%= listing.zipcode %></td>
@@ -43,8 +41,8 @@
                             <td><%= listing.number_rooms %></td>
                             <td><%= listing.number_baths %></td>
                             <td><%= listing.cost_per_night %></td>
-                            <div class="listing_<%=listing.id%>">
-                              <tr><%= link_to listing_review(listing), "Write a Review" %>
+                            <div class="listing_<%=listing.id %>">
+                              <td><%= link_to "View Listing", listing_path(listing) %></td> 
                             </div>
                           </tr>
                         <%end%>

@@ -62,7 +62,6 @@
                   </ul>
                 <% end %>
             </div>
-
         </div>
         <!-- /.row -->
 
@@ -91,7 +90,7 @@
             </div>
 
             <div class="col-sm-3 col-xs-6">
-                <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= @listing.user.user_photo %>" alt="">
+                <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= @listing.user.avatar.url(:thumb) %>">
                 <h4> <%= @listing.user.first_name %> </h4>
             </div>
             <div class="col-sm-1 col-xs-1">
@@ -103,8 +102,13 @@
                 <h3>About the Host</h3>
                 <p>  <%= @listing.user.about_me %> </p>
             </div>
+
         </div>
         <!-- /.row -->
+        <div>
+          <%= link_to "Write a Review", new_listings_review_path(@listing) %>
+        </div>
+
 
         <hr>
 

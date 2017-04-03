@@ -18,7 +18,9 @@
                       </div>
                     </div>
                   </div>
-                  <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.user_photo %>">
+                  <% if current_user.avatar.url.present? %>
+                    <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.avatar.url(:thumb) %>">
+                  <% end %>
                 	</div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                  <div class="col-md-7">
+                  <div class="col-md-10">
                     <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
                     <div class="card">
                       <div class="header">
@@ -17,7 +17,7 @@
                           <th>Email</th>
                           <th>Roles</th>
                           <th>Status</th>
-                          <th>Acion</th>
+                          <th>Action</th>
                         </thead>
                         <tbody>
                           <% @users.each do |user| %>
@@ -38,7 +38,7 @@
                       </table>
                     </div>
                   </div>
-                  <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.user_photo %>">
+                  <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= current_user.avatar.url(:thumb) %>">
                 	</div>
                 </div>
             </div>

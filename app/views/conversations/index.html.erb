@@ -12,7 +12,7 @@
                         <div class=”ui segment”>
                            <h4><%= link_to conversation.recipient.first_name,
                                conversation_messages_path(conversation)%></h4>
-                               <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= conversation.recipient.user_photo %>">
+                               <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= conversation.recipient.avatar.url(:thumb) %>">
                             <div class=”content”>
                               <div class=”list”>
                                <div class=”message”>

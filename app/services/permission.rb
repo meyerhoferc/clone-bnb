@@ -59,5 +59,6 @@ class Permission
     return true if controller == "admin/users"
     return true if controller == "sessions"
     return true if controller == "listings"
+    return true if controller == "admin/listings"
   end
 end

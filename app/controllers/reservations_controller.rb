@@ -27,9 +27,19 @@ class ReservationsController < ApplicationController
     @listings = user.listings
   end
 
+  def update
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update!(status: params[:status])
+      flash[:success] = "reservation #{@reservation.id} updated to #{@reservation.status}"
+      redirect_to user_reservations_path(current_user)
+    else
+      flash[:danger] = "Reservation not updated"
+    end
+  end
+
   private
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date)
+    params.require(:reservation).permit(:start_date, :end_date, :status)
   end
 end

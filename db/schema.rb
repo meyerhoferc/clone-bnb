@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402230420) do
+ActiveRecord::Schema.define(version: 20170403175008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,12 @@ ActiveRecord::Schema.define(version: 20170402230420) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string  "image_url"
-    t.integer "listing_id"
+    t.string   "image_url"
+    t.integer  "listing_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["listing_id"], name: "index_images_on_listing_id", using: :btree
   end
 
@@ -81,6 +85,8 @@ ActiveRecord::Schema.define(version: 20170402230420) do
     t.string   "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "listing_id"
+    t.index ["listing_id"], name: "index_reviews_on_listing_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -95,17 +101,20 @@ ActiveRecord::Schema.define(version: 20170402230420) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string  "email"
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "about_me"
-    t.string  "user_photo"
-    t.string  "phone_number"
-    t.string  "password_digest"
-    t.integer "status",          default: 0
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "about_me"
+    t.string   "phone_number"
+    t.string   "password_digest"
+    t.integer  "status",              default: 0
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
-  add_foreign_key "images", "listings"
+  add_foreign_key "images", "listings", on_delete: :cascade
   add_foreign_key "listing_amenities", "amenities"
   add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "users"
@@ -113,6 +122,7 @@ ActiveRecord::Schema.define(version: 20170402230420) do
   add_foreign_key "messages", "users"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users"
+  add_foreign_key "reviews", "listings"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
