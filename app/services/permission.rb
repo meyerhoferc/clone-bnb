@@ -53,6 +53,8 @@ class Permission
 
   def admin_user_permissions
     return true if controller == "admin/dashboard"
+    return true if controller == "admin/users"
     return true if controller == "sessions"
+    return true if controller == "listings"
   end
 end

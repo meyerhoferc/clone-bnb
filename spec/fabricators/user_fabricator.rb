@@ -14,4 +14,5 @@ Fabricator(:user) do
   phone_number { sequence(:phone_number, 8000) }
   about_me { sequence(:about_me) { |i| "aboutme#{i}"} }
   password_digest { sequence(:password_digest) { |i| "digest#{i}"} }
+  status "active"
 end
