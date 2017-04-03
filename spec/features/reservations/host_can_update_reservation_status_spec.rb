@@ -17,26 +17,26 @@ describe "from the host dashboard" do
                                     number_rooms: 1,
                                     number_baths: 1)
 
-    res_one = listing.reservations.create!(start_date: "1/3/2012",
-                                        end_date: "1/4/2012",
+    res_one = listing.reservations.create!(start_date: "10/3/2012",
+                                        end_date: "11/4/2012",
                                         user_id: traveler.id,
                                         status: "pending",
                                         listing_id: listing.id)
 
-    res_two = listing.reservations.create!(start_date: "1/3/2012",
-                                        end_date: "1/4/2012",
+    res_two = listing.reservations.create!(start_date: "12/3/2012",
+                                        end_date: "13/4/2012",
                                         user_id: traveler.id,
                                         status: "confirmed",
                                         listing_id: listing.id)
 
-    res_three = listing.reservations.create!(start_date: "1/3/2012",
-                                          end_date: "1/4/2012",
+    res_three = listing.reservations.create!(start_date: "14/3/2012",
+                                          end_date: "15/4/2012",
                                           user_id: traveler.id,
                                           status: "confirmed",
                                           listing_id: listing.id)
 
-    res_four = listing.reservations.create!(start_date: "1/3/2012",
-                                         end_date: "1/4/2012",
+    res_four = listing.reservations.create!(start_date: "16/3/2012",
+                                         end_date: "17/4/2012",
                                          user_id: traveler.id,
                                          status: "confirmed",
                                          listing_id: listing.id)
@@ -51,19 +51,28 @@ describe "from the host dashboard" do
     within(".reservation-#{res_one.id}") do
       expect(page).to have_content("pending")
       click_on "Confirm"
+    end
+
+    within(".reservation-#{res_one.id}") do
       expect(page).to have_content("confirmed")
     end
 
     within(".reservation-#{res_two.id}") do
-      expect(page).to have_content("pending")
+      expect(page).to have_content("confirmed")
       click_on "Cancel"
+    end
+
+    within(".reservation-#{res_two.id}") do
       expect(page).to have_content("cancelled")
     end
 
     within(".reservation-#{res_three.id}") do
       expect(page).to have_content("confirmed")
       click_on "Complete"
-      expect(page).to have_content("completed")
+    end
+
+    within(".reservation-#{res_three.id}") do
+      expect(page).to have_content("complete")
     end
   end
 end
