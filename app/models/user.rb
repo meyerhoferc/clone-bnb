@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
 
-  has_many :listings
+  has_many :listings, dependent: :destroy
   has_many :reservations
 
   has_many :user_roles

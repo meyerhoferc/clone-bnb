@@ -17,13 +17,12 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: "dashboard#show"
     resources :users, only: [:index, :update]
+    resources :listings, only: [:index, :show, :destroy]
   end
 
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
     resources :messages
-    resources :trips
-    resources :reservations
     resources :trips, only: [:index, :show]
     get 'listings', to: 'user/listings#index'
     get 'listings/:listing_id', to: 'user/listings#show', as: 'listing'
