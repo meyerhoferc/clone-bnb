@@ -6,15 +6,13 @@
       <div class="content">
         <div class="container-fluid">
             <div class="row">
-              <div class="col-md-7">
-                <h1>Reservations</h1>
+              <div class="col-md-12">
                 <div class="card">
-                  <div class="content ">
+                  <div class="header">
                     <h1>Reservations</h1>
                     <hr>
-
-                    <table>
-                      <tr>
+                    <table class="content table table-striped">
+                      <thead class="headers">
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>First Name</th>
@@ -23,34 +21,32 @@
                         <th>Phone Number</th>
                         <th>Status</th>
                         <th>Action</th>
-                      </tr>
-                      <tbody>
-                    <div class="all_listings">
+                      </thead>
+                      <tbody class="records all_listings">
                         <% @listings.each do |listing| %>
                           <% listing.reservations.each do |reservation| %>
-                            <tr class="reservation-<%= "#{reservation.id}" %>">
-                            <td><%= reservation.start_date %></td>
-                            <td><%= reservation.end_date %></td>
-                            <td><%= reservation.user.first_name %></td>
-                            <td><%= reservation.user.last_name %></td>
-                            <td><%= reservation.user.email %></td>
-                            <td><%= reservation.user.phone_number %></td>
-                            <td><%= reservation.status %></td>
-                            <% if reservation.status == "pending" %>
-                            <td>
-                              <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success" %>
-                              <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success"%>
-                            </td>
-                            <% elsif reservation.status == "confirmed" %>
-                            <td>
-                              <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success" %>
-                              <%= button_to "Complete", user_reservation_path(current_user, reservation, status: "complete"), method: :put, class: "btn btn-success" %>
-                            </td>
+                            <tr class="reservation-<%= "#{reservation.id}" %>" scope="row">
+                              <td><%= reservation.start_date %></td>
+                              <td><%= reservation.end_date %></td>
+                              <td><%= reservation.user.first_name %></td>
+                              <td><%= reservation.user.last_name %></td>
+                              <td><%= reservation.user.email %></td>
+                              <td><%= reservation.user.phone_number %></td>
+                              <td><%= reservation.status %></td>
+                              <% if reservation.status == "pending" %>
+                              <td>
+                                <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success" %>
+                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success"%>
+                              </td>
+                              <% elsif reservation.status == "confirmed" %>
+                              <td>
+                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success" %>
+                                <%= button_to "Complete", user_reservation_path(current_user, reservation, status: "complete"), method: :put, class: "btn btn-success" %>
+                              </td>
                             <% end %>
                             </tr>
                           <% end %>
                       <% end %>
-                    </div>
                   </div>
                 </div>
             </div>

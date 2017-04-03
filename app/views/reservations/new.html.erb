@@ -23,9 +23,9 @@
                           </div>
 
                             <% if current_user %>
-                            <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
+                              <%= f.submit "Confirm Reservation", class: "btn btn-success" %>
                             <% else %>
-                            <%= link_to "Login to Make Reservation", login_path, class: "btn btn-success" %>
+                              <%= link_to "Login to Make Reservation", login_path, class: "btn btn-success" %>
                             <% end %>
                           <% end %>
                       </div>
