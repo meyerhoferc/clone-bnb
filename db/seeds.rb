@@ -12,6 +12,8 @@ class Seed
     seed.generate_reservations
     seed.generate_traveler_user_roles
     seed.generate_host_user_roles
+    seed.generate_predefined_listings_for_host
+    seed.generate_predefined_reservations_for_traveler
   end
 
   def generate_users
@@ -106,6 +108,7 @@ class Seed
   def generate_predefined_users
     host = Role.find_by(title: "host")
     traveler = Role.find_by(title: "traveler")
+    admin = Role.find_by(title: "admin")
     User.create!(email: "sample@email.com",
                  first_name: "sample",
                  last_name: "user",
@@ -118,6 +121,49 @@ class Seed
                  about_me: "sample traveler user",
                  phone_number: "8183231122",
                  password: "password")
+    User.create!(email: "admin@email.com",
+                 first_name: "Admin",
+                 last_name: "User",
+                 about_me: "sample admin",
+                 phone_number: "123456789",
+                 password: "password")
+  end
+
+  def generate_predefined_listings_for_host
+    host = User.find_by(email: "host@email.com")
+    5.times do
+      listing = Listing.create!(
+        user_id: host.id,
+        title: Faker::Company.catch_phrase,
+        street_address: Faker::Address.street_address,
+        city: Faker::Address.city,
+        state: Faker::Address.state_abbr,
+        zipcode: Faker::Address.zip,
+        max_occupancy: Faker::Number.between(1, 30),
+        description: Faker::Hipster.paragraph,
+        list_category: ["Entire home/apt", "Private room", "Shared room"].sample,
+        number_beds:Faker::Number.between(1, 30),
+        number_rooms: Faker::Number.between(1, 30),
+        number_baths: Faker::Number.between(1, 5),
+        cost_per_night: Faker::Number.between(1, 350))
+    end
+  end
+
+  def generate_predefined_reservations_for_traveler
+    traveler = User.find_by(email: "sample@email.com")
+    host = User.find_by(email: "host@email.com")
+    5.times do
+      listing = Listing.where(user: host).sample
+      start_date = Faker::Date.between(Date.today, 1.year.from_now)
+      end_date = Faker::Date.between(start_date, 1.year.from_now)
+      reservation = Reservation.create!(
+        start_date: start_date,
+        end_date: end_date,
+        listing_id: listing.id,
+        status: ["confirmed", "pending", "cancelled", "complete"].sample,
+        user_id: traveler.id
+      )
+    end
   end
 
   def generate_amenities
