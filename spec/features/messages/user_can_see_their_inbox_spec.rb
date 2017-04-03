@@ -16,8 +16,7 @@ describe "user can see their inbox" do
     visit ("/dashboard")
 
     click_on "Messages"
-save_and_open_page
-# binding.pry
+
   within(".mailbox") do
     expect(page).to have_content("#{host.first_name}'s Mailbox")
   end
