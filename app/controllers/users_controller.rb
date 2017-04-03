@@ -35,6 +35,7 @@ class UsersController < ApplicationController
                                  :email,
                                  :password,
                                  :about_me,
-                                 :phone_number)
+                                 :phone_number,
+                                 :avatar)
   end
 end
