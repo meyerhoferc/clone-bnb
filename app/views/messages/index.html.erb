@@ -1,1 +1,45 @@
-<h1>Messages</h1>
+<div class="wrapper">
+<%= render partial: "shared/sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="card">
+                      <div class="header">
+                        <h3>Messages between <%= @conversation.initiator.first_name %> and <%= @conversation.recipient.first_name %></h3>
+                      </div>
+                      <div class="content messages">
+                        <div class=”ui segment”>
+                         <% @messages.each do |message| %>
+                          <% if message.body %>
+                          <% message.sender %>
+                            <div class=”content”>
+                             <div class=”header”><strong><%= message.sender.first_name %></strong></div>
+                              <div class=”list”>
+                               <div class=”message”>
+                                <i class=”right triangle icon”></i>
+                                 <%= message.body %>
+                              </div>
+                           </div>
+                         </div>
+                         <% end %>
+                        <% end %>
+                        </div>
+                        <%= form_for [@conversation, @message] do |f| %>
+                         <div class=”field”>
+                           <%= f.text_area :body%>
+                         </div>
+                         <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+                         <div>
+                           <%= f.submit%>
+                         </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ class ReservationsController < ApplicationController
 
   def create
     @listing = Listing.find(params[:listing_id])
+
     @reservation = @listing.reservations.new(reservation_params)
     @reservation.user = current_user
     if @reservation.no_overlapping? && @reservation.save
