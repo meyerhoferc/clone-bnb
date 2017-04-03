@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create, :edit, :update] do
-    resources :reservations
+    resources :reservations, only: [:index, :show, :new, :create]
     resources :messages
     resources :trips, only: [:index, :show]
     get 'listings', to: 'user/listings#index'
