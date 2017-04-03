@@ -46,5 +46,4 @@ describe "traveler can send a message" do
 
     expect(page).to have_content("404")
   end
-
 end
