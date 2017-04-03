@@ -21,7 +21,6 @@ describe "creating a reservation" do
     expect(current_path).to eq(new_listing_reservation_path(listing))
     fill_in("reservation[start_date]", with: "01/01/2018")
     fill_in("reservation[end_date]", with: "03/01/2018")
-    # save_and_open_page
     click_on "Confirm Reservation"
 
     expect(Reservation.count).to eq(1)
