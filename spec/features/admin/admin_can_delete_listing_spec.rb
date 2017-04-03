@@ -32,7 +32,7 @@ describe "as a logged in admin" do
     admin = User.create(email: "email@email.com", first_name: "Castle", last_name: "Pines", about_me: "Boop beep boop", phone_number: "853-343-2343", password: "123")
     admin.roles.create(title: "admin")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
-    save_and_open_page
+
     visit admin_listing_path(listing)
 
     within(".admin") do
