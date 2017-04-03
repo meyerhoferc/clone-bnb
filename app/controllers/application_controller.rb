@@ -21,4 +21,18 @@ class ApplicationController < ActionController::Base
   def authorized?
     current_permission.allow?(params[:controller], params[:action])
   end
+
+  def admin_login
+    user = User.find_by(email: params[:session][:email])
+    if user && user.authenticate(params[:session][:password]) && user.admin?
+      session[:user_id] = user.id
+      "Logged in as #{user.first_name} #{user.last_name}"
+      redirect_to admin_dashboard_path
+    end
+  end
+
+  def check_user_status
+    user = User.find_by(email: params[:session][:email])
+    render file: "public/404" if user && user.status == "inactive"
+  end
 end

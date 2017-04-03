@@ -93,7 +93,7 @@ describe "creating a reservation" do
     expect(page).to_not have_content("Reservation ID:")
   end
 
-  xit "cannot be created by a guest" do
+  it "cannot be created by a guest" do
     listing = Fabricate(:listing)
     image = Fabricate.times(3, :image, listing: listing)
 
@@ -104,7 +104,7 @@ describe "creating a reservation" do
 
     fill_in("reservation[start_date]", with: "01/01/2018")
     fill_in("reservation[end_date]", with: "03/01/2018")
-    save_and_open_page
+
     expect(page).to_not have_link("Confirm Reservation")
     expect(page).to have_link("Login to Make Reservation")
 

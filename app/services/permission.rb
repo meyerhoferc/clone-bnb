@@ -8,7 +8,9 @@ class Permission
     @controller = controller
     @action     = action
 
-    if user.host?
+    if user.admin?
+      admin_user_permissions
+    elsif user.host?
       host_user_permissions
     elsif user.traveler?
       traveler_user_permissions
@@ -50,5 +52,12 @@ class Permission
     return true if controller == "reservations"
     return true if controller == "conversations"
     return true if controller == "messages"
+  end
+
+  def admin_user_permissions
+    return true if controller == "admin/dashboard"
+    return true if controller == "admin/users"
+    return true if controller == "sessions"
+    return true if controller == "listings"
   end
 end
