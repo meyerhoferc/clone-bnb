@@ -21,7 +21,6 @@ class Seed
         last_name: Faker::Name.last_name,
         email: Faker::Internet.unique.free_email,
         about_me: Faker::Hipster.paragraph,
-        user_photo: "http://robohash.org/#{i}.png",
         phone_number: Faker::PhoneNumber.unique.cell_phone,
         password: "password"
       )

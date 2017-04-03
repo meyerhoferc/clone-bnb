@@ -99,8 +99,8 @@
             </div>
 
             <div class="col-sm-3 col-xs-6">
-                <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= @listing.user.user_photo %>" alt="">
-                <h4> <%= @listing.user.first_name %> </h4>
+              <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= @listing.user.avatar.url(:thumb) %>">
+              <h4> <%= @listing.user.first_name %> </h4>
             </div>
             <div class="col-sm-1 col-xs-1">
             </div>
