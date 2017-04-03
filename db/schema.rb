@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20170403011931) do
     t.string "name"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer "initiator_id"
+    t.integer "recipient_id"
+  end
+
   create_table "images", force: :cascade do |t|
     t.string   "image_url"
     t.integer  "listing_id"
@@ -56,10 +61,12 @@ ActiveRecord::Schema.define(version: 20170403011931) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer "host_id"
-    t.integer "traveler_id"
     t.text    "body"
-    t.string  "title"
+    t.integer "conversation_id"
+    t.integer "user_id"
+    t.boolean "unread"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -101,6 +108,8 @@ ActiveRecord::Schema.define(version: 20170403011931) do
   add_foreign_key "listing_amenities", "amenities"
   add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users"
   add_foreign_key "user_roles", "roles"

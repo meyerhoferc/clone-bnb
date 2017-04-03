@@ -1,4 +1,9 @@
 class Message < ApplicationRecord
-  belongs_to :host, class_name: 'User', foreign_key: :host_id
-  belongs_to :traveler, class_name: 'User', foreign_key: :traveler_id
+  belongs_to :conversation
+  belongs_to :user
+  validates_presence_of :body, :conversation_id, :user_id
+
+  def sender
+    @sender = User.find(self.user_id)
+  end
 end

@@ -22,9 +22,15 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
     resources :messages
+    resources :trips
+    resources :reservations
     resources :trips, only: [:index, :show]
     get 'listings', to: 'user/listings#index'
     get 'listings/:listing_id', to: 'user/listings#show', as: 'listing'
     get 'listings/:listing_id/edit', to: 'user/listings#edit', as: 'edit_listing'
+  end
+
+  resources :conversations, only: [:index, :create] do
+    resources :messages, only: [:index, :new, :create]
   end
 end

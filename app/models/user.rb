@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :user_roles
   has_many :roles, through: :user_roles
 
+  has_many :conversations, foreign_key: 'initiator_id'
+
   def traveler?
     roles.exists?(title: "traveler")
   end
@@ -30,6 +32,14 @@ class User < ApplicationRecord
   def update_role(role)
     if role == "host"
       roles.create(title: "host")
+    end
+  end
+
+  def recipient
+    if conversation.initiator_id == current_user.id
+      recipient = User.find(conversation.recipient_id)
+    else
+      recipient = User.find(conversation.initiator_id)
     end
   end
 end
