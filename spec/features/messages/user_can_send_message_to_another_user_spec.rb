@@ -31,4 +31,20 @@ describe "traveler can send a message" do
     expect(page).to_not have_content("Message #{listing_1.user.first_name}")
   end
 
+  it "they cannot access other people's messages" do
+    user_1, user_2 = Fabricate.times(2, :user)
+    user_1.roles.create!(title: "traveler")
+    user_2.roles.create!(title: "traveler")
+    host = Fabricate(:user)
+    host.roles.create!(title: "host")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user_2)
+
+    conversation_1 = Conversation.create!(initiator_id: host.id, recipient_id: user_1.id)
+    message_1 = conversation_1.messages.create!(user_id: user_1.id, body: "msg test 1")
+
+    visit "/conversations/#{conversation_1.id}/messages"
+
+    expect(page).to have_content("404")
+  end
+
 end

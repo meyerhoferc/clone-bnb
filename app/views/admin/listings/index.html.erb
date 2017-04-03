@@ -1,0 +1,54 @@
+<div class="wrapper">
+<%= render partial: "shared/admin_sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">Listings</h3>
+                      </div>
+                      <table class="content table table-striped listings">
+                        <thead>
+                          <th>Listing ID</th>
+                          <th>Host Name</th>
+                          <th>Host Email</th>
+                          <th>Title</th>
+                          <th>Address</th>
+                          <th>Category</th>
+                          <th>Occupancy</th>
+                          <th>Cost/Night</th>
+                          <th>Action</th>
+                        </thead>
+                        <tbody>
+                          <% @listings.each do |listing| %>
+
+                          <tr scope="row">
+                            <div class="listing-<%= listing.id %>">
+                              <td><%= listing.id %></td>
+                              <td><%= listing.user.first_name %>
+                                  <%= listing.user.last_name %></td>
+                              <td><%= listing.user.email %></td>
+                              <td><%= link_to listing.title, admin_listing_path(listing) %></td>
+                              <td><%= listing.street_address %>
+                                  <%= listing.city %>
+                                  <%= listing.state %>
+                                  <%= listing.zipcode %></td>
+                              <td><%= listing.list_category %></td>
+                              <td><%= listing.max_occupancy %> person(s)</td>
+                              <td>$<%= listing.cost_per_night %></td>
+                              <td><%= button_to "Delete", admin_listing_path(listing), method: :delete, class: "btn btn-success" %></td>
+                            </div>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                	</div>
+                </div>
+            </div>
+    </div>
+</div>
