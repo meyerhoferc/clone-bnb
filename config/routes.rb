@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
+    resources :review, only: [:index, :show]
   end
   resources :reservations, only: [:show]
 
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
     resources :reservations
     resources :messages
     resources :trips, only: [:index, :show]
+    resources :reviews, only: [:index, :show]
     get 'listings', to: 'user/listings#index'
     get 'listings/:listing_id', to: 'user/listings#show', as: 'listing'
     get 'listings/:listing_id/edit', to: 'user/listings#edit', as: 'edit_listing'

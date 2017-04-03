@@ -1,0 +1,14 @@
+<h1>Write a review</h1>
+
+<%= form_for(@listing, @review) do |f| %>
+  <%= f.label :title %>
+  <%= f.string :title %>
+
+  <%= f.label :stars %>
+  <%= f.integer :stars %>
+
+  <%= f.label :message %>
+  <%= f.text_field :message %>
+
+  <%= f.submit "Add Review", listing_review_path(@listing), class: "btn btn-danger" %>
+<% end %>

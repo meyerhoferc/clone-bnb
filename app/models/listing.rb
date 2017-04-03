@@ -5,6 +5,7 @@ class Listing < ApplicationRecord
   belongs_to :user
   has_many :listing_amenities
   has_many :amenities, through: :listing_amenities
+  has_many :reviews
 
   validates_presence_of :street_address,
                         :description,
