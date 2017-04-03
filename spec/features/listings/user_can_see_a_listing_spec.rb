@@ -22,7 +22,6 @@ describe "user can see a listing" do
     expect(page).to have_xpath("//img[@src='#{listing_1.images[0].image_url}']")
     expect(page).to have_xpath("//img[@src='#{listing_1.images[1].image_url}']")
     expect(page).to have_xpath("//img[@src='#{listing_1.images[2].image_url}']")
-    expect(page).to have_xpath("//img[@src='#{listing_1.user.user_photo}']")
 
     within(".amenities") do
       expect(page).to have_content("Amenities at this property")
