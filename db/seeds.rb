@@ -8,11 +8,11 @@ class Seed
     seed.generate_amenities
     seed.generate_listings
     seed.generate_listing_amenities
+    seed.generate_predefined_listings_for_host
     seed.generate_images
     seed.generate_reservations
     seed.generate_traveler_user_roles
     seed.generate_host_user_roles
-    seed.generate_predefined_listings_for_host
     seed.generate_predefined_reservations_for_traveler
   end
 
