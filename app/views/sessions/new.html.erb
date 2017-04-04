@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <h1>Login with your Credentials</h1>
+    <%= button_to "Forgot Password?", new_code_path, method: :get %>
 
     <%= form_for(:session, url: login_path) do |f| %>
 

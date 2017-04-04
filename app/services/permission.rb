@@ -25,6 +25,7 @@ class Permission
     return true if controller == "users"
     return true if controller == "listings"
     return true if controller == "reservations"
+    return true if controller == "codes"
   end
 
   def host_user_permissions
