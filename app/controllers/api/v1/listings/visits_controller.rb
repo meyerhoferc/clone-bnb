@@ -1,6 +1,10 @@
 class Api::V1::Listings::VisitsController < ApplicationController
-  def index
+  def show
     render json: Listing.most_visits(listing_params)
+  end
+
+  def index
+    render json: Listing.most_visits_all(listing_params)
   end
 
   private
