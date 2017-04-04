@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root "home#index"
   get "dashboard", to: "dashboard#show"
+  resources :codes, only: [:new, :create, :edit, :update]
+  get 'reset_password', to: "codes#reset"
+  patch 'reset_password', to: "codes#update_password"
 
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
