@@ -13,4 +13,24 @@ describe Reservation do
     it { should belong_to(:user) }
     it { should belong_to(:listing) }
   end
+
+  describe "self.complete" do
+    it "returns only reservations with a status of complete" do
+      listing = Fabricate(:listing)
+      user = Fabricate(:user)
+      reservation_one = Reservation.create!(listing: listing,
+                                            user: user,
+                                            start_date: "01/02/2021",
+                                            end_date: "04/02/2021",
+                                            status: "complete")
+      reservation_two = Reservation.create!(listing: listing,
+                                            user: user,
+                                            start_date: "01/02/2020",
+                                            end_date: "04/02/2020",
+                                            status: "pending")
+      reservations = Reservation.complete
+      expect(reservations.count).to eq(1)
+      expect(reservations.first.id).to eq(reservation_one.id)
+    end
+  end
 end

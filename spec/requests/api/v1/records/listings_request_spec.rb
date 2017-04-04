@@ -55,6 +55,7 @@ describe "Listings Record API" do
         property = Fabricate(:listing, title: "Niiiice")
         title = property.title
 
+
         get "/api/v1/listings/find?title=#{title}"
 
         listing = JSON.parse(response.body)

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :listings do
         get 'find_all', to: "finder#index"
+        get 'most_visited', to: "visits#index"
       end
     end
   end

@@ -58,8 +58,6 @@ describe "creating a reservation" do
   end
 
   it "cannot make a reservation for a listing that is booked on that date" do
-
-
     user = User.create!(email: "email@email.com",
                         first_name: "Castle",
                         last_name: "Pines",
