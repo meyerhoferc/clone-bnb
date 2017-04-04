@@ -11,7 +11,7 @@
 																						<span class="pull-right"> <%= @reservation.end_date.month %>-<%= @reservation.end_date.day %>-<%= @reservation.end_date.year %></strong></h4>
                             </div>
 														<hr>
-														<div class="header">
+														<div class="header listing">
                               <h3><%= link_to @reservation.listing.title, listing_path(@reservation.listing) %></h3>
                               <h3><%= @reservation.listing.street_address %> <%= @reservation.listing.city %></h3>
 															<h4><strong> <%= @reservation.listing.list_category %></strong></h4>
