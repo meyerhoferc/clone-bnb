@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   root "home#index"
   get "dashboard", to: "dashboard#show"
 
-  namespace :listing do
-    resources :reviews, only: [:index, :new, :create]
+  resources :listings do
+    #resources :reviews, only: [:index, :new, :create]
+    get "/reviews/new", to: "listings/reviews#new"
+    post "/reviews/new", to: "listings/reviews#create"
+    # /listings/3/reviews/new
   end
 
   resources :listings, only: [:show, :index] do

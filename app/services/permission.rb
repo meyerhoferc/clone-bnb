@@ -33,12 +33,15 @@ class Permission
     return true if controller == "trips"
     return true if controller == "reservations"
     return true if controller == "dashboard"
+    return true if controller == "listings/reviews"
+    return true if controller == "reviews"
     return true if controller == "listings"
     return true if controller == "reservations"
     return true if controller == "conversations"
     return true if controller == "messages"
     return true if controller == "user/listings"
-    return true if controller == "reviews"
+
+
   end
 
   def traveler_user_permissions
@@ -47,9 +50,11 @@ class Permission
     return true if controller == "users"
     return true if controller == "trips"
     return true if controller == "dashboard"
+    return true if controller == "listings/reviews"
+    return true if controller == "reviews"
     return true if controller == "listings"
     return true if controller == "reservations"
-    return true if controller == "reviews"
+
     return true if controller == "conversations"
     return true if controller == "messages"
   end

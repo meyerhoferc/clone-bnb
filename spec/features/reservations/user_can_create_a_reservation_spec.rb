@@ -10,7 +10,7 @@ describe "creating a reservation" do
                         password: "123")
     user.roles.create!(title: "traveler")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    listing = Fabricate(:listing)
+    listing = Fabricate(:listing, cost_per_night: 10)
     image = Fabricate.times(3, :image, listing: listing)
     host = listing.user
 
@@ -21,7 +21,6 @@ describe "creating a reservation" do
     expect(current_path).to eq(new_listing_reservation_path(listing))
     fill_in("reservation[start_date]", with: "01/01/2018")
     fill_in("reservation[end_date]", with: "03/01/2018")
-
     click_on "Confirm Reservation"
 
     expect(Reservation.count).to eq(1)
@@ -31,6 +30,10 @@ describe "creating a reservation" do
 
     within(".success") do
       expect(page).to have_content("Successfully made reservation")
+    end
+
+    within(".listing") do
+      expect(page).to have_content(listing.title)
     end
 
     within(".dates") do
