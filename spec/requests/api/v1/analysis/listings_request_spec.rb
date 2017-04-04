@@ -32,4 +32,18 @@ describe "Listings Analysis API" do
       expect(listings.last[:id]).to eq(listing_three.id)
     end
   end
+
+  describe "ranking cities by most visited" do
+    it "for all successful reservations" do
+      cities = ["Denver", "Santa Fe", "Seattle"]
+      allow(Listing).to receive(:most_visited_cities).and_return(cities)
+      get "/api/v1/cities/most_visited"
+
+      expect(response).to be_success
+      json_cities = JSON.parse(response.body, symbolize_names: true)
+      expect(json_cities.count).to eq(3)
+      expect(json_cities.first[:city]).to eq("Denver")
+      expect(json_cities.last[:city]).to eq("Seattle")
+    end
+  end
 end
