@@ -13,6 +13,7 @@
                     <hr>
                     <table class="content table table-striped">
                       <thead class="headers">
+                        <th>Listing</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>First Name</th>
@@ -26,6 +27,7 @@
                         <% @listings.each do |listing| %>
                           <% listing.reservations.each do |reservation| %>
                             <tr class="reservation-<%= "#{reservation.id}" %>" scope="row">
+                              <td><%= reservation.listing.title %></td>
                               <td><%= reservation.start_date %></td>
                               <td><%= reservation.end_date %></td>
                               <td><%= reservation.user.first_name %></td>
