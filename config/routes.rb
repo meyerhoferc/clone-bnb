@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-
+  namespace :api do
+    namespace :v1 do
+      namespace :listings do
+        get 'find_all', to: "finder#index"
+      end
+    end
+  end
   root "home#index"
   get "dashboard", to: "dashboard#show"
   resources :codes, only: [:new, :create, :edit, :update]

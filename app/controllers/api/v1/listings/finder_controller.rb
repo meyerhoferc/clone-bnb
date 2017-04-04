@@ -1,21 +1,27 @@
 class Api::V1::Listings::FinderController < ApplicationController
+    def index
+      render json: Listing.where(listing_params)
+    end
 
-  def show
-    render json: Listing.find_by(find_listings_params)
-  end
+    def show
+      render json: Listing.find_by(listing_params)
+    end
 
-  def find_listings_params
-    params.permit(:id,
-                  :user_id,
-                  :street_address,
-                  :description,
-                  :city,
-                  :state,
-                  :zipcode,
-                  :max_occupancy,
-                  :title,
-                  :list_category,
-                  :cost_per_night,
-                   )
+    private
+
+    def listing_params
+      params.permit(:city,
+                    :id,
+                    :street_address,
+                    :state,
+                    :zipcode,
+                    :description,
+                    :title,
+                    :max_occupancy,
+                    :list_category,
+                    :number_beds,
+                    :number_rooms,
+                    :number_baths,
+                    :cost_per_night)
+    end
   end
-end
