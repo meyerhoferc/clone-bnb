@@ -181,16 +181,22 @@ class Seed
   end
 
   def generate_listing_amenities
-    amenities = []
-    5.times do
-      amenities << Amenity.find(Random.new.rand(1..20))
-    end
     Listing.all.each do |listing|
+      amenities = get_amenities
       amenities.each do |amenity|
         listing.listing_amenities.create!(amenity: amenity, value: true)
         puts "#{amenity.name} added to #{listing.title}"
       end
     end
+  end
+
+  def get_amenities
+    amenities = []
+    all_amenities = Amenity.all.to_a
+    5.times do
+      amenities << all_amenities.shuffle.shift
+    end
+    amenities
   end
 end
 
