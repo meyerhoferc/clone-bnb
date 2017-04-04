@@ -148,4 +148,59 @@ describe Listing do
       expect(listings.last.id).to eq(listing_three.id)
     end
   end
+
+  describe "#most_visited_cities" do
+    it "returns cities for listings in order of most visited" do
+      user = User.create!(email: "email@email.com",
+                          first_name: "Castle",
+                          last_name: "Pines",
+                          about_me: "Boop beep boop",
+                          phone_number: "853-343-2343",
+                          password: "123")
+      user.roles.create!(title: "traveler")
+
+      listing_one = Fabricate(:listing, city: "Denver")
+      listing_two = Fabricate(:listing, city: "Seattle")
+      listing_three = Fabricate(:listing, city: "Santa Fe")
+      Fabricate.times(2, :listing, city: "Tucson", state: "AZ")
+
+      Reservation.create!(listing: listing_two,
+                          user: user,
+                          start_date: "01/01/2018",
+                          end_date: "04/01/2018",
+                          status: "complete")
+      Reservation.create!(listing: listing_two,
+                          user: user,
+                          start_date: "01/02/2018",
+                          end_date: "04/02/2018",
+                          status: "complete")
+      Reservation.create!(listing: listing_two,
+                          user: user,
+                          start_date: "01/03/2018",
+                          end_date: "04/03/2018",
+                          status: "complete")
+
+      Reservation.create!(listing: listing_one,
+                          user: user,
+                          start_date: "01/01/2019",
+                          end_date: "04/01/2019",
+                          status: "complete")
+      Reservation.create!(listing: listing_one,
+                          user: user,
+                          start_date: "01/02/2019",
+                          end_date: "04/02/2019",
+                          status: "complete")
+
+      Reservation.create!(listing: listing_three,
+                          user: user,
+                          start_date: "01/02/2020",
+                          end_date: "04/02/2020",
+                          status: "complete")
+      most_visited_cities = Listing.most_visited_cities
+      expect(most_visited_cities.count).to eq(3)
+      expect(most_visited_cities.first.id).to eq(listing_two.id)
+      expect(most_visited_cities[1].id).to eq(listing_one.id)
+      expect(most_visited_cities.last.id).to eq(listing_three.id)
+    end
+  end
 end
