@@ -14,7 +14,7 @@
                           <tbody>
                             <% @listings.each do |listing| %>
                             <tr scope="row">
-                              <td><%= link_to listing.title, user_listing_path(current_user, listing) %></td>
+                              <td><%= link_to listing.title, listing_path(listing) %></td>
                             </tr>
                             <% end %>
                           </tbody>

@@ -37,17 +37,5 @@ describe "a logged in host user" do
       expect(page).to have_link("Hipster Loft")
       expect(page).to_not have_link("#{listing_four.title}")
     end
-
-    click_on "Small Apartment"
-
-    expect(current_path).to eq(user_listing_path(user, listing_two))
-
-    within(".sidebar") do
-      expect(page).to have_link("My Listings")
-      expect(page).to have_link("Reservations")
-      expect(page).to have_link("Messages")
-      expect(page).to have_link("Dashboard")
-      expect(page).to have_link("Trips")
-    end
   end
 end
