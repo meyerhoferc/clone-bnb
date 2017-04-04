@@ -22,7 +22,7 @@ class TwilioService
     rand(10000..99999)
   end
 
-  def sanitized(number)
+  def sanitize(number)
     number
   end
 end
