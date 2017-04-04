@@ -33,21 +33,18 @@ describe "a logged in host user" do
 
     within(".my-listings") do
       expect(page).to have_link("Big House")
+      expect(page).to have_content("#{listing_one.street_address}")
+      expect(page).to have_content("#{listing_one.cost_per_night}")
+      expect(page).to have_content("#{listing_one.reservations.count}")
       expect(page).to have_link("Small Apartment")
+      expect(page).to have_content("#{listing_two.street_address}")
+      expect(page).to have_content("#{listing_two.cost_per_night}")
+      expect(page).to have_content("#{listing_two.reservations.count}")
       expect(page).to have_link("Hipster Loft")
+      expect(page).to have_content("#{listing_three.street_address}")
+      expect(page).to have_content("#{listing_three.cost_per_night}")
+      expect(page).to have_content("#{listing_three.reservations.count}")
       expect(page).to_not have_link("#{listing_four.title}")
-    end
-
-    click_on "Small Apartment"
-
-    expect(current_path).to eq(user_listing_path(user, listing_two))
-
-    within(".sidebar") do
-      expect(page).to have_link("My Listings")
-      expect(page).to have_link("Reservations")
-      expect(page).to have_link("Messages")
-      expect(page).to have_link("Dashboard")
-      expect(page).to have_link("Trips")
     end
   end
 end
