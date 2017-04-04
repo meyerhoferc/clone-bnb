@@ -76,7 +76,9 @@
 
           </div>
           <div>
-            <%= link_to "Write a Review", listing_reviews_new_path(@listing) %>
+            <% if @reservation_listing %>
+              <%= link_to "Write a Review", listing_reviews_new_path(@listing) %>
+            <% end %>  
             <%= render partial: "shared/review" %>
           </div>
 

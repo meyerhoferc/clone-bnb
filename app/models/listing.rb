@@ -36,4 +36,13 @@ class Listing < ApplicationRecord
   def check_middle_dates(date)
     reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
+
+  def user_stayed_at?(user)
+    if user.nil?
+      false
+    else
+      derp = user.reservations.find_by(listing_id: id)
+      true if !derp.nil?
+    end   
+  end
 end
