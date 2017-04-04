@@ -3,12 +3,12 @@
                 <div class="row">
                     <div class="col-md-4">
 											<h3> Reservation ID: <%= @reservation.id %> </h3>
-                      <h5>Status: <%= @reservation.status %></h5>
                         <div class="card">
                             <div class="header dates">
                                 <h5 class="title">Check-in<span class="pull-right">Check-out</span></h5>
 																<h4><strong><%= @reservation.start_date.month %>-<%= @reservation.start_date.day %>-<%= @reservation.start_date.year %>
 																						<span class="pull-right"> <%= @reservation.end_date.month %>-<%= @reservation.end_date.day %>-<%= @reservation.end_date.year %></strong></h4>
+                                              <h5>Status: <%= @reservation.status %></h5>
                             </div>
 														<hr>
 														<div class="header listing">
