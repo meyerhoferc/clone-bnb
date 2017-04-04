@@ -13,7 +13,7 @@ describe TwilioService do
   describe "#sanitize" do
     it "formats the user phone number" do
       service = TwilioService.new
-      expect(service.sanitze("5202221199")).to eq("+15202221199")
+      expect(service.sanitize("5202221199")).to eq("+15202221199")
     end
   end
 end
