@@ -12,7 +12,7 @@ class TwilioService
     @code = generate_code
     @account.messages.create(
     from: ENV['TWILIO_TEST_PHONE'],
-    to: sanitized(phone_number),
+    to: sanitize(phone_number),
     body: @code
     )
     @code
@@ -22,7 +22,13 @@ class TwilioService
     rand(10000..99999)
   end
 
-  def sanitized(number)
-    number
+  def sanitize(number)
+    if number[0..1] == "+1"
+      number
+    elsif number[0] == "1"
+      number.chars.unshift("+").join
+    else
+      number.chars.unshift("1").unshift("+").join
+    end
   end
 end
