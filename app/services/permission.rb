@@ -26,6 +26,7 @@ class Permission
     return true if controller == "listings"
     return true if controller == "reservations"
     return true if controller == "codes"
+    return true if controller == "api/v1/listings/finder"
   end
 
   def host_user_permissions
@@ -40,7 +41,6 @@ class Permission
     return true if controller == "conversations"
     return true if controller == "messages"
     return true if controller == "user/listings"
-
   end
 
   def traveler_user_permissions
