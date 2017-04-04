@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <h1>Enter the code that was sent to your phone number</h1>
+    <%= form_for(@code) do |f| %>
+      <div class="form-group">
+        <%= f.text_field :body, class: "form-control" %>
+      </div>
+
+      <div class="login_btn">
+        <%= f.submit "Verify", class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
+</div>
