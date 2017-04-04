@@ -58,7 +58,7 @@
                 <h3>Amenities at this property</h3>
                 <% @listing.amenities.each do |amenity| %>
                   <ul>
-                    <%= amenity.name %>
+                    <li> <%= amenity.name.humanize.capitalize %></li>
                   </ul>
                 <% end %>
             </div>

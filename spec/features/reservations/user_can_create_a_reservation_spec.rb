@@ -45,7 +45,7 @@ describe "creating a reservation" do
     end
 
     within(".charges") do
-      expect(page).to have_content("Total $20")
+      expect(page).to have_content("Total Price: $20")
     end
 
     expect(reservation.status).to eq("pending")

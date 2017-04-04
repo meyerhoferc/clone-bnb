@@ -25,11 +25,11 @@ describe "user can see a listing" do
 
     within(".amenities") do
       expect(page).to have_content("Amenities at this property")
-      expect(page).to have_content("internet")
-      expect(page).to have_content("tv")
-      expect(page).to have_content("gym")
-      expect(page).to have_content("pool")
-      expect(page).to have_content("doorman")
+      expect(page).to have_content("Internet")
+      expect(page).to have_content("Tv")
+      expect(page).to have_content("Gym")
+      expect(page).to have_content("Pool")
+      expect(page).to have_content("Doorman")
     end
     end
 end

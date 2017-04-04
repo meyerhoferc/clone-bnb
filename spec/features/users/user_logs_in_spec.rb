@@ -114,6 +114,6 @@ describe "user logs in" do
       click_on "Login"
     end
 
-    expect(page).to have_content("The page you were looking for doesn't exist (404)")
+    expect(page).to have_content("You don't have to go home, but you can't stay here! Error 404")
   end
 end

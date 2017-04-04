@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Logged in as #{user.first_name} #{user.last_name}"
       redirect_to dashboard_path
     else
-      flash.now[:notice] = "Email or password has been entered incorrectly"
+      flash.now[:error] = "Email or password has been entered incorrectly"
       render :new
     end
   end
