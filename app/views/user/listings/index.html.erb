@@ -4,17 +4,29 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                  <div class="col-md-7">
+                  <div class="col-md-12">
                     <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
                     <div class="card">
                       <div class="header">
                         <h3 class="title">My Listings</h3>
                       </div>
                         <table class="content table table-striped my-listings">
+                          <thead>
+                            <th>Listing Title</th>
+                            <th>Address</th>
+                            <th>Cost Per Night</th>
+                            <th>Upcoming Reservations</th>
+                          </thead>
                           <tbody>
                             <% @listings.each do |listing| %>
                             <tr scope="row">
                               <td><%= link_to listing.title, listing_path(listing) %></td>
+                              <td><%= listing.street_address %>
+                                  <%= listing.city %>
+                                  <%= listing.state %>
+                                  <%= listing.zipcode %></td>
+                              <td><%= listing.cost_per_night %></td>
+                              <td><%= listing.reservations.count %></td>
                             </tr>
                             <% end %>
                           </tbody>
