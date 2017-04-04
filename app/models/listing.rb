@@ -36,4 +36,13 @@ class Listing < ApplicationRecord
     reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
 
+  def self.most_visits(parameters)
+    select('listings.*, COUNT(reservations.listing_id) AS frequency')
+      .where(city: parameters[:city])
+      .joins(:reservations)
+      .merge(Reservation.complete)
+      .group(:id)
+      .order('frequency desc')
+      .limit(parameters[:limit])
+  end
 end

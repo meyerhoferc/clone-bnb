@@ -5,6 +5,8 @@ class Reservation < ApplicationRecord
   validates :start_date, :end_date, :listing, :user, :status, presence: true
   enum status: [:pending, :confirmed, :complete, :cancelled]
 
+  scope :complete, -> { where(status: 'complete') }
+
   def num_nights
     (self.start_date..self.end_date).to_a.count - 1
   end
@@ -20,5 +22,4 @@ class Reservation < ApplicationRecord
   def no_overlapping?
     listing.present? && listing.range_available?(start_date, end_date)
   end
-
 end
