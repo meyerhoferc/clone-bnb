@@ -18,12 +18,13 @@ class Seed
 
   def generate_users
     1000.times do |i|
+      number = generate_phone_number
       user = User.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         email: Faker::Internet.unique.free_email,
         about_me: Faker::Hipster.paragraph,
-        phone_number: Faker::PhoneNumber.unique.cell_phone,
+        phone_number: sanitize_phone_number(number),
         password: "password"
       )
       puts "User #{user.last_name}, #{user.first_name} created!"
@@ -197,6 +198,14 @@ class Seed
       amenities << all_amenities.shuffle.shift
     end
     amenities
+  end
+
+  def sanitize_phone_number(number)
+    number.chars.unshift("1").unshift("+").join
+  end
+
+  def generate_phone_number
+    rand(1000000000..9999999999).to_s
   end
 end
 
