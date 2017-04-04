@@ -39,4 +39,13 @@ Rails.application.routes.draw do
   resources :conversations, only: [:index, :create] do
     resources :messages, only: [:index, :new, :create]
   end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :listings do
+        get 'find_all', to: "finder#index"
+        get 'find', to: "finder#show"
+      end
+    end
+  end
 end
