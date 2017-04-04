@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root "home#index"
   get "dashboard", to: "dashboard#show"
+  resources :codes, only: [:new, :create, :edit, :update]
+  get 'reset_password', to: "codes#reset"
+  patch 'reset_password', to: "codes#update_password"
 
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
@@ -22,7 +25,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
-    resources :messages
     resources :trips, only: [:index, :show]
     get 'listings', to: 'user/listings#index'
     get 'listings/:listing_id', to: 'user/listings#show', as: 'listing'

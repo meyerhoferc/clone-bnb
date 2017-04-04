@@ -137,7 +137,7 @@ describe "a logged in user" do
     end
 
     visit user_trip_path(other_user, reservation)
-    expect(page).to have_content("The page you were looking for doesn't exist (404)")
+    expect(page).to have_content("You don't have to go home, but you can't stay here! Error 404")
 
     expect(page).to_not have_link("Super Cool Pad")
     expect(page).to_not have_content("1-1-2018")

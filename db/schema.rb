@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403023324) do
+ActiveRecord::Schema.define(version: 20170403224256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(version: 20170403023324) do
 
   create_table "amenities", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "codes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "phone_number"
+    t.string  "body"
+    t.index ["user_id"], name: "index_codes_on_user_id", using: :btree
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -104,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170403023324) do
     t.datetime "avatar_updated_at"
   end
 
+  add_foreign_key "codes", "users"
   add_foreign_key "images", "listings", on_delete: :cascade
   add_foreign_key "listing_amenities", "amenities"
   add_foreign_key "listing_amenities", "listings"
