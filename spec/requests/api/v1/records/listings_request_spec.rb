@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Listings Record API" do
   describe "find all listings by an attribute" do
     it "can find listings by city case-insensitively" do
-      denver_listings = Fabricate.times(4, :listing, city: "dEnVer", state: "CO")
+      denver_listings = Fabricate.times(4, :listing, city: "dEnVer", state: "CO", number_baths: 0)
       denver_listing_ids = denver_listings.map { |listing| listing.id }
       Fabricate(:listing, city: "Tucson", state: "AZ")
 
@@ -21,7 +21,7 @@ describe "Listings Record API" do
     it "can find listings by title, number of bathrooms, and cost per night" do
       title_listing = Fabricate(:listing, number_baths: 0, cost_per_night: 10, title: "This")
       bathroom_listings = Fabricate.times(2, :listing, number_baths: 2)
-      cost_listings = Fabricate.times(3, :listing, cost_per_night: 20)
+      cost_listings = Fabricate.times(3, :listing, cost_per_night: 20, number_baths: 0)
 
       get "/api/v1/listings/find_all?title=#{title_listing.title}"
 
