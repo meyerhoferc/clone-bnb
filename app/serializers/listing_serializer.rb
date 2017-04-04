@@ -12,4 +12,5 @@ class ListingSerializer < ActiveModel::Serializer
              :number_rooms,
              :number_baths,
              :cost_per_night
+  has_many :reservations
 end

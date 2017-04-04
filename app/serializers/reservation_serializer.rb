@@ -5,4 +5,5 @@ class ReservationSerializer < ActiveModel::Serializer
              :status,
              :num_nights,
              :total_cost
+  belongs_to :listing
 end
