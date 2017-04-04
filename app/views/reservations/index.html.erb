@@ -33,17 +33,11 @@
                               <td><%= reservation.user.email %></td>
                               <td><%= reservation.user.phone_number %></td>
                               <td><%= reservation.status %></td>
-                              <% if reservation.status == "pending" %>
                               <td>
-                                <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success" %>
-                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success"%>
+                                <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success",  disabled: reservation.complete? || reservation.cancelled? %>
+                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success", disabled: reservation.cancelled? %>
+                                <%= button_to "Complete", user_reservation_path(current_user, reservation, status: "complete"), method: :put, class: "btn btn-success", disabled: reservation.pending? || reservation.cancelled? %>
                               </td>
-                              <% elsif reservation.status == "confirmed" %>
-                              <td>
-                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success" %>
-                                <%= button_to "Complete", user_reservation_path(current_user, reservation, status: "complete"), method: :put, class: "btn btn-success" %>
-                              </td>
-                            <% end %>
                             </tr>
                           <% end %>
                       <% end %>
