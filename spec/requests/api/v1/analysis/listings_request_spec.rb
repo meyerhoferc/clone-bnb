@@ -46,4 +46,19 @@ describe "Listings Analysis API" do
       expect(json_cities.keys.last).to eq("Seattle")
     end
   end
+
+  describe "display cities with number of listings" do
+    it "in each city" do
+      listing_one, listing_two, listing_three = Fabricate.times(3, :listing, city: "Denver", state: "CO")
+      Fabricate.times(2, :listing, city: "Tucson", state: "AZ")
+      get "/api/v1/listings/listings_per_city"
+
+      expect(response).to be_success
+      json_cities = JSON.parse(response.body)
+      expect(json_cities.count).to eq(2)
+
+      expect(json_cities).to include("Tucson"=>2)
+      expect(json_cities).to include("Denver"=>3)
+    end
+  end
 end

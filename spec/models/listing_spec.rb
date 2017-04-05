@@ -20,6 +20,7 @@ describe Listing do
     it { should have_many(:images) }
     it { should have_many(:listing_amenities) }
     it { should have_many(:amenities) }
+    it { should have_many(:reviews) }
   end
 
   describe "#range_available?" do
@@ -200,6 +201,21 @@ describe Listing do
       expect(most_visited_cities.count).to eq(3)
       expect(most_visited_cities.first.first).to eq(listing_two.city)
       expect(most_visited_cities.to_a.last.first).to eq(listing_three.city)
+    end
+  end
+
+  describe "#listings_per_city" do
+    it "returns cities with number of listings per city" do
+      listing_one, listing_two, listing_three = Fabricate.times(3, :listing, city: "Denver", state: "CO")
+      Fabricate.times(2, :listing, city: "Tucson", state: "AZ")
+      Fabricate(:listing, city: "Reno", state: "NV")
+
+      cities_listings = Listing.listings_per_city
+      expect(cities_listings.count).to eq(3)
+      expect(cities_listings.first.first).to eq("Reno")
+      expect(cities_listings.to_a.last.first).to eq("Denver")
+      expect(cities_listings.to_a.last.last).to eq(3)
+
     end
   end
 end

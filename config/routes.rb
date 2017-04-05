@@ -6,8 +6,8 @@ Rails.application.routes.draw do
         get 'find', to: "finder#show"
         get 'most_visited', to: "visits#show"
         get 'most_visited_all', to: "visits#index"
+        get 'listings_per_city', to: "cities#index"
       end
-
       namespace :cities do
         get 'most_visited', to: "finder#show"
       end
