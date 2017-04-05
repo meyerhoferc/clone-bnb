@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get 'reset_password', to: "codes#reset"
   patch 'reset_password', to: "codes#update_password"
 
+  resources :listings do
+    get "/reviews/new", to: "listings/reviews#new"
+    post "/reviews/new", to: "listings/reviews#create"
+  end
+
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
   end
@@ -40,6 +45,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
     resources :trips, only: [:index, :show]
+    resources :reviews, only: [:index]
     get 'listings', to: 'user/listings#index'
   end
 
