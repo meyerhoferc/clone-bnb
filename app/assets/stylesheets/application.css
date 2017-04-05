@@ -12,17 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require simple_calendar
  */
 
 
- /*body {
-   padding-top: 51px;
-   background-color: #0d5c63;
-   color: #4B3621;
- }*/
- /*.nav {
-   background-color: #fffffa;
- }*/
  .text-center {
    padding-top: 20px;
  }
@@ -85,17 +78,22 @@
      padding-top: 0;
    }
  }
- 
+
+ .simple-calendar .calendar-heading {
+   text-align: center;
+}
+
  /* main page dropdown-menu */
  .bootstrap-select.btn-group .dropdown-menu li > a {
      text-align: center;
  }
 
 
- /*
- #fffffa white
- #0d5c63 darkest blue
- #247b7b second darkest blue
- #78cdd7 lightest blue
- #44a1a0 second lightest blue
- */
+.simple-calendar .calendar-heading .calendar-title {
+  font-size: 300%;
+  text-decoration: underline;
+}
+
+.simple-calendar .day-not-available {
+  background: #DDD;
+}

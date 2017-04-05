@@ -39,6 +39,8 @@ gem 'simplecov', :require => false, :group => :test
 
 gem "paperclip", "~> 5.0.0"
 
+gem "simple_calendar", "~> 2.0"
+
 gem 'twilio-ruby', '~> 4.11.1'
 
 gem "figaro"
