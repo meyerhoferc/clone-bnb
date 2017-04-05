@@ -3,10 +3,16 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :listings do
         get 'find_all', to: "finder#index"
-        get 'most_visited', to: "visits#index"
+        get 'most_visited', to: "visits#show"
+        get 'most_visited_all', to: "visits#index"
+      end
+
+      namespace :cities do
+        get 'most_visited', to: "finder#show"
       end
     end
   end
+  
   root "home#index"
   get "dashboard", to: "dashboard#show"
   resources :codes, only: [:new, :create, :edit, :update]

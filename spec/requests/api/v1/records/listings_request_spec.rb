@@ -21,8 +21,8 @@ describe "Listings Record API" do
 
       it "can find listings by title, number of bathrooms, and cost per night" do
         title_listing = Fabricate(:listing, number_baths: 0, cost_per_night: 10, title: "This")
-        bathroom_listings = Fabricate.times(2, :listing, number_baths: 2)
-        cost_listings = Fabricate.times(3, :listing, cost_per_night: 20)
+        bathroom_listings = Fabricate.times(2, :listing, number_baths: 2, cost_per_night: 0)
+        cost_listings = Fabricate.times(3, :listing, cost_per_night: 20, number_baths: 0)
 
         get "/api/v1/listings/find_all?title=#{title_listing.title}"
 
@@ -67,7 +67,7 @@ describe "Listings Record API" do
       it "can find by street_address" do
         property = Fabricate(:listing, street_address: "123 Sycamore Ct")
         street_address = property.street_address
-        
+
         get "/api/v1/listings/find?address=#{street_address}"
 
         listing = JSON.parse(response.body)

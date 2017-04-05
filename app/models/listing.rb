@@ -45,4 +45,21 @@ class Listing < ApplicationRecord
       .order('frequency desc')
       .limit(parameters[:limit])
   end
+
+  def self.most_visits_all(parameters)
+    select('listings.*, COUNT(reservations.listing_id) AS frequency')
+      .joins(:reservations)
+      .merge(Reservation.complete)
+      .group(:id)
+      .order('frequency desc')
+      .limit(parameters[:limit])
+  end
+
+  def self.most_visited_cities
+    joins(:reservations)
+       .merge(Reservation.complete)
+       .group(:city)
+       .order('COUNT(reservations.listing_id) desc')
+       .count
+  end
 end
