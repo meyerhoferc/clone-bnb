@@ -75,6 +75,7 @@ class Listing < ApplicationRecord
 
   def self.listings_per_city
     self.group(:city).count
+    # self.group(:city).order('count(listings) DESC')
   end
 
 end
