@@ -22,7 +22,6 @@ describe "traveler can make a review" do
 
     visit root_path
     click_on "Login"
-
     fill_in "session[email]", with: traveler.email
     fill_in "session[password]", with: traveler.password
     within(".login_btn") do
