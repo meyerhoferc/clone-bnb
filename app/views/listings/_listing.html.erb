@@ -1,7 +1,7 @@
 <% @listings.each do |listing| %>
 <tr class="listing">
 <div class="col-md-4 portfolio-item">
-  <% if listing.user.status == "active" %>
+  <% if listing.active_host? %>
   <div class="listing <%= listing.id %>">
 
   </div>

@@ -14,6 +14,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    get 'dashboard', to: "dashboard#show"
+    resources :users, only: [:index, :update]
+    resources :listings, only: [:index, :show, :destroy]
+    resources :reviews, only: [:index, :destroy]
+  end
+
   root "home#index"
 
   get "listings_by_city", to: "home#show"
@@ -31,6 +38,7 @@ Rails.application.routes.draw do
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
   end
+
   resources :reservations, only: [:show]
 
   get "login", to: "sessions#new"
@@ -39,12 +47,6 @@ Rails.application.routes.draw do
 
   put "update_host", to: "users#update"
   post '/notification', to: 'notification#create'
-
-  namespace :admin do
-    get 'dashboard', to: "dashboard#show"
-    resources :users, only: [:index, :update]
-    resources :listings, only: [:index, :show, :destroy]
-  end
 
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
@@ -56,6 +58,4 @@ Rails.application.routes.draw do
   resources :conversations, only: [:index, :create] do
     resources :messages, only: [:index, :new, :create]
   end
-
-
 end

@@ -80,4 +80,20 @@ class Listing < ApplicationRecord
   def self.listings_per_city
     self.group(:city).count
   end
+
+  def host_name
+    "#{user.first_name} #{user.last_name}"
+  end
+
+  def active_host?
+    user.status == "active"
+  end
+
+  def host_phone
+    user.phone_number
+  end
+
+  def number_reservations
+    reservations.count
+  end
 end

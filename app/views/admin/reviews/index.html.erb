@@ -1,0 +1,43 @@
+<div class="wrapper">
+<%= render partial: "shared/admin_sidebar" %>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h1>Welcome, <%= current_user.first_name %> <%= current_user.last_name %></h1>
+                    <div class="card">
+                      <div class="header">
+                        <h3 class="title">Reviews</h3>
+                      </div>
+                      <table class="content table table-striped listings">
+                        <thead>
+                          <th>Review ID</th>
+                          <th>Review Title</th>
+                          <th>Listing Name</th>
+                          <th>Host Email</th>
+                          <th>Review Body</th>
+                          <th>Review Rating</th>
+                          <th>Action</th>
+                        </thead>
+                        <tbody>
+                          <% @reviews.each do |review| %>
+                            <tr scope="row" class="review-<%= review.id %>">
+                              <td><%= review.id %></td>
+                              <td><%= link_to review.title, admin_review_path(review) %></td>
+                              <td><%= link_to review.listing_title, admin_listing_path(review.listing) %></td>
+                              <td><%= review.host_email %></td>
+                              <td><%= review.message %></td>
+                              <td><%= review.stars %></td>
+                              <td><%= button_to "Delete", admin_review_path(review), method: :delete, class: "btn btn-success" %></td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                	</div>
+                </div>
+            </div>
+    </div>
+</div>

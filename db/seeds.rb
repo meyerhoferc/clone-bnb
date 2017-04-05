@@ -2,6 +2,7 @@ class Seed
 
   def self.start
     seed = Seed.new
+    seed.generate_cities
     seed.generate_users
     seed.generate_roles
     seed.generate_predefined_users
@@ -14,6 +15,14 @@ class Seed
     seed.generate_traveler_user_roles
     seed.generate_host_user_roles
     seed.generate_predefined_reservations_for_traveler
+    seed.generate_reviews
+  end
+
+  def generate_cities
+    @cities = []
+    10.times do
+      @cities << Faker::Address.city
+    end
   end
 
   def generate_users
@@ -38,7 +47,7 @@ class Seed
         user_id: user.id,
         title: Faker::Company.catch_phrase,
         street_address: Faker::Address.street_address,
-        city: Faker::Address.city,
+        city: @cities.sample,
         state: Faker::Address.state_abbr,
         zipcode: Faker::Address.zip,
         max_occupancy: Faker::Number.between(1, 30),
@@ -110,24 +119,24 @@ class Seed
     host = Role.find_by(title: "host")
     traveler = Role.find_by(title: "traveler")
     admin = Role.find_by(title: "admin")
-    User.create!(email: "sample@email.com",
-                 first_name: "sample",
-                 last_name: "user",
-                 about_me: "sample traveler user",
-                 phone_number: "8183231121",
-                 password: "password")
-    User.create!(email: "host@email.com",
-                 first_name: "host",
-                 last_name: "user",
-                 about_me: "sample traveler user",
-                 phone_number: "8183231122",
-                 password: "password")
-    User.create!(email: "admin@email.com",
-                 first_name: "Admin",
-                 last_name: "User",
-                 about_me: "sample admin",
-                 phone_number: "123456789",
-                 password: "password")
+    traveler.users.create!(email: "sample@email.com",
+                           first_name: "sample",
+                           last_name: "user",
+                           about_me: "sample traveler user",
+                           phone_number: "8183231121",
+                           password: "password")
+    host.users.create!(email: "host@email.com",
+                       first_name: "host",
+                       last_name: "user",
+                       about_me: "sample traveler user",
+                       phone_number: "8183231122",
+                       password: "password")
+    admin.users.create!(email: "admin@admin.com",
+                        first_name: "Admin",
+                        last_name: "User",
+                        about_me: "sample admin",
+                        phone_number: "123456789",
+                        password: "password")
   end
 
   def generate_predefined_listings_for_host
@@ -137,7 +146,7 @@ class Seed
         user_id: host.id,
         title: Faker::Company.catch_phrase,
         street_address: Faker::Address.street_address,
-        city: Faker::Address.city,
+        city: @cities.sample,
         state: Faker::Address.state_abbr,
         zipcode: Faker::Address.zip,
         max_occupancy: Faker::Number.between(1, 30),
@@ -206,6 +215,17 @@ class Seed
 
   def generate_phone_number
     rand(1000000000..9999999999).to_s
+  end
+
+  def generate_reviews
+    100.times do
+      listing = Listing.all.sample
+      listing.reviews.create!(
+      title: Faker::Hipster.word,
+      message: Faker::Hipster.sentence,
+      stars: rand(1..5)
+      )
+    end
   end
 end
 

@@ -1,14 +1,20 @@
 <h1>Write a review</h1>
 
 <%= form_for(:review) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
 
-  <%= f.label :stars %>
-  <%= f.text_field :stars %>
+  <div class="form-group">
+    <%= f.label :stars %>
+    <%= f.text_field :stars, class: "form-control" %>
+  </div>
 
-  <%= f.label :message %>
-  <%= f.text_field :message %>
+  <div class="form-group">
+    <%= f.label :message %>
+    <%= f.text_field :message, class: "form-control" %>
+  </div>
 
   <%= f.submit "Add Review", class: "btn btn-danger" %>
 <% end %>

@@ -20,6 +20,7 @@ describe Listing do
     it { should have_many(:images) }
     it { should have_many(:listing_amenities) }
     it { should have_many(:amenities) }
+    it { should have_many(:reviews) }
   end
 
   describe "#range_available?" do
@@ -214,7 +215,43 @@ describe Listing do
       expect(cities_listings.first.first).to eq("Reno")
       expect(cities_listings.to_a.last.first).to eq("Denver")
       expect(cities_listings.to_a.last.last).to eq(3)
+    end
+  end
 
+  describe "#host_name" do
+    it "returns the host's full name" do
+      user = Fabricate(:user, first_name: "First", last_name: "Last")
+      listing = Fabricate(:listing, user: user)
+      expect(listing.host_name).to eq("First Last")
+    end
+  end
+
+  describe "#active_host?" do
+    it "returns true if the host is an active user" do
+      user = Fabricate(:user, status: "active")
+      listing = Fabricate(:listing, user: user)
+      expect(listing.active_host?).to be_truthy
+    end
+  end
+
+  describe "#host_phone" do
+    it "returns host's phone number" do
+      user = Fabricate(:user, phone_number: "1234")
+      listing = Fabricate(:listing, user: user)
+      expect(listing.host_phone).to eq("1234")
+    end
+  end
+
+  describe "number_reservations" do
+    it "returns the number of reservations made for this listing" do
+      listing = Fabricate(:listing)
+      user = Fabricate(:user)
+       Reservation.create!(listing: listing,
+                           user: user,
+                           start_date: "01/02/2020",
+                           end_date: "04/02/2020",
+                           status: "pending")
+      expect(listing.number_reservations).to eq(1)
     end
   end
 end

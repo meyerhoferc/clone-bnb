@@ -22,4 +22,36 @@ class Reservation < ApplicationRecord
   def no_overlapping?
     listing.present? && listing.range_available?(start_date, end_date)
   end
+
+  def host_first_name
+    user.first_name
+  end
+
+  def host_last_name
+    user.last_name
+  end
+
+  def host_email
+    user.email
+  end
+
+  def host_phone
+    user.phone_number
+  end
+
+  def listing_name
+    listing.title
+  end
+
+  def listing_address
+    listing.street_address
+  end
+
+  def listing_category
+    listing.list_category
+  end
+
+  def listing_city
+    listing.city
+  end
 end

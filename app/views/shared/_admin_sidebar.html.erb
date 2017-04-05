@@ -19,16 +19,22 @@
                   </a>
               </li>
               <li>
-                  <a href="/users/<%= current_user.id %>/messages">
-                      <i class="pe-7s-user"></i>
-                      <p>Messages</p>
-                  </a>
+                <a href="<%= admin_users_path %>">
+                  <i class="pe-7s-user"></i>
+                  <p>Users</p>
+                </a>
               </li>
               <li>
-                  <a href="<%= admin_users_path %>">
-                      <i class="pe-7s-user"></i>
-                      <p>Users</p>
-                  </a>
+                <a href="<%= admin_listings_path %>">
+                  <i class="pe-7s-user"></i>
+                  <p>Listings</p>
+                </a>
+              </li>
+              <li>
+                <a href="<%= admin_reviews_path %>">
+                  <i class="pe-7s-user"></i>
+                  <p>Reviews</p>
+                </a>
               </li>
           </ul>
     </div>
