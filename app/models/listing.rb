@@ -76,4 +76,8 @@ class Listing < ApplicationRecord
   def self.list_by_city(city)
     Listing.where(city: city)
   end
+
+  def self.listings_per_city
+    self.group(:city).count
+  end
 end
