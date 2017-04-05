@@ -103,7 +103,7 @@
             </div>
             <div class="col-sm-1 col-xs-1">
               <% if current_user.present? %>
-              <%= link_to "Message #{@listing.user.first_name}", conversations_path(initiator_id: current_user.id, recipient_id: @listing.user_id), method: :post %>
+              <%= link_to "Message #{@listing.host_name}", conversations_path(initiator_id: current_user.id, recipient_id: @listing.user_id), method: :post %>
               <% end %>
             </div>
             <div class="col-sm-3 col-xs-6">

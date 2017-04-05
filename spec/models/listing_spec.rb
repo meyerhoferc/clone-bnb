@@ -215,7 +215,6 @@ describe Listing do
       expect(cities_listings.first.first).to eq("Reno")
       expect(cities_listings.to_a.last.first).to eq("Denver")
       expect(cities_listings.to_a.last.last).to eq(3)
-
     end
   end
 end

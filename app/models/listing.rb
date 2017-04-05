@@ -77,4 +77,11 @@ class Listing < ApplicationRecord
     self.group(:city).count
   end
 
+  def host_name
+    "#{user.first_name} #{user.last_name}"
+  end
+
+  def active_host?
+    user.status == "active"
+  end
 end

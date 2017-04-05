@@ -25,8 +25,8 @@
                             <tr scope="row" class="review-<%= review.id %>">
                               <td><%= review.id %></td>
                               <td><%= link_to review.title, admin_review_path(review) %></td>
-                              <td><%= link_to review.listing.title, admin_listing_path(review.listing) %></td>
-                              <td><%= review.listing.user.email %></td>
+                              <td><%= link_to review.listing_title, admin_listing_path(review.listing) %></td>
+                              <td><%= review.host_email %></td>
                               <td><%= review.message %></td>
                               <td><%= review.stars %></td>
                               <td><%= button_to "Delete", admin_review_path(review), method: :delete, class: "btn btn-success" %></td>
