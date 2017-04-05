@@ -73,6 +73,7 @@ class Permission
     return true if controller == "sessions"
     return true if controller == "listings"
     return true if controller == "admin/listings"
+    return true if controller == "admin/reviews"
     return true if controller == "api/v1/listings/finder"
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"

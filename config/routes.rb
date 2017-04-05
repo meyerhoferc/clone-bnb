@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+
   root "home#index"
   get "dashboard", to: "dashboard#show"
   resources :codes, only: [:new, :create, :edit, :update]
@@ -20,16 +20,13 @@ Rails.application.routes.draw do
   patch 'reset_password', to: "codes#update_password"
 
   resources :listings do
-    #resources :reviews, only: [:index, :new, :create]
     get "/reviews/new", to: "listings/reviews#new"
     post "/reviews/new", to: "listings/reviews#create"
-    # /listings/3/reviews/new
   end
 
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
   end
-
 
   resources :reservations, only: [:show]
 
@@ -43,6 +40,7 @@ Rails.application.routes.draw do
     get 'dashboard', to: "dashboard#show"
     resources :users, only: [:index, :update]
     resources :listings, only: [:index, :show, :destroy]
+    resources :reviews, only: [:index, :show, :destroy]
   end
 
   resources :users, only: [:new, :create, :edit, :update] do

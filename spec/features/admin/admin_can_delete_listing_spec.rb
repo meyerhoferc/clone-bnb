@@ -15,7 +15,10 @@ describe "as a logged in admin" do
     admin.roles.create(title: "admin")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
-    visit admin_listings_path
+    visit admin_dashboard_path
+    click_on "Listings"
+
+    expect(current_path).to eq(admin_listings_path)
 
     within(".listing-#{listing_one.id}") do
       click_button("Delete")
@@ -73,13 +76,14 @@ describe "as a logged in admin" do
 
     expect(current_path).to eq(admin_reviews_path)
 
-    within(".reviews review-#{review_one.id}") do
+    within(".review-#{review_one.id}") do
       expect(page).to have_content("Mediocre night")
-      expect(page).to have_content("★ 3 ★")
+      expect(page).to have_content("3")
       expect(page).to have_content("the pillows were stinky")
       click_on "Delete"
     end
 
+    expect(current_path).to eq(admin_reviews_path)
     expect(page).to_not have_content("Mediocre night")
     expect(page).to_not have_content("★ 3 ★")
     expect(page).to_not have_content("the pillows were stinky")
