@@ -7,6 +7,7 @@ class Permission
   def allow?(controller, action)
     @controller = controller
     @action     = action
+
     if user.admin?
       admin_user_permissions
     elsif user.host?
@@ -28,6 +29,7 @@ class Permission
     return true if controller == "api/v1/listings/finder"
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
+    return true if controller == "api/v1/listings/cities"
   end
 
   def host_user_permissions
@@ -37,8 +39,6 @@ class Permission
     return true if controller == "trips"
     return true if controller == "reservations"
     return true if controller == "dashboard"
-    return true if controller == "listings/reviews"
-    return true if controller == "reviews"
     return true if controller == "listings"
     return true if controller == "reservations"
     return true if controller == "conversations"
@@ -47,6 +47,7 @@ class Permission
     return true if controller == "api/v1/listings/finder"
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
+    return true if controller == "api/v1/listings/cities"
   end
 
   def traveler_user_permissions
@@ -55,16 +56,14 @@ class Permission
     return true if controller == "users"
     return true if controller == "trips"
     return true if controller == "dashboard"
-    return true if controller == "listings/reviews"
-    return true if controller == "reviews"
     return true if controller == "listings"
     return true if controller == "reservations"
-
     return true if controller == "conversations"
     return true if controller == "messages"
     return true if controller == "api/v1/listings/finder"
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
+    return true if controller == "api/v1/listings/cities"
   end
 
   def admin_user_permissions
@@ -76,5 +75,6 @@ class Permission
     return true if controller == "api/v1/listings/finder"
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
+    return true if controller == "api/v1/listings/cities"
   end
 end
