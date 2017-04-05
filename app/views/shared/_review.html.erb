@@ -1,0 +1,10 @@
+<h5>Reviews</h5>
+<div>
+  <% @listing.reviews.each do |review| %>
+  <hr>
+    <%= review.title %>
+    <%= review.stars %><br>
+    <%= review.message%>
+  <% end %>
+  <hr>
+</div>

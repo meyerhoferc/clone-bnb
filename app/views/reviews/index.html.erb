@@ -1,0 +1,56 @@
+</tbody>
+</table>
+<div class="wrapper">
+<%= render partial: "shared/sidebar" %>
+    <div class="main-panel">
+      <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="card">
+                  <div class="header">
+                    <h1>Reviews</h1>
+                    <hr>
+                    <table class="content table table-striped">
+                      <thead class="headers">
+                        <tr>
+                          <th>Street Address</th>
+                          <th>City</th>
+                          <th>State</th>
+                          <th>Zipcode</th>
+                          <th>Title</th>
+                          <th>Description</th>
+                          <th>List Category</th>
+                          <th>Max Occupancy</th>
+                          <th>Number of Beds</th>
+                          <th>Number of Rooms</th>
+                          <th>Number of Baths</th>
+                          <th>Cost / Night</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody class="records all_listings">
+                        <%@completed_trips.each do |listing|%>
+                            <tr class="listing_<%= "#{listing.id}" %>" scope="row">
+                              <td><%= listing.street_address %></td>
+                              <td><%= listing.city %></td>
+                              <td><%= listing.state %></td>
+                              <td><%= listing.zipcode%></td>
+                              <td><%= listing.title %></td>
+                              <td><%= listing.description %></td>
+                              <td><%= listing.list_category %></td>
+                              <td><%= listing.max_occupancy %></td>
+                              <td><%= listing.number_beds %></td>
+                              <td><%= listing.number_rooms %></td>
+                              <td><%= listing.number_baths %></td>
+                              <td><%= listing.cost_per_night %></td>
+                              <td><%= link_to "View Listing", listing_path(listing) %></td>
+                            </tr>
+                        <%end%>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

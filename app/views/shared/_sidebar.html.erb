@@ -30,6 +30,12 @@
                       <p>Trips</p>
                   </a>
               </li>
+              <li>
+                  <a href="/users/<%= current_user.id %>/reviews">   
+                      <i class="pe-7s-user"></i>
+                      <p>Reviews</p>
+                  </a>
+              </li>
               <% if current_user.host? %>
               <li>
                   <a href="/users/<%= current_user.id %>/reservations">

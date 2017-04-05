@@ -9,8 +9,6 @@ module ApplicationHelper
         "alert-warning"   # Yellow
       when "notice"
         "alert-info"      # Blue
-      else
-        flash_type.to_s
     end
   end
 end

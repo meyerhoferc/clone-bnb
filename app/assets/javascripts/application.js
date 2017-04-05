@@ -21,3 +21,4 @@ $(document).ready(function() {
     $('.row-offcanvas').toggleClass('active');
   });
 });
+//= require jquery.infinitescroll
