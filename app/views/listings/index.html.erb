@@ -31,7 +31,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">All Listings
-                    <small>Secondary Text</small>
                 </h1>
             </div>
         </div>
@@ -39,7 +38,12 @@
 
         <!-- Projects Row -->
         <div class="row">
-          <% @listings.each do |listing| %>
+          <table id="posts">
+
+          <tbody class="page">
+            <%#= render @listings %>
+            <% @listings.each do |listing| %>
+            <tr class="listing">
             <div class="col-md-4 portfolio-item">
               <% if listing.user.status == "active" %>
               <div class="listing <%= listing.id %>">
@@ -53,39 +57,11 @@
               </div>
               <% end %>
             <% end %>
+            </tr>
+          </tbody>
+        </table>
         </div>
-        <hr>
-
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">«</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">»</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
+        <%= paginate @listings %>
         <hr>
 
         <!-- Footer -->

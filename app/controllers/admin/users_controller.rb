@@ -6,10 +6,10 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(status: params[:status])
-      flash[:success] = "User #{@user.id} status now #{params[:status]}"
+      flash[:alert] = "User #{@user.id} status now #{params[:status]}"
       redirect_to admin_users_path
     else
-      flash[:danger] = "Action not successful"
+      flash[:error] = "Action not successful"
       render :index
     end
   end

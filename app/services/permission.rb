@@ -24,6 +24,9 @@ class Permission
     return true if controller == "users"
     return true if controller == "listings"
     return true if controller == "reservations"
+    return true if controller == "codes"
+    return true if controller == "api/v1/listings/finder"
+    return true if controller == "api/v1/listings/visits"
   end
 
   def host_user_permissions
@@ -40,8 +43,8 @@ class Permission
     return true if controller == "conversations"
     return true if controller == "messages"
     return true if controller == "user/listings"
-
-
+    return true if controller == "api/v1/listings/finder"
+    return true if controller == "api/v1/listings/visits"
   end
 
   def traveler_user_permissions
@@ -57,6 +60,8 @@ class Permission
 
     return true if controller == "conversations"
     return true if controller == "messages"
+    return true if controller == "api/v1/listings/finder"
+    return true if controller == "api/v1/listings/visits"
   end
 
   def admin_user_permissions
@@ -65,5 +70,7 @@ class Permission
     return true if controller == "sessions"
     return true if controller == "listings"
     return true if controller == "admin/listings"
+    return true if controller == "api/v1/listings/finder"
+    return true if controller == "api/v1/listings/visits"
   end
 end

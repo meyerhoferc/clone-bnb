@@ -41,7 +41,7 @@ describe "as a logged in admin" do
 
     visit listing_path(listing_one)
 
-    expect(page).to have_content("The page you were looking for doesn't exist (404)")
+    expect(page).to have_content("You don't have to go home, but you can't stay here! Error 404")
 
     expect(host.listings.count).to eq(3)
     expect(host.listings.first.title).to eq("Big House")

@@ -43,6 +43,16 @@ class Listing < ApplicationRecord
     else
       derp = user.reservations.find_by(listing_id: id)
       true if !derp.nil?
-    end   
+    end
+  end   
+
+  def self.most_visits(parameters)
+    select('listings.*, COUNT(reservations.listing_id) AS frequency')
+      .where(city: parameters[:city])
+      .joins(:reservations)
+      .merge(Reservation.complete)
+      .group(:id)
+      .order('frequency desc')
+      .limit(parameters[:limit])
   end
 end
