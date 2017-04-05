@@ -5,6 +5,7 @@ class Listing < ApplicationRecord
   belongs_to :user
   has_many :listing_amenities
   has_many :amenities, through: :listing_amenities
+  has_many :reviews
 
   validates_presence_of :street_address,
                         :description,
@@ -35,6 +36,15 @@ class Listing < ApplicationRecord
   def check_middle_dates(date)
     reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
+
+  def user_stayed_at?(user)
+    if user.nil?
+      false
+    else
+      derp = user.reservations.find_by(listing_id: id)
+      true if !derp.nil?
+    end
+  end   
 
   def self.most_visits(parameters)
     select('listings.*, COUNT(reservations.listing_id) AS frequency')

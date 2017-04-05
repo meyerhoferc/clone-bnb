@@ -7,7 +7,6 @@ class Permission
   def allow?(controller, action)
     @controller = controller
     @action     = action
-
     if user.admin?
       admin_user_permissions
     elsif user.host?
@@ -38,6 +37,8 @@ class Permission
     return true if controller == "trips"
     return true if controller == "reservations"
     return true if controller == "dashboard"
+    return true if controller == "listings/reviews"
+    return true if controller == "reviews"
     return true if controller == "listings"
     return true if controller == "reservations"
     return true if controller == "conversations"
@@ -54,8 +55,11 @@ class Permission
     return true if controller == "users"
     return true if controller == "trips"
     return true if controller == "dashboard"
+    return true if controller == "listings/reviews"
+    return true if controller == "reviews"
     return true if controller == "listings"
     return true if controller == "reservations"
+
     return true if controller == "conversations"
     return true if controller == "messages"
     return true if controller == "api/v1/listings/finder"

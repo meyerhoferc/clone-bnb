@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170403224256) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "citext"
@@ -86,6 +85,16 @@ ActiveRecord::Schema.define(version: 20170403224256) do
     t.index ["user_id"], name: "index_reservations_on_user_id", using: :btree
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "stars"
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "listing_id"
+    t.index ["listing_id"], name: "index_reviews_on_listing_id", using: :btree
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "title"
   end
@@ -120,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170403224256) do
   add_foreign_key "messages", "users"
   add_foreign_key "reservations", "listings"
   add_foreign_key "reservations", "users"
+  add_foreign_key "reviews", "listings"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
