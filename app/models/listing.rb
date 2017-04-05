@@ -37,6 +37,7 @@ class Listing < ApplicationRecord
     reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
 
+<<<<<<< Updated upstream
   def user_stayed_at?(user)
     if user.nil?
       false
@@ -71,5 +72,9 @@ class Listing < ApplicationRecord
        .group(:city)
        .order('COUNT(reservations.listing_id) desc')
        .count
+=======
+  def self.list_by_city(city)
+    Listing.where(city: city)
+>>>>>>> Stashed changes
   end
 end

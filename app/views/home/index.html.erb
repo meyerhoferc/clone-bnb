@@ -33,13 +33,13 @@
     <h3>Where do you wanna travel?</h3>
     </br>
     <div>
-      <div class="dropdown">
+      <div class="dropdown btn-group dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose a city
         <span class="caret"></span></button>
-        <ul class="dropdown-menu text-center">
-          <li><a href="#">HTML</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
+        <ul class="text-center dropdown-menu">
+          <% @listings.each do |listing| %>
+          <li><%= link_to listing.city, listings_by_city_path(listing.city) %></li>
+          <% end %>
         </ul>
       </div>
     </div>

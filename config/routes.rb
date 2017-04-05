@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   end
   
   root "home#index"
+
+  get "listings_by_city", to: "home#show"
+
   get "dashboard", to: "dashboard#show"
   resources :codes, only: [:new, :create, :edit, :update]
   get 'reset_password', to: "codes#reset"
@@ -38,6 +41,7 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
 
   put "update_host", to: "users#update"
+  post '/notification', to: 'notification#create'
 
   namespace :admin do
     get 'dashboard', to: "dashboard#show"
