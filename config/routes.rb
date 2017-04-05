@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :listings do
         get 'find_all', to: "finder#index"
+        get 'find', to: "finder#show"
         get 'most_visited', to: "visits#show"
         get 'most_visited_all', to: "visits#index"
       end
@@ -11,6 +12,13 @@ Rails.application.routes.draw do
         get 'most_visited', to: "finder#show"
       end
     end
+  end
+
+  namespace :admin do
+    get 'dashboard', to: "dashboard#show"
+    resources :users, only: [:index, :update]
+    resources :listings, only: [:index, :show, :destroy]
+    resources :reviews, only: [:index, :destroy]
   end
 
   root "home#index"
@@ -36,13 +44,6 @@ Rails.application.routes.draw do
 
   put "update_host", to: "users#update"
 
-  namespace :admin do
-    get 'dashboard', to: "dashboard#show"
-    resources :users, only: [:index, :update]
-    resources :listings, only: [:index, :show, :destroy]
-    resources :reviews, only: [:index, :show, :destroy]
-  end
-
   resources :users, only: [:new, :create, :edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create, :update]
     resources :trips, only: [:index, :show]
@@ -52,14 +53,5 @@ Rails.application.routes.draw do
 
   resources :conversations, only: [:index, :create] do
     resources :messages, only: [:index, :new, :create]
-  end
-
-  namespace :api do
-    namespace :v1 do
-      namespace :listings do
-        get 'find_all', to: "finder#index"
-        get 'find', to: "finder#show"
-      end
-    end
   end
 end

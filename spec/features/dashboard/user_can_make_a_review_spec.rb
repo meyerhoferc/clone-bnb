@@ -22,7 +22,7 @@ describe "traveler can make a review" do
 
     visit root_path
     click_on "Login"
-    
+
     fill_in "session[email]", with: traveler.email
     fill_in "session[password]", with: traveler.password
     within(".login_btn") do
@@ -34,7 +34,7 @@ describe "traveler can make a review" do
     expect(page).to have_content(a_listing.street_address)
 
     within(".listing_#{a_listing.id}") do
-      click_on "View Listing"
+      click_on "Leave a Review"
     end
 
     expect(current_path).to eq(listing_path(a_listing))
