@@ -13,6 +13,9 @@
                         <%= form_for([@listing, @reservation]) do |f| %>
                           <p>Select a Check-In Date</p>
                           <div class="form-group">
+                            <!-- <%= month_calendar(attribute: :starts_at) do |date| %>
+                              <%= date %>
+                            <% end %> -->
                             <%= f.label :start_date %>
                             <%= f.date_field :start_date %>
                           </div>
