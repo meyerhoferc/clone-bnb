@@ -28,7 +28,7 @@
                         <% @listings.each do |listing| %>
                           <% listing.reservations.each do |reservation| %>
                             <tr class="reservation-<%= "#{reservation.id}" %>" scope="row">
-                              <td><%= reservation.listing.title %></td>
+                              <td><%= link_to reservation.listing.title, reservation_path(reservation) %></td>
                               <td><%= reservation.start_date %></td>
                               <td><%= reservation.end_date %></td>
                               <td><%= reservation.user.first_name %></td>
