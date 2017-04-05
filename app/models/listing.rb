@@ -37,7 +37,6 @@ class Listing < ApplicationRecord
     reservations.where('end_date >= ? AND start_date <= ?', date, date).count == 0
   end
 
-<<<<<<< Updated upstream
   def user_stayed_at?(user)
     if user.nil?
       false
@@ -45,7 +44,7 @@ class Listing < ApplicationRecord
       derp = user.reservations.find_by(listing_id: id)
       true if !derp.nil?
     end
-  end   
+  end
 
   def self.most_visits(parameters)
     select('listings.*, COUNT(reservations.listing_id) AS frequency')
@@ -72,9 +71,9 @@ class Listing < ApplicationRecord
        .group(:city)
        .order('COUNT(reservations.listing_id) desc')
        .count
-=======
+  end
+
   def self.list_by_city(city)
     Listing.where(city: city)
->>>>>>> Stashed changes
   end
 end
