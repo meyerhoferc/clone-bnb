@@ -51,7 +51,7 @@
               </div>
               <div class="col-sm-3 col-xs-6">
                 <a href="#">
-                    <img class="img-responsive portfolio-item" src="<%= @listing.images[2].image_url %>" alt="">
+                    <img class="img-responsive portfolio-item" src="<%= @listing.images[1].image_url %>" alt="">
                 </a>
               </div>
           </div>
@@ -64,20 +64,18 @@
                   <img class="img-circle img-thumbnail img-responsive portfolio-item" src="<%= @listing.user.avatar.url(:thumb) %>">
                   <h4> <%= @listing.user.first_name %> </h4>
               </div>
-              <div class="col-sm-1 col-xs-1">
-                <% if current_user.present? %>
-                <%= link_to "Message #{@listing.user.first_name}", conversations_path(initiator_id: current_user.id, recipient_id: @listing.user_id), method: :post %>
-                <% end %>
-              </div>
               <div class="col-sm-3 col-xs-6">
-                  <h3>About the Host</h3>
+                  <h3>About the Host:</h3>
                   <p>  <%= @listing.user.about_me %> </p>
+                  <% if current_user.present? %>
+                  <%= link_to "Message #{@listing.user.first_name}", conversations_path(initiator_id: current_user.id, recipient_id: @listing.user_id), method: :post, class: "btn btn-success" %>
+                  <% end %>
               </div>
-
           </div>
+          <hr>
           <div>
             <% if @reservation_listing %>
-              <%= link_to "Write a Review", listing_reviews_new_path(@listing) %>
+              <%= link_to "Write a Review", listing_reviews_new_path(@listing), class: "btn btn-success" %>
             <% end %>
             <%= render partial: "shared/review" %>
           </div>
