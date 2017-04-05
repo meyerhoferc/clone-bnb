@@ -73,6 +73,10 @@ class Listing < ApplicationRecord
        .count
   end
 
+  def self.list_by_city(city)
+    Listing.where(city: city)
+  end
+
   def self.listings_per_city
     self.group(:city).count
   end
@@ -88,7 +92,7 @@ class Listing < ApplicationRecord
   def host_phone
     user.phone_number
   end
-  
+
   def number_reservations
     reservations.count
   end

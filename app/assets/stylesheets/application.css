@@ -85,7 +85,11 @@
      padding-top: 0;
    }
  }
-
+ 
+ /* main page dropdown-menu */
+ .bootstrap-select.btn-group .dropdown-menu li > a {
+     text-align: center;
+ }
 
 
  /*
