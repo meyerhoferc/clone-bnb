@@ -24,8 +24,9 @@ describe "admin dashboard" do
     expect(page).to have_content("853-343-2343")
 
     within(".sidebar") do
-      expect(page).to have_link("Messages")
       expect(page).to have_link("Users")
+      expect(page).to have_link("Listings")
+      expect(page).to have_link("Reviews")
     end
   end
 
