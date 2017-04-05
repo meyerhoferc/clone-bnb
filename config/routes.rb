@@ -3,34 +3,34 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :listings do
         get 'find_all', to: "finder#index"
+        get 'find', to: "finder#show"
         get 'most_visited', to: "visits#show"
         get 'most_visited_all', to: "visits#index"
+        get 'listings_per_city', to: "cities#index"
       end
-
       namespace :cities do
         get 'most_visited', to: "finder#show"
       end
     end
   end
-  
+
   root "home#index"
+
+  get "listings_by_city", to: "home#show"
+
   get "dashboard", to: "dashboard#show"
   resources :codes, only: [:new, :create, :edit, :update]
   get 'reset_password', to: "codes#reset"
   patch 'reset_password', to: "codes#update_password"
 
   resources :listings do
-    #resources :reviews, only: [:index, :new, :create]
     get "/reviews/new", to: "listings/reviews#new"
     post "/reviews/new", to: "listings/reviews#create"
-    # /listings/3/reviews/new
   end
 
   resources :listings, only: [:show, :index] do
     resources :reservations, only: [:new, :create]
   end
-
-
   resources :reservations, only: [:show]
 
   get "login", to: "sessions#new"
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
 
   put "update_host", to: "users#update"
+  post '/notification', to: 'notification#create'
 
   namespace :admin do
     get 'dashboard', to: "dashboard#show"
@@ -56,12 +57,5 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :new, :create]
   end
 
-  namespace :api do
-    namespace :v1 do
-      namespace :listings do
-        get 'find_all', to: "finder#index"
-        get 'find', to: "finder#show"
-      end
-    end
-  end
+
 end

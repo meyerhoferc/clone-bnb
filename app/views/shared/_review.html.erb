@@ -1,10 +1,10 @@
-<h5>Reviews</h5>
+<h4>Reviews:</h4>
 <div>
   <% @listing.reviews.each do |review| %>
   <hr>
-    <%= review.title %>
-    <%= review.stars %><br>
-    <%= review.message%>
-  <% end %>
+  <h6><%= review.title %></h6>
+  <p>★ <%= review.stars %> ★</p>
+  <p><%= review.message%></p>
   <hr>
+  <% end %>
 </div>

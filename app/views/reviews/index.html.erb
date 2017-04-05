@@ -10,7 +10,7 @@
 
                 <div class="card">
                   <div class="header">
-                    <h1>Reviews</h1>
+                    <h1>Previous Bookings</h1>
                     <hr>
                     <table class="content table table-striped">
                       <thead class="headers">
@@ -45,7 +45,7 @@
                               <td><%= listing.number_rooms %></td>
                               <td><%= listing.number_baths %></td>
                               <td><%= listing.cost_per_night %></td>
-                              <td><%= link_to "View Listing", listing_path(listing) %></td>
+                              <td><%= link_to "Leave a Review", listing_path(listing), class: "btn btn-success" %></td>
                             </tr>
                         <%end%>
                   </div>

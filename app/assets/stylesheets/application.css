@@ -81,8 +81,13 @@
 
  .simple-calendar .calendar-heading {
    text-align: center;
+}
 
+ /* main page dropdown-menu */
+ .bootstrap-select.btn-group .dropdown-menu li > a {
+     text-align: center;
  }
+
 
 .simple-calendar .calendar-heading .calendar-title {
   font-size: 300%;
