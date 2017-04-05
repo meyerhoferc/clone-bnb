@@ -198,9 +198,8 @@ describe Listing do
                           status: "complete")
       most_visited_cities = Listing.most_visited_cities
       expect(most_visited_cities.count).to eq(3)
-      expect(most_visited_cities.first.id).to eq(listing_two.id)
-      expect(most_visited_cities[1].id).to eq(listing_one.id)
-      expect(most_visited_cities.last.id).to eq(listing_three.id)
+      expect(most_visited_cities.first.first).to eq(listing_two.city)
+      expect(most_visited_cities.to_a.last.first).to eq(listing_three.city)
     end
   end
 end
