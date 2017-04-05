@@ -2,6 +2,7 @@ class ReservationsController < ApplicationController
   def new
     @listing = Listing.find(params[:listing_id])
     @reservation = Reservation.new
+    #@listings = Listing.all
   end
 
   def create
@@ -13,7 +14,7 @@ class ReservationsController < ApplicationController
       flash[:success] = "Successfully made reservation"
       redirect_to reservation_path(@reservation)
     else
-      flash[:danger] = "Reservation not created. Please select another date range."
+      flash[:error] = "Reservation not created. Please select another date range."
       render :new
     end
   end
@@ -33,7 +34,7 @@ class ReservationsController < ApplicationController
       flash[:success] = "reservation #{@reservation.id} updated to #{@reservation.status}"
       redirect_to user_reservations_path(current_user)
     else
-      flash[:danger] = "Reservation not updated"
+      flash[:error] = "Reservation not updated"
     end
   end
 

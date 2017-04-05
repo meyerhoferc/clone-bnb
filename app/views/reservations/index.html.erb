@@ -14,21 +14,21 @@
                     <hr>
                     <table class="content table table-striped">
                       <thead class="headers">
-                        <tr>
-                          <th>Start Date</th>
-                          <th>End Date</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <th>Phone Number</th>
-                          <th>Status</th>
-                          <th>Action</th>
-                        </tr>
+                        <th>Property</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Status</th>
+                        <th>Action</th>
                       </thead>
                       <tbody class="records all_listings">
                         <% @listings.each do |listing| %>
                           <% listing.reservations.each do |reservation| %>
                             <tr class="reservation-<%= "#{reservation.id}" %>" scope="row">
+                              <td><%= reservation.listing.title %></td>
                               <td><%= reservation.start_date %></td>
                               <td><%= reservation.end_date %></td>
                               <td><%= reservation.user.first_name %></td>
@@ -36,17 +36,11 @@
                               <td><%= reservation.user.email %></td>
                               <td><%= reservation.user.phone_number %></td>
                               <td><%= reservation.status %></td>
-                              <% if reservation.status == "pending" %>
                               <td>
-                                <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success" %>
-                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success"%>
+                                <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success",  disabled: reservation.complete? || reservation.cancelled? %>
+                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success", disabled: reservation.cancelled? %>
+                                <%= button_to "Complete", user_reservation_path(current_user, reservation, status: "complete"), method: :put, class: "btn btn-success", disabled: reservation.pending? || reservation.cancelled? %>
                               </td>
-                              <% elsif reservation.status == "confirmed" %>
-                              <td>
-                                <%= button_to "Cancel", user_reservation_path(current_user, reservation, status: "cancelled"), method: :put, class: "btn btn-success" %>
-                                <%= button_to "Complete", user_reservation_path(current_user, reservation, status: "complete"), method: :put, class: "btn btn-success" %>
-                              </td>
-                            <% end %>
                             </tr>
                           <% end %>
                       <% end %>

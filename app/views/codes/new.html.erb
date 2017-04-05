@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <h1>Enter your phone number to verify your credentials</h1>
+    <h3>Please enter your phone number in the format: <strong>5551119999</strong> -- no spaces, no dashes, no parentheses</h3>
+    <%= form_for(@code) do |f| %>
+      <div class="form-group">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: "form-control" %>
+      </div>
+
+      <div class="login_btn">
+        <%= f.submit "Send Message", class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,4 @@
 class Admin::ListingsController < ApplicationController
-
   def index
     @listings = Listing.all
   end
@@ -15,5 +14,4 @@ class Admin::ListingsController < ApplicationController
     flash[:notice] = "#{listing.id} successfully deleted"
     redirect_to admin_listings_path
   end
-
 end

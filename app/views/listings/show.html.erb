@@ -38,7 +38,7 @@
                   <h3>Amenities at this property</h3>
                   <% @listing.amenities.each do |amenity| %>
                     <ul>
-                      <%= amenity.name %>
+                      <%= amenity.name.humanize.capitalize %>
                     </ul>
                   <% end %>
               </div>
@@ -78,7 +78,7 @@
           <div>
             <% if @reservation_listing %>
               <%= link_to "Write a Review", listing_reviews_new_path(@listing) %>
-            <% end %>  
+            <% end %>
             <%= render partial: "shared/review" %>
           </div>
 

@@ -11,6 +11,7 @@
     <%= render partial: "shared/navbar" %>
     <div class="flash">
       <% flash.each do |type, message| %>
+      <div class="alert <%= bootstrap_class_for(type) %> fade in">
         <%= content_tag :div, sanitize(message), class: type %>
       <% end %>
     </div>
