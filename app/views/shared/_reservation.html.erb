@@ -12,24 +12,24 @@
                             </div>
 														<hr>
 														<div class="header listing">
-                              <h3><%= link_to @reservation.listing.title, listing_path(@reservation.listing) %></h3>
-                              <h3><%= @reservation.listing.street_address %> <%= @reservation.listing.city %></h3>
-															<h4><strong> <%= @reservation.listing.list_category %></strong></h4>
+                              <h3><%= link_to @reservation.listing_name, listing_path(@reservation.listing) %></h3>
+                              <h3><%= @reservation.listing_address %> <%= @reservation.listing.city %></h3>
+															<h4><strong> <%= @reservation.listing_category %></strong></h4>
 														</div>
 														<div class="header">
 															<p> <%= @reservation.listing.description %></p>
 														</div>
 														<div class="header">
-															<p> Hosted by: <%= @reservation.listing.user.first_name %> <%= @reservation.listing.user.last_name %></p>
-															<p>Phone: <%= @reservation.listing.user.phone_number %></p>
-                              <%= link_to "Message #{@reservation.listing.user.first_name}", conversations_path(initiator_id: current_user.id, recipient_id: @reservation.listing.user_id), method: :post, class: "btn btn-success" %>
+															<p> Hosted by: <%= @reservation.host_first_name %> <%= @reservation.host_last_name %></p>
+															<p>Phone: <%= @reservation.listing.host_phone %></p>
+                              <%= link_to "Message #{@reservation.host_first_name}", conversations_path(initiator_id: current_user.id, recipient_id: @reservation.listing.user_id), method: :post, class: "btn btn-success" %>
                             </div>
 														<hr>
                         </div>
                     </div>
 
                     <div class="col-md-8">
-											<h3> <%= @reservation.num_nights %> nights in <%= @reservation.listing.city %></h3>
+											<h3> <%= @reservation.num_nights %> nights in <%= @reservation.listing_city %></h3>
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Charges</h4>

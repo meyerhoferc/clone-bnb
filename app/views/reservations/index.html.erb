@@ -31,10 +31,10 @@
                               <td><%= link_to reservation.listing.title, reservation_path(reservation) %></td>
                               <td><%= reservation.start_date %></td>
                               <td><%= reservation.end_date %></td>
-                              <td><%= reservation.user.first_name %></td>
-                              <td><%= reservation.user.last_name %></td>
-                              <td><%= reservation.user.email %></td>
-                              <td><%= reservation.user.phone_number %></td>
+                              <td><%= reservation.host_first_name %></td>
+                              <td><%= reservation.host_last_name %></td>
+                              <td><%= reservation.host_email %></td>
+                              <td><%= reservation.host_phone %></td>
                               <td><%= reservation.status %></td>
                               <td>
                                 <%= button_to "Confirm", user_reservation_path(current_user, reservation, status: "confirmed"), method: :put, class: "btn btn-success",  disabled: reservation.complete? || reservation.cancelled? %>

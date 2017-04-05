@@ -84,4 +84,12 @@ class Listing < ApplicationRecord
   def active_host?
     user.status == "active"
   end
+
+  def host_phone
+    user.phone_number
+  end
+  
+  def number_reservations
+    reservations.count
+  end
 end
