@@ -81,6 +81,12 @@ class Listing < ApplicationRecord
     self.group(:city).count
   end
 
+  def self.highest_rated(given_limit)
+    select('listings.*, reviews.stars')
+      .joins(:reviews)
+      .limit(given_limit)
+  end
+
   def host_name
     "#{user.first_name} #{user.last_name}"
   end
