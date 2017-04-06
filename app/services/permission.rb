@@ -51,6 +51,7 @@ class Permission
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
     return true if controller == "api/v1/listings/cities"
+    return true if controller == "api/v1/listings/rated"
   end
 
   def traveler_user_permissions
@@ -69,6 +70,7 @@ class Permission
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
     return true if controller == "api/v1/listings/cities"
+    return true if controller == "api/v1/listings/rated"
   end
 
   def admin_user_permissions
@@ -89,5 +91,6 @@ class Permission
     return true if controller == "api/v1/listings/visits"
     return true if controller == "api/v1/cities/finder"
     return true if controller == "api/v1/listings/cities"
+    return true if controller == "api/v1/listings/rated"
   end
 end

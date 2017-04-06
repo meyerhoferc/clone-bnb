@@ -87,6 +87,14 @@ class Listing < ApplicationRecord
     self.group(:city).count
   end
 
+  def self.highest_rated(parameters)
+    select('listings.*, AVG(reviews.stars) as average')
+      .joins(:reviews)
+      .group(:id)
+      .order("average DESC")
+      .limit(parameters[:limit].to_i)
+  end
+
   def host_name
     "#{user.first_name} #{user.last_name}"
   end
