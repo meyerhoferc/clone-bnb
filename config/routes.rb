@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         get 'most_visited_all', to: "visits#index"
         get 'listings_per_city', to: "cities#index"
         get 'highest_rated', to: "rated#index"
+        get 'highest_rated_by_city', to: "rated#show"
       end
       namespace :cities do
         get 'most_visited', to: "finder#show"
