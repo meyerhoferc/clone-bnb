@@ -54,7 +54,7 @@ describe "Listings Record API" do
       it "can find by title" do
         property = Fabricate(:listing, title: "Niiiice")
         title = property.title
-
+        allow(Listing).to receive(:find_by).and_return(property)
         get "/api/v1/listings/find?title=#{title}"
 
         listing = JSON.parse(response.body)
@@ -66,7 +66,7 @@ describe "Listings Record API" do
       it "can find by street_address" do
         property = Fabricate(:listing, street_address: "123 Sycamore Ct")
         street_address = property.street_address
-
+        allow(Listing).to receive(:find_by).and_return(property)
         get "/api/v1/listings/find?address=#{street_address}"
 
         listing = JSON.parse(response.body)
