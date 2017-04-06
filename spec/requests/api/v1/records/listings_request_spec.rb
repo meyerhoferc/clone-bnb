@@ -68,7 +68,6 @@ describe "Listings Record API" do
         title = property.title
         allow(Listing).to receive(:find_by).and_return(property)
         get "/api/v1/listings/find?title=#{title}"
-
         listing = JSON.parse(response.body)
 
         expect(response).to be_success
