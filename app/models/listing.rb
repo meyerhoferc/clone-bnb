@@ -88,7 +88,6 @@ class Listing < ApplicationRecord
   end
 
   def self.highest_rated(parameters)
-    #byebug
     select('listings.*, AVG(reviews.stars) as average')
       .joins(:reviews)
       .group(:id)

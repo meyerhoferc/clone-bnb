@@ -86,7 +86,6 @@ describe "Listings Analysis API" do
       allow(Listing).to receive(:listings_ranked_in_city).and_return([listing_one, listing_two, listing_three])
       get "/api/v1/listings/highest_rated_by_city?city=Denver&limit=3"
 
-
       expect(response).to be_success
       json_listings = JSON.parse(response.body, symbolize_names: true)
       expect(json_listings.count).to eq(3)
