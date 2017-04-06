@@ -36,10 +36,11 @@ describe Reservation do
 
   describe "#host_first_name" do
     it "returns the first name of the host" do
-      listing = Fabricate(:listing)
+      traveler = Fabricate(:user)
       user = Fabricate(:user, first_name: "Hi")
+      listing = Fabricate(:listing, user: user)
        Reservation.create!(listing: listing,
-                           user: user,
+                           user: traveler,
                            start_date: "01/02/2020",
                            end_date: "04/02/2020",
                            status: "pending")
@@ -49,10 +50,11 @@ describe Reservation do
 
   describe "#host_last_name" do
     it "returns the last name of the host" do
-      listing = Fabricate(:listing)
       user = Fabricate(:user, last_name: "Hi")
+      listing = Fabricate(:listing, user: user)
+      traveler = Fabricate(:user)
        Reservation.create!(listing: listing,
-                           user: user,
+                           user: traveler,
                            start_date: "01/02/2020",
                            end_date: "04/02/2020",
                            status: "pending")
@@ -62,10 +64,11 @@ describe Reservation do
 
   describe "#host_email" do
     it "returns the host's email" do
-      listing = Fabricate(:listing)
       user = Fabricate(:user, email: "hi@email.com")
+      listing = Fabricate(:listing, user: user)
+      traveler = Fabricate(:user)
        Reservation.create!(listing: listing,
-                           user: user,
+                           user: traveler,
                            start_date: "01/02/2020",
                            end_date: "04/02/2020",
                            status: "pending")
