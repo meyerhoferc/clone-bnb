@@ -10,6 +10,7 @@ class Admin::ListingsController < ApplicationController
   def destroy
     listing = Listing.find(params[:id])
     listing.images.delete
+    listing.reservations.delete
     listing.delete
     flash[:notice] = "#{listing.id} successfully deleted"
     redirect_to admin_listings_path

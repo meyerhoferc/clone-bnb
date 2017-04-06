@@ -24,19 +24,19 @@ class Reservation < ApplicationRecord
   end
 
   def host_first_name
-    user.first_name
+    listing.user.first_name
   end
 
   def host_last_name
-    user.last_name
+    listing.user.last_name
   end
 
   def host_email
-    user.email
+    listing.user.email
   end
 
   def host_phone
-    user.phone_number
+    listing.user.phone_number
   end
 
   def listing_name

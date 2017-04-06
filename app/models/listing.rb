@@ -38,11 +38,8 @@ class Listing < ApplicationRecord
   end
 
   def user_stayed_at?(user)
-    if user.nil?
-      false
-    else
-      derp = user.reservations.find_by(listing_id: id)
-      true if !derp.nil?
+    if user && user.reservations && user.reservations.find_by(listing_id: id).present?
+      user.reservations.find_by(listing_id: id).status == "complete"
     end
   end
 
