@@ -76,4 +76,52 @@ describe "Listings Record API" do
       end
     end
   end
+
+  describe "highest_rated" do
+    it "returns a given limit of listings with the highest rated listing" do
+      user = User.create!(email: "email@email.com",
+                     first_name: "Castle",
+                      last_name: "Pines",
+                       about_me: "Boop beep boop",
+                   phone_number: "853-343-2343",
+                       password: "123")
+      user.roles.create!(title: "traveler")
+
+      listing_one = Fabricate(:listing, city: "Denver")
+      listing_two = Fabricate(:listing, city: "Denver")
+      listing_three = Fabricate(:listing, city: "Denver")
+
+      Fabricate.times(2, :listing, city: "Tucson", state: "AZ")
+
+      3.times do
+        Review.create!(title: "nice title",
+                       message: "this is the thing",
+                       stars: 3,
+                       listing: listing_one)
+      end
+
+      3.times do
+        Review.create!(title: "nice title",
+                       message: "this is the thing",
+                       stars: 4,
+                       listing: listing_two)
+      end
+
+      3.times do
+        Review.create!(title: "nice title",
+                       message: "this is the thing",
+                       stars: 5,
+                       listing: listing_three)
+      end
+
+      Review.create!(title: "Nice", message: "message", stars: 1, listing: listing_one)
+      Review.create!(title: "Nice", message: "message", stars: 1, listing: listing_two)
+      Review.create!(title: "Nice", message: "message", stars: 1, listing: listing_three)
+
+      final_listing = Listing.highest_rated(3)
+      expect(final_listing.to_a.count).to eq(3)
+      expect(final_listing.first.id).to eq(listing_three.id)
+      expect(final_listing.last.id).to eq(listing_one.id)
+    end
+  end
 end
