@@ -209,7 +209,6 @@ describe Listing do
       listing_one, listing_two, listing_three = Fabricate.times(3, :listing, city: "Denver", state: "CO")
       Fabricate.times(2, :listing, city: "Tucson", state: "AZ")
       Fabricate(:listing, city: "Reno", state: "NV")
-
       cities_listings = Listing.listings_per_city
       expect(cities_listings.count).to eq(3)
       expect(cities_listings.first.first).to eq("Reno")
@@ -242,7 +241,7 @@ describe Listing do
     end
   end
 
-  describe "number_reservations" do
+  describe "#number_reservations" do
     it "returns the number of reservations made for this listing" do
       listing = Fabricate(:listing)
       user = Fabricate(:user)
@@ -252,6 +251,53 @@ describe Listing do
                            end_date: "04/02/2020",
                            status: "pending")
       expect(listing.number_reservations).to eq(1)
+    end
+  end
+
+  describe "#listings_ranked_in_city" do
+    it "returns the listings ranked by average rating in a city" do
+      user = User.create!(email: "email@email.com",
+                          first_name: "Castle",
+                          last_name: "Pines",
+                          about_me: "Boop beep boop",
+                          phone_number: "853-343-2343",
+                          password: "123")
+      user.roles.create!(title: "traveler")
+
+      listing_one = Fabricate(:listing, city: "Denver")
+      listing_two = Fabricate(:listing, city: "Denver")
+      listing_three = Fabricate(:listing, city: "Denver")
+      Fabricate.times(2, :listing, city: "Tucson", state: "AZ")
+
+      3.times do
+        Review.create!(title: "nice title",
+                       message: "this is the thing",
+                       stars: 3,
+                       listing: listing_one)
+      end
+
+      3.times do
+        Review.create!(title: "nice title",
+                       message: "this is the thing",
+                       stars: 4,
+                       listing: listing_two)
+      end
+
+      3.times do
+        Review.create!(title: "nice title",
+                       message: "this is the thing",
+                       stars: 5,
+                       listing: listing_three)
+      end
+
+      Review.create!(title: "Nice", message: "message", stars: 1, listing: listing_one)
+      Review.create!(title: "Nice", message: "message", stars: 1, listing: listing_two)
+      Review.create!(title: "Nice", message: "message", stars: 1, listing: listing_three)
+
+      highest_rated_listings = Listing.listings_ranked_in_city(city: "Denver", limit: 3)
+      expect(highest_rated_listings.to_a.count).to eq(3)
+      expect(highest_rated_listings.first.id).to eq(listing_three.id)
+      expect(highest_rated_listings.last.id).to eq(listing_one.id)
     end
   end
 end

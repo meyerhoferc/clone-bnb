@@ -7,7 +7,7 @@ describe "Listings Record API" do
         denver_listings = Fabricate.times(4, :listing, city: "dEnVer", state: "CO")
         denver_listing_ids = denver_listings.map { |listing| listing.id }
         Fabricate(:listing, city: "Tucson", state: "AZ")
-
+        allow(Listing).to receive(:where).and_return(denver_listings)
         get "/api/v1/listings/find_all?city=Denver"
 
         expect(response).to be_success
@@ -19,11 +19,11 @@ describe "Listings Record API" do
         end
       end
 
-      it "can find listings by title, number of bathrooms, and cost per night" do
+      it "can find listings by title" do
         title_listing = Fabricate(:listing, number_baths: 0, cost_per_night: 10, title: "This")
         bathroom_listings = Fabricate.times(2, :listing, number_baths: 2, cost_per_night: 0)
         cost_listings = Fabricate.times(3, :listing, cost_per_night: 20, number_baths: 0)
-
+        allow(Listing).to receive(:where).and_return([title_listing])
         get "/api/v1/listings/find_all?title=#{title_listing.title}"
 
         expect(response).to be_success
@@ -31,7 +31,13 @@ describe "Listings Record API" do
         expect(json_title_listings.count).to eq(1)
         expect(json_title_listings.first[:title]).to eq(title_listing.title)
         expect(json_title_listings.first[:id]).to eq(title_listing.id)
+      end
 
+      it "can find listings by number of bathrooms" do
+        title_listing = Fabricate(:listing, number_baths: 0, cost_per_night: 10, title: "This")
+        bathroom_listings = Fabricate.times(2, :listing, number_baths: 2, cost_per_night: 0)
+        cost_listings = Fabricate.times(3, :listing, cost_per_night: 20, number_baths: 0)
+        allow(Listing).to receive(:where).and_return(bathroom_listings)
         get "/api/v1/listings/find_all?number_baths=2"
 
         expect(response).to be_success
@@ -39,7 +45,13 @@ describe "Listings Record API" do
         expect(json_bathroom_listings.count).to eq(2)
         expect(json_bathroom_listings.first[:id]).to eq(bathroom_listings.first.id)
         expect(json_bathroom_listings.last[:id]).to eq(bathroom_listings.last.id)
+      end
 
+      it "can find listings by cost per night" do
+        title_listing = Fabricate(:listing, number_baths: 0, cost_per_night: 10, title: "This")
+        bathroom_listings = Fabricate.times(2, :listing, number_baths: 2, cost_per_night: 0)
+        cost_listings = Fabricate.times(3, :listing, cost_per_night: 20, number_baths: 0)
+        allow(Listing).to receive(:where).and_return(cost_listings)
         get "/api/v1/listings/find_all?cost_per_night=20"
 
         expect(response).to be_success
@@ -54,7 +66,7 @@ describe "Listings Record API" do
       it "can find by title" do
         property = Fabricate(:listing, title: "Niiiice")
         title = property.title
-
+        allow(Listing).to receive(:find_by).and_return(property)
         get "/api/v1/listings/find?title=#{title}"
 
         listing = JSON.parse(response.body)
@@ -66,7 +78,7 @@ describe "Listings Record API" do
       it "can find by street_address" do
         property = Fabricate(:listing, street_address: "123 Sycamore Ct")
         street_address = property.street_address
-
+        allow(Listing).to receive(:find_by).and_return(property)
         get "/api/v1/listings/find?address=#{street_address}"
 
         listing = JSON.parse(response.body)

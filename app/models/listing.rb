@@ -70,6 +70,15 @@ class Listing < ApplicationRecord
        .count
   end
 
+  def self.listings_ranked_in_city(parameters)
+    select('listings.*, AVG(reviews.stars) AS average')
+       .where('listings.city = ?', parameters[:city])
+       .joins(:reviews)
+       .group(:id)
+       .order('average DESC')
+       .limit(parameters[:limit])
+  end
+
   def self.list_by_city(city)
     Listing.where(city: city)
   end
