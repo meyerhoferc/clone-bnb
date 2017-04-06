@@ -3,7 +3,7 @@
     <h1>Enter the code that was sent to your phone number</h1>
     <%= form_for(@code) do |f| %>
       <div class="form-group">
-        <%= f.text_field :body, class: "form-control" %>
+        <%= f.text_field :body, class: "form-control", placeholder: 'enter code' %>
       </div>
 
       <div class="login_btn">
