@@ -27,25 +27,33 @@
     <!-- Page Header -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Listings in <%= @city %>
-            </h1>
+            <h2 class="page-header">Listings in <%= @city %>
+            </h2>
         </div>
     </div>
-    <!-- /.row -->
-    <!-- Projects Row -->
-    <div class="row">
+    <br />
+    <!-- Listings Row -->
+  <div class="row">
+    <table id="posts">
+    <tbody class="page">
       <% @listings_by_city.each do |listing| %>
-        <div class="col-md-4 portfolio-item">
-          <div class="listing <%= listing.title %>"</div>
-          <img class="img-responsive" src= "<%= listing.images[0].image_url %>">
-            <h3>
-              <%= link_to listing.title, listing_path(listing)  %>
-            </h3>
-            <div class="ellipsis"><p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%= listing.description %></p></div>
+      <tr class="listing">
+      <div class="col-md-6 portfolio-item">
+        <div class="listing <%= listing.title %>">
+
         </div>
-      <% end %>
-    </div>
+        <img class="img-responsive" src= "<%= listing.images[0].image_url %>">
+          <h3>
+            <%= link_to listing.title, listing_path(listing)  %>
+          </h3>
+          <div class="ellipsis"><p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%= listing.description %></p></div>
+        </div>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
   </div>
+
     <!-- Footer -->
     </br></br>
     <footer>
@@ -55,7 +63,7 @@
         </div>
       </div>
     </footer>
-    
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
