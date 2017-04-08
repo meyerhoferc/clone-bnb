@@ -21,20 +21,24 @@ Navigate to `localhost:3000`
 
 #### Get a property's data data
 `/api/v1/listings/find?`
+
 query params:
-      * title
-      * street addresss
-      * city
+
+  * title
+  * street addresss
+  * city
 
 #### Get all property data meeting a criteria
 `/api/v1/listings/find_all?`
-      * city
-      * state
-      * zipcode
-      * all
-      * list_type
-      * max_occupancy
-      * cost_per_night
+
+query params:
+  * city
+  * state
+  * zipcode
+  * all
+  * list_type
+  * max_occupancy
+  * cost_per_night
 
 #### Cities with a count of how many properties are in that city
 `/api/v1/listings/count/?city=denver`
