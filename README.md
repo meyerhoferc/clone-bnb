@@ -36,20 +36,20 @@ query params:
       * max_occupancy
       * cost_per_night
 
-### Cities with a count of how many properties are in that city
+#### Cities with a count of how many properties are in that city
 `/api/v1/listings/count/?city=denver`
 
-### Cities most frequently visited
+#### Cities most frequently visited
 `/api/v1/reservations/complete/ranked_by_cities`
 
-### Properties ranked by most visited
+#### Properties ranked by most visited
 `/api/v1/listings/most_visited?limit=num`
 
-### Properties ranked by highest rated, give a limit
+#### Properties ranked by highest rated, give a limit
 `/api/v1/listings/highest_rated?limit=num`
 
-### Properties ranked by most visited for a city, give limit
+#### Properties ranked by most visited for a city, give limit
 `/api/v1/listings/most_visited?city=denver&limit=num`
 
-### Properties ranked by highest rated for a city, give limit
+#### Properties ranked by highest rated for a city, give limit
 `/api/v1/listings/highest_rated?city=denver&limit=num`
