@@ -1,83 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://clonebnb1.herokuapp.com/
 
-Things you may want to cover:
+### Running the Project Locally
+`bundle`
 
-* Ruby version: 5.0
+`rake db:create db:migrate db:seed`
 
-* System dependencies
+`rails s`
 
-* Configuration
-Run in your terminal:
-$ bundle
+Navigate to `localhost:3000`
 
-* Database creation and initialization:
-Run in your terminal:
-1. $ rake db:create
-2. $ rake db:migrate
-3. $ rake db:seed
+### Running the Test Suite
+`rspec`
 
-* How to run the test suite
-Run in your terminal:
-1. $ rake db:test_prepare
-2. $ rspec
 
-* Heroku link: https://clonebnb1.herokuapp.com/
+### API Endpoints:
 
-* How to run the project locally:
-1. Run in your terminal:
-$ rails s
-2. Type in your browser and start navigating: http://localhost:3000/
+(all query params case insensitive)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* API Endpoints:
-- Get a user’s account data **
-- Get a listing’s data
-  * get /api/v1/listings/find?
+#### Get a property's data data
+`/api/v1/listings/find?`
+query params:
       * title
-      * street addresss & city
-- Get all listing data
-  * get /api/v1/listings/find_all?
+      * street addresss
+      * city
+
+#### Get all property data meeting a criteria
+`/api/v1/listings/find_all?`
       * city
       * state
       * zipcode
       * all
       * list_type
       * max_occupancy
-      * cost_per_night (do this in a range)
+      * cost_per_night
 
-* API Relationship Endpoints: **
-    Get all of the messages for a user
-    Get all of the reviews a user has posted
-    Get all trips for a user
-    Get all reservations for a user
-    Get all listings for a host user
-    Get all reviews for a host’s listings
+### Cities with a count of how many properties are in that city
+`/api/v1/listings/count/?city=denver`
 
-* API Analysis Endpoints:
-    Cities with a count of how many listings are in that city
-    * get /api/v1/listings/count/?
-        * city=“”
-    Cities most frequently visited
-    * get /api/v1/reservations/complete/ranked_by_cities (prob could be better named)
-    Listings ranked by most visited, give a limit
-    * get /api/v1/listings/most_visited?
-        * limit=num
-    Listings ranked by highest rated, give a limit
-    * get /api/v1/listings/highest_rated?
-        * limit=num
-    Listings ranked by most visited for a city, give limit
-    * get /api/v1/listings/most_visited?
-        * city=“”
-        * limit=num
-    Listings ranked by highest rated for a city, give limit
-    * get /api/v1/listings/highest_rated?
-        * city = “”
-        * limit=num
-    Listing with most revenue
-    * get api/v1/listings/most_revenue
+### Cities most frequently visited
+`/api/v1/reservations/complete/ranked_by_cities`
+
+### Properties ranked by most visited
+`/api/v1/listings/most_visited?limit=num`
+
+### Properties ranked by highest rated, give a limit
+`/api/v1/listings/highest_rated?limit=num`
+
+### Properties ranked by most visited for a city, give limit
+`/api/v1/listings/most_visited?city=denver&limit=num`
+
+### Properties ranked by highest rated for a city, give limit
+`/api/v1/listings/highest_rated?city=denver&limit=num`
