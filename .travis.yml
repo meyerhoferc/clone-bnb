@@ -1,8 +1,11 @@
 language: ruby
-rvm:
-  2.3.0
+rvm: 2.3.0
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'create database clonebnb_test;' -U postgres
+- psql -c 'create database clonebnb_test;' -U postgres
 script: bundle exec rspec spec
+
+deploy:
+  api_key:
+    secure: ED2f9CDa6q9H8vwm5EPlTkLnQ7zkJHhZnp5ElYd2hLWfqbhg962db94m7tcQP8EWud0g9PtuZTShXPOj9/QEfZqHHdJp0vxozmfaf09osVDO+ZPL5sD7um0eS/m2dcuw2Xzc424KjQ2lJm629d4JKPNQsLY+d+U9g9+VA5nZQvrkJwFsmuHGZ7IZZeFLXNg0xom4lrboOv9XExxKRfn7CZlzDWcdmsDOkxJUpPnZqI5uCthE4QkzcDyuX8xQFoC3u6h1/vz+tn4w5UbHzZvsTB24WfMqSkYhoG8Ocq3RNCzWh+f7HL3BjH7S/bNlpW9QtwRLNK9awx3GoGAUHyPN4afVWcBmUG7v40aCW7WtfTXqJyQ0WPMwr3vHpUpIIgFwwClfRvsTh+iLqgPfS1c9XvuF01WmxSmgwLyzTjblGJdAVBqpDTXHlwT9HpC11+w+7Xm6J75vBUCa1BM8amK1+uD9L6xcd54J4WnG6DmPl8LFvBQCXVVrtM1oiSyGlz42CeMMbKuHwY0wwNUFvkPtJzA5Ngu+1EcdCgDYlYx2gBIDC4F/mZh/fbSYh2kDPptOZmZxQqjNAvx+hQlJ3lyDrIFgCCVohXgdpunc+rza54OI4ao2EKI4kazAXU9HidWmVstlpGeXBTyqaY4JNjBY4N2BVllZucpmIgbBVujfGJ0=
